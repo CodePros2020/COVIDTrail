@@ -1,0 +1,33 @@
+{
+    "configurations": [
+{
+    "name": "Launch Chrome",
+    "request": "launch",
+    "type": "pwa-chrome",
+    "url": "http://localhost:8080",
+    "webRoot": "${workspaceFolder}"
+},
+{
+    "name": "Attach to Chrome",
+    "port": 9222,
+    "request": "attach",
+    "type": "pwa-chrome",
+    "webRoot": "${workspaceFolder}"
+},
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "Hackathon:App.App (nodejs12.x)",
+            "invokeTarget": {
+                "target": "code",
+                "projectRoot": "",
+                "lambdaHandler": "App.App"
+            },
+            "lambda": {
+                "runtime": "nodejs12.x",
+                "payload": {},
+                "environmentVariables": {}
+            }
+        }
+    ]
+}
