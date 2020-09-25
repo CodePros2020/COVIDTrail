@@ -71,7 +71,7 @@ const App = () => {
             style={{ color: "#00C0C1", paddingLeft: 10 }}
             // onPress={() => Linking.openURL("http://google.com")}
           >
-            Sign Up
+             Sign Up
           </Text>
         </Text>
       </View>
@@ -126,12 +126,13 @@ const styles = StyleSheet.create({
     borderColor: "#00C0C1",
     borderWidth: 1,
     backgroundColor: "#262D37",
+    alignItems: "center"
   },
   checkboxContainer: {
     flexDirection: "row",
     marginBottom: 20,
     backgroundColor: "#262D37",
-    alignItems: "center",
+    alignItems: "center"
   },
   checkbox: {
     alignSelf: "center",

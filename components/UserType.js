@@ -12,7 +12,7 @@ const UserType = () => {
   return (
     <View style={styles.container}>
       <Image source={require("../assets/logo.png")} style={styles.logoStyle} />
-      <Test style={styles.titleHeading}>User Type</Test>
+      <Text style={styles.titleHeading}>User Type</Text>
       <View style={styles.labelView}>
         <View style={styles.checkboxContainer}>
           <RadioForm
