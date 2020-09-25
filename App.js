@@ -1,94 +1,30 @@
 import { StatusBar } from "expo-status-bar";
-import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Button,
-  Linking,
-} from "react-native";
-import CheckBox from '@react-native-community/checkbox';
-import { TextInput } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import CustomButton from "./components/CustomButton";
-import NavBarBottom from "./components/NavBarBottom";
-import MSSQL from 'react-native-mssql';
+import React from 'react';
+import { StyleSheet, View, AppRegistry } from 'react-native';
+import { NativeRouter, Switch, Route } from 'react-router-native';
+import { Provider as PaperProvider } from 'react-native-paper';
 
-const App = () => {
-  const [value, onChangeText] = React.useState();
-  const [isSelected, setSelection] = React.useState(false);
-  return (
-    <View style={styles.container}>
-      <Image source={require("./assets/logo.png")} style={styles.logoStyle} />
-      <View style={styles.viewStyle}>
-        <Icon style={styles.userIcon} name="user" />
-        <TextInput
-          style={styles.input}
-          //   onChangeText={(text) => onChangeText(text)}
-          //   value={value}
-          placeholder="Phone Number"
-          placeholderTextColor={"#979797"}
-          underlineColorAndroid="transparent"
-          spellCheck={false}
-          autoCorrect={false}
-        />
-      </View>
+// import MSSQL from 'react-native-mssql';
 
-      <View style={styles.viewStyle}>
-        <Icon style={styles.userIcon} name="lock" />
-        <TextInput
-          style={styles.input}
-          //   onChangeText={(text) => onChangeText(text)}
-          //   value={value}
-          placeholder="Password"
-          placeholderTextColor={"#979797"}
-          underlineColorAndroid="transparent"
-          spellCheck={false}
-          autoCorrect={false}
-        />
-      </View>
-      <View style={styles.labelView}>
-        <View style={styles.checkboxContainer}>
-          <CheckBox
-            value={isSelected}
-            onValueChange={setSelection}
-            style={styles.checkbox}
-            tintColors={{ true: "#00C0C1", false: "white" }}
-          />
-          <Text style={styles.label}>Remember me</Text>
-        </View>
-        <View style={styles.checkboxContainer}>
-          <Text style={styles.label}>Forgot Password?</Text>
-        </View>
-      </View>
+import WelcomePage from "./components/WelcomePage";
+import UserType from "./components/UserType";
 
-      <CustomButton name="Login" style="loginBtn" />
-      <View style={styles.line}></View>
-      <View style={styles.signUp}>
-        <Text style={styles.label}>
-          Don't have an account?
-          <Text
-            style={{ color: "#00C0C1", paddingLeft: 10 }}
-            // onPress={() => Linking.openURL("http://google.com")}
-          >
-             Sign Up
-          </Text>
-        </Text>
-      </View>
-    </View>
-  );
-};
-
-const config = {
-  server: 'sqlservercovidtrail.database.windows.net',
-  username: 'codepros',
-  password: '@Covidtrail123',
-  database: 'sqlcovidtrail',
-  port: 8080,
-  timeout: 30
+export default class App extends React.Component {
+  render() {
+    return (
+      <PaperProvider>
+        <NativeRouter>
+          <View style={styles.container}>
+            <Switch>
+              <Route exact path="/" component={WelcomePage} />
+              <Route exact path="/userType" component={UserType} />
+            </Switch>
+          </View>
+        </NativeRouter>
+      </PaperProvider>
+    )
+  }
 }
-MSSQL.connect(config);
 
 const styles = StyleSheet.create({
   container: {
@@ -99,79 +35,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 0,
     paddingTop: 60,
-  },
-  input: {
-    height: 40,
-    width: 250,
-    color: "#FFFFFF",
-    fontSize: 18,
-  },
-  text: {
-    color: "red",
-  },
-  viewStyle: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#262D37",
-    borderBottomWidth: 1,
-    borderBottomColor: "#707070",
-    height: 60,
-    marginLeft: 10,
-    color: "#ffffff",
-  },
-  userIcon: {
-    color: "#979797",
-    margin: 5,
-    paddingRight: 10,
-    alignItems: "center",
-    fontSize: 18,
-  },
-  logoStyle: {
-    height: 250,
-    width: 300,
-  },
-  loginBtn: {
-    height: 45,
-    width: 250,
-    borderColor: "#00C0C1",
-    borderWidth: 1,
-    backgroundColor: "#262D37",
-    alignItems: "center"
-  },
-  checkboxContainer: {
-    flexDirection: "row",
-    marginBottom: 20,
-    backgroundColor: "#262D37",
-    alignItems: "center"
-  },
-  checkbox: {
-    alignSelf: "center",
-    backgroundColor: "#262D37",
-    borderColor: "#00C0C1",
-    color: "#00C0C1",
-  },
-  label: {
-    color: "#696969",
-  },
-  labelView: {
-    marginTop: 20,
-    width: 350,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#262D37",
-    padding: 10,
-  },
-  line: {
-    marginTop: 30,
-    borderBottomColor: "#707070",
-    borderBottomWidth: 1,
-    width: 325,
-  },
-  signUp: {
-    marginTop: 30,
-  },
+  }
 });
 
-export default App;
+// const config = {
+//   server: 'sqlservercovidtrail.database.windows.net',
+//   username: 'codepros',
+//   password: '@Covidtrail123',
+//   database: 'sqlcovidtrail',
+//   port: 8080,
+//   timeout: 30
+// }
+// MSSQL.connect(config);
