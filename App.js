@@ -81,12 +81,12 @@ const App = () => {
 };
 
 const config = {
-  server: 'sqlservercovidtrail.database.windows.net', //ip address of the mssql database
-  username: 'codepros', //username to login to the database
-  password: '@Covidtrail123', //password to login to the database
-  database: 'sqlcovidtrail', //the name of the database to connect to
-  port: 8080, //OPTIONAL, port of the database on the server
-  timeout: 30, //OPTIONAL, login timeout for the server
+  server: 'sqlservercovidtrail.database.windows.net',
+  username: 'codepros',
+  password: '@Covidtrail123',
+  database: 'sqlcovidtrail',
+  port: 8080,
+  timeout: 30
 }
 MSSQL.connect(config);
 
