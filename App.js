@@ -6,9 +6,9 @@ import {
   View,
   Image,
   Button,
-  CheckBox,
   Linking,
 } from "react-native";
+import CheckBox from '@react-native-community/checkbox';
 import { TextInput } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import CustomButton from "./components/CustomButton";
