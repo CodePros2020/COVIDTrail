@@ -13,6 +13,7 @@ import { TextInput } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import CustomButton from "./components/CustomButton";
 import NavBarBottom from "./components/NavBarBottom";
+import MSSQL from 'react-native-mssql';
 
 const App = () => {
   const [value, onChangeText] = React.useState();
@@ -78,6 +79,16 @@ const App = () => {
     </View>
   );
 };
+
+const config = {
+  server: 'sqlservercovidtrail.database.windows.net', //ip address of the mssql database
+  username: 'codepros', //username to login to the database
+  password: '@Covidtrail123', //password to login to the database
+  database: 'sqlcovidtrail', //the name of the database to connect to
+  port: 8080, //OPTIONAL, port of the database on the server
+  timeout: 30, //OPTIONAL, login timeout for the server
+}
+MSSQL.connect(config);
 
 const styles = StyleSheet.create({
   container: {
