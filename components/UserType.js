@@ -1,60 +1,40 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel,
-} from "react-native-simple-radio-button";
+import { StyleSheet, View, Image } from "react-native";
+import { Divider, Text, RadioButton } from "react-native-paper";
 import CustomButton from "../components/CustomButton";
 
 const UserType = () => {
+  
+  const [value, setValue] = React.useState('individual');
+
   return (
     <View style={styles.container}>
       <Image source={require("../assets/logo.png")} style={styles.logoStyle} />
-      <Test style={styles.titleHeading}>User Type</Test>
-      <View style={styles.labelView}>
-        <View style={styles.checkboxContainer}>
-          <RadioForm
-            radio_props={this.state.types}
-            initial={0}
-            formHorizontal={false}
-            labelHorizontal={true}
-            buttonColor={"#00C0C1"}
-            animation={true}
-            onPress={(value) => {
-              this.setState({ value: value });
-            }}
-          />
-          <Text style={styles.label}>Personal</Text>
+      <Text style={styles.titleHeading}>User Type</Text>
+      <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
+      
+        <View>
+          <Text>Individual</Text>
+          <RadioButton value="individual" uncheckedColor="00C0C1"/>
         </View>
-      </View>
-      <View style={styles.labelView}>
-        <View style={styles.checkboxContainer}>
-          <RadioForm
-            radio_props={this.state.types}
-            initial={0}
-            formHorizontal={false}
-            labelHorizontal={true}
-            buttonColor={"#00C0C1"}
-            animation={true}
-            onPress={(value) => {
-              this.setState({ value: value });
-            }}
-          />
-          <Text style={styles.label}>Business</Text>
+        <Divider />
+        <View>
+          <Text>Business</Text>
+          <RadioButton value="business" uncheckedColor="00C0C1"/>
         </View>
-      </View>
+      </RadioButton.Group>
+
     </View>
   );
 };
 export default UserType;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#262D37",
     flex: 1,
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
     marginTop: 0,
   },
@@ -111,11 +91,17 @@ const styles = StyleSheet.create({
     width: 325,
   },
   titleHeading: {
-    fontSize: 22,
+    fontSize: 30,
+    fontWeight: 'bold',
     color: "#00C0C1",
   },
   btnText: {
     fontSize: 20,
     color: "#00C0C1",
   },
+  divider: {
+    backgroundColor: "#f54260",
+    color: "#f54260",
+  },
+
 });
