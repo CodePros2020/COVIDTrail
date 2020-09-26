@@ -9,8 +9,8 @@ import {
   Dimensions,
 } from "react-native";
 import Constants from "expo-constants";
-import Header from "./Header";
-import CustomButton from "../components/CustomButton";
+import Header from "./header";
+import CustomButton from "./customButton";
 
 var width = Dimensions.get("window").width;
 var widthProportion = "80%";
@@ -136,6 +136,7 @@ const ClientSignUp = ({ navigation }) => {
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
               spellCheck={false}
+              secureTextEntry={true}
               autoCorrect={false}
               maxLength={30}
             />
@@ -150,6 +151,7 @@ const ClientSignUp = ({ navigation }) => {
               underlineColorAndroid="transparent"
               spellCheck={false}
               autoCorrect={false}
+              secureTextEntry={true}
               maxLength={30}
             />
           </View>
