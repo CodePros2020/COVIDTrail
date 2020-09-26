@@ -7,10 +7,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 // import MSSQL from 'react-native-mssql';
 
-import WelcomePage from "./components/welcomePage";
-import UserType from "./components/userType";
-import BusinessSignUp from "./components/businessSignUp";
-import ClientSignUp from "./components/clientSignUp";
+import WelcomePage from "./components/WelcomePage";
+import UserType from "./components/UserType";
+import BusinessSignUp from "./components/BusinessSignUp";
+import ClientSignUp from "./components/ClientSignUp";
+// import ScanPage from "./components/ScanPage";
+import NavBarBottom from "./components/NavBarBottom";
 import QRCodePage from "./components/qrCodePage";
 
 const Stack = createStackNavigator();
@@ -35,6 +37,7 @@ export default class App extends React.Component {
             <Stack.Screen name="UserType" component={UserType} />
             <Stack.Screen name="BusinessSignUp" component={BusinessSignUp} />
             <Stack.Screen name="ClientSignUp" component={ClientSignUp} />
+            <Stack.Screen name="NavBarBottom" component={NavBarBottom} />
             <Stack.Screen name="QRCodePage" component={QRCodePage} />
           </Stack.Navigator>
         </NavigationContainer>

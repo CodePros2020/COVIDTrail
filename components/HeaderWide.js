@@ -26,7 +26,14 @@ const styles = StyleSheet.create({
     height: 80,
     padding: 10,
   },
-
+  header: {
+    alignSelf: "stretch",
+    flexDirection: "row",
+    alignItems: "center",
+    height: 80,
+    padding: 15,
+    backgroundColor: "#262D37",
+  },
   text: {
     color: "#00C0C1",
     fontSize: 28,
