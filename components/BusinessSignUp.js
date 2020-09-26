@@ -12,12 +12,16 @@ import Constants from "expo-constants";
 import Header from "./header";
 import CustomButton from "./customButton";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import { Picker } from "@react-native-community/picker";
 
 var width = Dimensions.get("window").width;
 var widthProportion = "80%";
 
 const BusinessSignUp = ({ navigation }) => {
   const [txtBusinessName, setBusinessName] = useState("");
+  const state = {
+    province: "",
+  };
 
   const checkTextInput = () => {
     if (!txtBusinessName.trim()) {
@@ -25,7 +29,22 @@ const BusinessSignUp = ({ navigation }) => {
       return;
     }
   };
-
+  const [businessAccount, setBusinessAccount] = useState({
+    _id: "",
+    businessName: "",
+    email: "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    province: "",
+    postalCode: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const onChange = (e) => {
+    e.persist();
+    setBusinessAccount({ ...businessAccount, [e.target.name]: e.target.value });
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
@@ -36,8 +55,24 @@ const BusinessSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={(value) => setBusinessName(value)}
+              value={businessAccount.businessName}
+              onChange={onChange}
               placeholder="Business Name *"
+              placeholderTextColor={"#979797"}
+              underlineColorAndroid="transparent"
+              spellCheck={false}
+              autoCorrect={false}
+              maxLength={50}
+              name="businessName"
+            />
+          </View>
+          <View style={styles.viewStyle}>
+            <TextInput
+              style={styles.input}
+              //   value={businessAccount.email}
+              //   name="email"
+              //   onChange={onChange}
+              placeholder="Email"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
               spellCheck={false}
@@ -54,13 +89,16 @@ const BusinessSignUp = ({ navigation }) => {
               spellCheck={false}
               autoCorrect={false}
               maxLength={100}
+              //   value={businessAccount.addressLine1}
+              //   onChange={onChange}
+              //   name="addressLine1"
             />
           </View>
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
+              //   value={businessAccount.addressLine2}
+              //   onChange={onChange}
               placeholder="Address Line 2"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
@@ -72,8 +110,8 @@ const BusinessSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
+              //   value={businessAccount.city}
+              //   onChange={onChange}
               placeholder="City *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
@@ -83,23 +121,42 @@ const BusinessSignUp = ({ navigation }) => {
             />
           </View>
           <View style={styles.viewStyle}>
-            <TextInput
-              style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
-              placeholder="Province *"
-              placeholderTextColor={"#979797"}
-              underlineColorAndroid="transparent"
-              spellCheck={false}
-              autoCorrect={false}
-              maxLength={30}
-            />
+            <Picker
+              selectedValue={state.province}
+              style={{
+                height: 50,
+                width: 300,
+                color: "#979797",
+                fontSize: 20,
+                position: "relative",
+                left: 0,
+                right: 0,
+              }}
+              //   onValueChange={(itemValue, itemIndex) =>
+              //     this.setState({ province: itemValue })
+              //   }
+            >
+              <Picker.Item label="Select Province" value="" />
+              <Picker.Item label="Alberta" value="AB" />
+              <Picker.Item label="British Columbia" value="BC" />
+              <Picker.Item label="Manitoba" value="MB" />
+              <Picker.Item label="New Brunswick" value="NB" />
+              <Picker.Item label="Newfoundland and Labrador" value="NL" />
+              <Picker.Item label="Northwest Territories" value="NT" />
+              <Picker.Item label="Nova Scotia" value="NS" />
+              <Picker.Item label="Nunavut" value="NU" />
+              <Picker.Item label="Ontario" value="ON" />
+              <Picker.Item label="Prince Edward Island" value="PE" />
+              <Picker.Item label="Quebec" value="QC" />
+              <Picker.Item label="Saskatchewan" value="SK" />
+              <Picker.Item label="Yukon" value="YT" />
+            </Picker>
           </View>
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
+              //   value={businessAccount.postalCode}
+              //   onChange={onChange}
               placeholder="Postal Code *"
               autoCompleteType="postal-code"
               placeholderTextColor={"#979797"}
@@ -112,8 +169,8 @@ const BusinessSignUp = ({ navigation }) => {
           <View style={styles.viewStylePassword}>
             <TextInput
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
+              //   value={businessAccount.password}
+              //   onChange={onChange}
               placeholder="Password *"
               autoCompleteType="password"
               inlineImageLeft=""
@@ -130,8 +187,8 @@ const BusinessSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
+              //   value={businessAccount.confirmPassword}
+              //   onChange={onChange}
               placeholder="Confirm Password *"
               autoCompleteType="password"
               placeholderTextColor={"#979797"}
@@ -210,7 +267,7 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   gap: {
-    marginBottom: 35,
+    marginBottom: 15,
   },
   customBtn: {
     height: 45,
