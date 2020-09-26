@@ -28,6 +28,7 @@ export default function WelcomePage({ navigation }) {
       <View style={styles.viewStyle}>
         <Icon style={styles.userIcon} name="user" />
         <TextInput
+          keyboardType="numeric"
           style={styles.input}
           //   onChangeText={(text) => onChangeText(text)}
           //   value={value}

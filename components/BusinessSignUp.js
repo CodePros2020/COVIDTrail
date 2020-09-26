@@ -13,7 +13,7 @@ const BusinessSignUp = ({ navigation, props }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <Header title="Sign Up" navigation={navigation}></Header>
+        <Header title="Business Sign Up" navigation={navigation}></Header>
         <ScrollView style={styles.scrollView}>
           <View>
             <TextInput
