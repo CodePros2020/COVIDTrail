@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, SafeAreaView, ScrollView } from "react-native";
 import Constants from "expo-constants";
 
-const BusinessSignUp = () => {
+const ClientSignUp = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>

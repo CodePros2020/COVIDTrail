@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
-const HeaderWide = ({ title }) => {
+const HeaderWide = ({ title, navigation }) => {
   return (
     <View style={{ marginTop: 0 }}>
       <View style={styles.mainHeader}>

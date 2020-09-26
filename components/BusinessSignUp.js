@@ -1,25 +1,31 @@
 import React from "react";
 import { StyleSheet, Text, SafeAreaView, ScrollView, View } from "react-native";
 import Constants from "expo-constants";
-import Header from "./Header";
+import Header from "./header";
+import CustomButton from "./customButton";
 
-const ClientSignUp = ({ navigation }) => {
+const BusinessSignUp = ({ navigation }) => {
+  const userTypeHandler = () => {
+    navigation.navigate("QRCodePage");
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <Header title="Sign Up" navigation={navigation}></Header>
         <ScrollView style={styles.scrollView}>
           <Text style={styles.text}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            This is business sign up Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
           </Text>
+          <CustomButton name="Next" onPress={userTypeHandler} />
         </ScrollView>
-      </View>  
+      </View>
     </SafeAreaView>
   );
 };
@@ -41,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ClientSignUp;
+export default BusinessSignUp;

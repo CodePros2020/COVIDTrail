@@ -11,33 +11,33 @@ import {
   SafeAreaView,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import CustomButton from "./CustomButton";
+import CustomButton from "./customButton";
 // import NavBarBottom from "./NavBarBottom";
 
 export default function WelcomePage({ navigation }) {
-    const [value, onChangeText] = React.useState();
-    const [isSelected, setSelection] = React.useState(false);
+  const [value, onChangeText] = React.useState();
+  const [isSelected, setSelection] = React.useState(false);
 
-    const userTypeHandler = () => {
-      navigation.navigate('UserType');
-    }
+  const userTypeHandler = () => {
+    navigation.navigate("UserType");
+  };
 
-    return (
-        <View style={styles.container}>
-            <Image source={require("../assets/logo.png")} style={styles.logoStyle} />
-            <View style={styles.viewStyle}>
-                <Icon style={styles.userIcon} name="user" />
-                <TextInput
-                    style={styles.input}
-                    //   onChangeText={(text) => onChangeText(text)}
-                    //   value={value}
-                    placeholder="Phone Number"
-                    placeholderTextColor={"#979797"}
-                    underlineColorAndroid="transparent"
-                    spellCheck={false}
-                    autoCorrect={false}
-                />
-            </View>
+  return (
+    <View style={styles.container}>
+      <Image source={require("../assets/logo.png")} style={styles.logoStyle} />
+      <View style={styles.viewStyle}>
+        <Icon style={styles.userIcon} name="user" />
+        <TextInput
+          style={styles.input}
+          //   onChangeText={(text) => onChangeText(text)}
+          //   value={value}
+          placeholder="Phone Number"
+          placeholderTextColor={"#979797"}
+          underlineColorAndroid="transparent"
+          spellCheck={false}
+          autoCorrect={false}
+        />
+      </View>
 
       <View style={styles.viewStyle}>
         <Icon style={styles.userIcon} name="lock" />
@@ -68,21 +68,21 @@ export default function WelcomePage({ navigation }) {
         </View>
       </View>
 
-            <CustomButton name="Login" style="loginBtn" />
-            <View style={styles.line}></View>
-            <View style={styles.signUp}>
-                <Text style={styles.label}>
-                    Don't have an account?&nbsp;
-                    <Text
-                        style={{ color: "#00C0C1", paddingLeft: 10 }}
-                        onPress={userTypeHandler}
-                    >
-                        Sign Up
-                    </Text>
-                </Text>
-            </View>
-        </View> 
-    );
+      <CustomButton name="Login" style="loginBtn" />
+      <View style={styles.line}></View>
+      <View style={styles.signUp}>
+        <Text style={styles.label}>
+          Don't have an account?&nbsp;
+          <Text
+            style={{ color: "#00C0C1", paddingLeft: 10 }}
+            onPress={userTypeHandler}
+          >
+            Sign Up
+          </Text>
+        </Text>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

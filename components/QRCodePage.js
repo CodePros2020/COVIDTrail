@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Divider, Text, RadioButton } from "react-native-paper";
 
-const UserType = () => {
+const QRCodePage = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>In Scanner View</Text>
     </View>
   );
 };
-export default UserType;
 
 const styles = StyleSheet.create({
   container: {
@@ -20,3 +19,4 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
 });
+export default QRCodePage;
