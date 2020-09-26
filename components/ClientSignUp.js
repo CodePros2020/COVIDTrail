@@ -3,6 +3,8 @@ import { StyleSheet, Text, SafeAreaView, ScrollView, View, TextInput, Dimensions
 import Constants from "expo-constants";
 import Header from "./Header";
 import CustomButton from "../components/CustomButton";
+import Icon from "react-native-vector-icons/FontAwesome5";
+// import UserAccount from "../models/UserAccount";
 
 var width = Dimensions.get('window').width;
 var widthProportion = '80%';
@@ -10,7 +12,28 @@ var widthProportion = '80%';
 const ClientSignUp = ({ navigation }) => {
 
   const [textInputFirstName, setTextInputFirsttName] = useState('');
+  const [textInputMiddleName, setTextInputMiddletName] = useState('');
   const [textInputLastName, setTextInputLasttName] = useState('');
+  const [textInputPhoneNumber, setTextInputPhoneNumber] = useState('');
+  const [textInputEmail, setTextInputEmail] = useState('');
+  const [textInputAddressLine1, setTextInputAddressLine1] = useState('');
+  const [textInputAddressLine2, setTextInputAddressLine2] = useState('');
+  const [textInputCity, setTextInputCity] = useState('');
+  const [textInputProvince, setTextInputProvince] = useState('');
+  const [textInputPostalCode, setTextInputPostalCode] = useState('');
+  const [textInputPassword, setTextInputPassword] = useState('');
+  const [textInputConfirmPassword, setTextInputConfirmPassword] = useState('');
+  const [secure, setSecure] = useState({secure: true, icon: 'eye'});
+  // const [userModel, setUserModel] = useState({UserAccount});
+
+  const togglePasswordVisiblity = () => {
+    let iconName = secure.secure ? 'eye-slash' : 'eye';
+
+    setSecure({
+      secure: !secure.secure,
+      icon: iconName
+    });
+  }
 
   const checkTextInput = () => {
     if (!textInputFirstName.trim()) {
@@ -18,8 +41,68 @@ const ClientSignUp = ({ navigation }) => {
       return;
     }
 
-    if (!textInputLastName.trim()) {
+    else if (!textInputLastName.trim()) {
       alert('Please Enter Last Name');
+      return;
+    }
+
+    else if (!textInputPhoneNumber.trim()) {
+      alert('Please Enter Phone Number');
+      return;
+    }
+
+    else if (!textInputAddressLine1.trim()) {
+      alert('Please Enter Address Line 1');
+      return;
+    }
+
+    else if (!textInputCity.trim()) {
+      alert('Please Enter City');
+      return;
+    }
+
+    else if (!textInputProvince.trim()) {
+      alert('Please Enter Province');
+      return;
+    }
+
+    else if (!textInputPostalCode.trim()) {
+      alert('Please Enter Postal Code');
+      return;
+    }
+
+    else if (!textInputPassword.trim()) {
+      alert('Please enter a Password.');
+      return;
+    }
+
+    else if (!textInputConfirmPassword.trim()) {
+      alert('Please confirm the password you entered.');
+      return;
+    }
+
+    else if (textInputPassword !== textInputConfirmPassword) {
+      alert('Password and Confirm Password fields does not match.');
+      return;
+    }
+
+    else {
+      alert('Sign Up Completed.');
+
+      // let userAccount = new UserAccount();
+      // userAccount.firstName = textInputFirstName;
+      // userAccount.middleName = textInputMiddleName;
+      // userAccount.lastName = textInputLastName;
+      // userAccount.phoneNumber = textInputPhoneNumber;
+      // userAccount.emailAddress = textInputEmail;
+      // userAccount.addressLine1 = textInputAddressLine1;
+      // userAccount.addressLine2 = textInputAddressLine2;
+      // userAccount.city = textInputCity;
+      // userAccount.province = textInputProvince;
+      // userAccount.postalCode = textInputPostalCode;
+      // userAccount.password = textInputPassword;
+
+      navigation.navigate('NavBarBottom');
       return;
     }
   };
@@ -36,6 +119,7 @@ const ClientSignUp = ({ navigation }) => {
               onChangeText={
                 (value) => setTextInputFirsttName(value)
               }
+              value={textInputFirstName}
               placeholder="First Name *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
@@ -47,8 +131,10 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
+              onChangeText={
+                (value) => setTextInputMiddleName(value)
+              }
+              value={textInputMiddleName}
               placeholder="Middle Name"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
@@ -63,6 +149,7 @@ const ClientSignUp = ({ navigation }) => {
               onChangeText={
                 (value) => setTextInputLasttName(value)
               }
+              value={textInputLastName}
               placeholder="Last Name *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
@@ -73,10 +160,28 @@ const ClientSignUp = ({ navigation }) => {
           </View>
           <View style={styles.viewStyle}>
             <TextInput
+              keyboardType='numeric'
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
-              placeholder="Address Line 2"
+              onChangeText={
+                (value) => setTextInputPhoneNumber(value)
+              }
+              value={textInputPhoneNumber}
+              placeholder="Phone Number *"
+              placeholderTextColor={"#979797"}
+              underlineColorAndroid="transparent"
+              spellCheck={false}
+              autoCorrect={false}
+              maxLength={10}
+            />
+          </View>
+          <View style={styles.viewStyle}>
+            <TextInput
+              style={styles.input}
+              onChangeText={
+                (value) => setTextInputEmail(value)
+              }
+              value={textInputEmail}
+              placeholder="Email"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
               spellCheck={false}
@@ -87,8 +192,40 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
+              onChangeText={
+                (value) => setTextInputAddressLine1(value)
+              }
+              value={textInputAddressLine1}
+              placeholder="Address Line 1 *"
+              placeholderTextColor={"#979797"}
+              underlineColorAndroid="transparent"
+              spellCheck={false}
+              autoCorrect={false}
+              maxLength={50}
+            />
+          </View>
+          <View style={styles.viewStyle}>
+            <TextInput
+              style={styles.input}
+              onChangeText={
+                (value) => setTextInputAddressLine2(value)
+              }
+              value={textInputAddressLine2}
+              placeholder="Address Line 2"
+              placeholderTextColor={"#979797"}
+              underlineColorAndroid="transparent"
+              spellCheck={false}
+              autoCorrect={false}
+              maxLength={50}
+            />
+          </View>
+          <View style={styles.viewStyle}>
+            <TextInput
+              style={styles.input}
+              onChangeText={
+                (value) => setTextInputCity(value)
+              }
+              value={textInputCity}
               placeholder="City *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
@@ -100,8 +237,10 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
+              onChangeText={
+                (value) => setTextInputProvince(value)
+              }
+              value={textInputProvince}
               placeholder="Province *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
@@ -113,21 +252,26 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
+              onChangeText={
+                (value) => setTextInputPostalCode(value)
+              }
+              value={textInputPostalCode}
               placeholder="Postal Code *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
               spellCheck={false}
               autoCorrect={false}
-              maxLength={30}
+              maxLength={6}
             />
           </View>
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
+              onChangeText={
+                (value) => setTextInputPassword(value)
+              }
+              value={textInputPassword}
+              secureTextEntry={secure.secure}
               placeholder="Password *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
@@ -135,12 +279,16 @@ const ClientSignUp = ({ navigation }) => {
               autoCorrect={false}
               maxLength={30}
             />
+            <Icon style={styles.userIcon} name={secure.icon} onPress={togglePasswordVisiblity} />
           </View>
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
+              onChangeText={
+                (value) => setTextInputConfirmPassword(value)
+              }
+              value={textInputConfirmPassword}
+              secureTextEntry={secure.secure}
               placeholder="Confirm Password *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
@@ -148,6 +296,7 @@ const ClientSignUp = ({ navigation }) => {
               autoCorrect={false}
               maxLength={30}
             />
+            <Icon style={styles.userIcon} name={secure.icon} onPress={togglePasswordVisiblity} />
           </View>
           <View>
             <Text style={styles.warning}>* Indicates that field is mandatory.</Text>
@@ -187,10 +336,12 @@ const styles = StyleSheet.create({
     height: 60,
     marginLeft: 10,
     color: "#ffffff",
+    width: 350
   },
   input: {
+    flex: 1,
     height: 40,
-    width: 350,
+    // width: 350,
     color: "#ffffff",
     fontSize: 18,
   },
@@ -208,6 +359,13 @@ const styles = StyleSheet.create({
     borderColor: "#00C0C1",
     borderWidth: 1,
     backgroundColor: "#262D37",
+  },
+  userIcon: {
+    color: "#979797",
+    // margin: 5,
+    // paddingRight: 10,
+    // alignItems: "center",
+    fontSize: 18,
   },
 });
 

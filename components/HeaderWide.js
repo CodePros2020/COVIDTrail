@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 80,
     padding: 15,
-    backgroundColor: "#1D1D1D",
+    backgroundColor: "red",
   },
   text: {
     color: "#00C0C1",

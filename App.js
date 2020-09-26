@@ -12,6 +12,8 @@ import WelcomePage from "./components/WelcomePage";
 import UserType from "./components/UserType";
 import BusinessSignUp from "./components/BusinessSignUp";
 import ClientSignUp from "./components/ClientSignUp";
+// import ScanPage from "./components/ScanPage";
+import NavBarBottom from "./components/NavBarBottom";
 
 const Stack = createStackNavigator();
 
@@ -26,6 +28,7 @@ export default class App extends React.Component {
             <Stack.Screen name="UserType" component={UserType} />
             <Stack.Screen name="BusinessSignUp" component={BusinessSignUp} />
             <Stack.Screen name="ClientSignUp" component={ClientSignUp} />
+            <Stack.Screen name="NavBarBottom" component={NavBarBottom} />
           </Stack.Navigator>
 
         </NavigationContainer>
