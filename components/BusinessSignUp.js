@@ -3,11 +3,11 @@ import { StyleSheet, Text, SafeAreaView, ScrollView, View } from "react-native";
 import Constants from "expo-constants";
 import Header from "./Header";
 
-const ClientSignUp = ({ navigation }) => {
+const BusinessSignUp = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <Header title="Sign Up" navigation={navigation}></Header>
+        <Header title="Business Sign Up" navigation={navigation}></Header>
         <ScrollView style={styles.scrollView}>
           <Text style={styles.text}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ClientSignUp;
+export default BusinessSignUp;
