@@ -1,11 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet, View, Image } from "react-native";
-import { Divider, Text, RadioButton } from "react-native-paper";
+import { Text, RadioButton } from "react-native-paper";
 import CustomButton from "../components/CustomButton";
 
-const UserType = () => {
-  
-  const [value, setValue] = React.useState('individual');
+const UserType = ({ navigation }) => {
+
+  const [value, setValue] = React.useState('personal');
+  const businessSignUp = () => {
+    if (value === 'personal') {
+      navigation.navigate('BusinessSignUp');
+    }
+  }
+
 
   return (
     <View style={styles.container}>
@@ -13,16 +19,20 @@ const UserType = () => {
       <Text style={styles.titleHeading}>User Type</Text>
       <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
       
-        <View>
-          <Text>Individual</Text>
-          <RadioButton value="individual" uncheckedColor="00C0C1"/>
+        <View style={styles.divider}>
+          <View><RadioButton value="personal" uncheckedColor="#00C0C1"/></View>
+          <View><Text style={styles.radioText}>Personal</Text></View>
         </View>
-        <Divider />
-        <View>
-          <Text>Business</Text>
-          <RadioButton value="business" uncheckedColor="00C0C1"/>
+        <View style={styles.divider}>
+          <View><RadioButton value="business" uncheckedColor="#00C0C1"/></View>
+          <View><Text style={styles.radioText}>Business</Text></View>
         </View>
       </RadioButton.Group>
+
+      <View style={styles.gap}>
+        <CustomButton name="Next" style="loginBtn" onPress={businessSignUp} />
+        <Text style={styles.cancel} onPress={() => navigation.goBack()}>Cancel</Text>
+      </View>
 
     </View>
   );
@@ -33,8 +43,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#262D37",
-    flex: 1,
-    // justifyContent: "center",
     alignItems: "center",
     marginTop: 0,
   },
@@ -94,14 +102,37 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: "#00C0C1",
+    marginBottom: 30,
   },
   btnText: {
     fontSize: 20,
     color: "#00C0C1",
   },
   divider: {
-    backgroundColor: "#f54260",
-    color: "#f54260",
+    borderTopColor: "#707070",
+    borderTopWidth: 1,
+    borderBottomColor: "#707070",
+    borderBottomWidth: 1,
+    width: 375,
+    height: 60,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 15,
+    paddingBottom: 15,
+  },
+  radioText: {
+    color: "#00C0C1",
+    fontSize: 25,
+  },
+  gap: {
+    marginTop: 30,
+  },
+  cancel: {
+    marginTop: 10,
+    color: "#FFFFFF",
+    fontSize: 15,
+    textAlign: "center"
   },
 
 });
