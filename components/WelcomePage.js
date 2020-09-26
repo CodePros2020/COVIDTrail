@@ -11,11 +11,15 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import CustomButton from "./CustomButton";
-import NavBarBottom from "./NavBarBottom";
+// import NavBarBottom from "./NavBarBottom";
 
-export default function WelcomePage({ history }) {
+export default function WelcomePage({ navigation }) {
     const [value, onChangeText] = React.useState();
     const [isSelected, setSelection] = React.useState(false);
+
+    const userTypeHandler = () => {
+      navigation.navigate('UserType');
+    }
 
     return (
         <View style={styles.container}>
@@ -70,7 +74,7 @@ export default function WelcomePage({ history }) {
                     Don't have an account?&nbsp;
                     <Text
                         style={{ color: "#00C0C1", paddingLeft: 10 }}
-                        onPress={() => history.push("/userType")}
+                        onPress={userTypeHandler}
                     >
                         Sign Up
                     </Text>

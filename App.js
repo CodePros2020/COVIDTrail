@@ -1,26 +1,32 @@
 import { StatusBar } from "expo-status-bar";
 import React from 'react';
 import { StyleSheet, View, AppRegistry } from 'react-native';
-import { NativeRouter, Switch, Route } from 'react-router-native';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 
 // import MSSQL from 'react-native-mssql';
 
 import WelcomePage from "./components/WelcomePage";
 import UserType from "./components/UserType";
+import BusinessSignUp from "./components/BusinessSignUp";
+
+const Stack = createStackNavigator();
 
 export default class App extends React.Component {
   render() {
     return (
+
       <PaperProvider>
-        <NativeRouter>
-          <View style={styles.container}>
-            <Switch>
-              <Route exact path="/" component={WelcomePage} />
-              <Route exact path="/userType" component={UserType} />
-            </Switch>
-          </View>
-        </NativeRouter>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{headerShown: false,}}>
+            <Stack.Screen name="WelcomePage" component={WelcomePage} />
+            <Stack.Screen name="UserType" component={UserType} />
+            <Stack.Screen name="BusinessSignUp" component={BusinessSignUp} />
+          </Stack.Navigator>
+
+        </NavigationContainer>
       </PaperProvider>
     )
   }

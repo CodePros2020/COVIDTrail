@@ -1,12 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const Header = ({ title }) => {
+const Header = ({ title, navigation }) => {
+
   return (
     <View style={styles.mainHeader}>
       <View style={styles.headerStyle}></View>
       <View style={styles.header}>
-        <Text style={styles.back}>Back</Text>
+        <Text style={styles.back} onPress={() => navigation.goBack()}>Back</Text>
         <Text style={styles.text}>{title}</Text>
       </View>
     </View>
@@ -22,6 +23,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     height: 80,
+    marginTop: 25,
   },
   header: {
     alignSelf: "stretch",
