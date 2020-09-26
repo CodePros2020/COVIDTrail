@@ -6,12 +6,14 @@ import CustomButton from "../components/CustomButton";
 const UserType = ({ navigation }) => {
 
   const [value, setValue] = React.useState('personal');
+
   const businessSignUp = () => {
-    if (value === 'personal') {
+    if (value === 'business') {
       navigation.navigate('BusinessSignUp');
+    } else if (value === 'personal') {
+      navigation.navigate('ClientSignUp');
     }
   }
-
 
   return (
     <View style={styles.container}>
