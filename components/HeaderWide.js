@@ -1,16 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
-const HeaderWide = ({ title }) => {
+const HeaderWide = ({ title, navigation }) => {
   return (
-    <View style={styles.mainHeader}>
-      <Image
-        source={require("../assets/logosml.png")}
-        style={styles.logoStyle}
-      />
-      <Text style={styles.text}>{title}</Text>
-      <Icon name="log-out" size={30} color="#707070" />
+    <View style={{ marginTop: 0 }}>
+      <View style={styles.mainHeader}>
+        <Image source={require("../assets/logosml.png")} />
+        <Text style={styles.text}>{title}</Text>
+        <Icon name="log-out" size={30} color="#707070" />
+      </View>
     </View>
   );
 };
@@ -20,10 +19,10 @@ HeaderWide.defaultProps = {
 
 const styles = StyleSheet.create({
   mainHeader: {
-    alignSelf: "stretch",
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
+    width: Dimensions.get("window").width,
+    justifyContent: "space-between",
     height: 80,
     padding: 10,
   },
@@ -33,7 +32,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 80,
     padding: 15,
-    backgroundColor: "red",
+    backgroundColor: "#262D37",
   },
   text: {
     color: "#00C0C1",
@@ -44,15 +43,6 @@ const styles = StyleSheet.create({
   back: {
     color: "#00C0C1",
     fontSize: 16,
-  },
-  headerStyle: {
-    height: 15,
-    alignSelf: "stretch",
-    flexDirection: "row",
-    alignSelf: "stretch",
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    backgroundColor: "#000000",
   },
 });
 

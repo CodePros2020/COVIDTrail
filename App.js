@@ -1,10 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import React from 'react';
-import { StyleSheet, View, AppRegistry } from 'react-native';
-import { Provider as PaperProvider } from 'react-native-paper';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
+import React from "react";
+import { StyleSheet, View, AppRegistry } from "react-native";
+import { Provider as PaperProvider } from "react-native-paper";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 // import MSSQL from 'react-native-mssql';
 
@@ -14,26 +13,36 @@ import BusinessSignUp from "./components/BusinessSignUp";
 import ClientSignUp from "./components/ClientSignUp";
 // import ScanPage from "./components/ScanPage";
 import NavBarBottom from "./components/NavBarBottom";
+import QRCodePage from "./components/qrCodePage";
 
 const Stack = createStackNavigator();
 
+// const config = {
+//   server: 'sqlservercovidtrail.database.windows.net',
+//   username: 'codepros',
+//   password: '@Covidtrail123',
+//   database: 'sqlcovidtrail',
+//   port: 8080,
+//   timeout: 30
+// }
+// MSSQL.connect(config);
+// =======
 export default class App extends React.Component {
   render() {
     return (
-
       <PaperProvider>
         <NavigationContainer>
-          <Stack.Navigator screenOptions={{headerShown: false,}}>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="WelcomePage" component={WelcomePage} />
             <Stack.Screen name="UserType" component={UserType} />
             <Stack.Screen name="BusinessSignUp" component={BusinessSignUp} />
             <Stack.Screen name="ClientSignUp" component={ClientSignUp} />
             <Stack.Screen name="NavBarBottom" component={NavBarBottom} />
+            <Stack.Screen name="QRCodePage" component={QRCodePage} />
           </Stack.Navigator>
-
         </NavigationContainer>
       </PaperProvider>
-    )
+    );
   }
 }
 
@@ -46,15 +55,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 0,
     paddingTop: 60,
-  }
+  },
 });
-
-// const config = {
-//   server: 'sqlservercovidtrail.database.windows.net',
-//   username: 'codepros',
-//   password: '@Covidtrail123',
-//   database: 'sqlcovidtrail',
-//   port: 8080,
-//   timeout: 30
-// }
-// MSSQL.connect(config);
