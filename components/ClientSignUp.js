@@ -1,41 +1,47 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, SafeAreaView, ScrollView, View, TextInput, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  View,
+  TextInput,
+  Dimensions,
+} from "react-native";
 import Constants from "expo-constants";
-import Header from "./Header";
-import CustomButton from "../components/CustomButton";
+import Header from "./header";
+import CustomButton from "./customButton";
 
-var width = Dimensions.get('window').width;
-var widthProportion = '80%';
+var width = Dimensions.get("window").width;
+var widthProportion = "80%";
 
 const ClientSignUp = ({ navigation }) => {
-
-  const [textInputFirstName, setTextInputFirsttName] = useState('');
-  const [textInputLastName, setTextInputLasttName] = useState('');
+  const [textInputFirstName, setTextInputFirsttName] = useState("");
+  const [textInputLastName, setTextInputLasttName] = useState("");
 
   const checkTextInput = () => {
     if (!textInputFirstName.trim()) {
-      alert('Please Enter First Name');
+      alert("Please Enter First Name");
       return;
     }
 
     if (!textInputLastName.trim()) {
-      alert('Please Enter Last Name');
+      alert("Please Enter Last Name");
       return;
     }
   };
 
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <View style={{width: width}}><Header title="Sign Up" navigation={navigation}></Header></View>
+        <View style={{ width: width }}>
+          <Header title="Sign Up" navigation={navigation}></Header>
+        </View>
         <ScrollView style={styles.scrollView}>
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={
-                (value) => setTextInputFirsttName(value)
-              }
+              onChangeText={(value) => setTextInputFirsttName(value)}
               placeholder="First Name *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
@@ -60,9 +66,7 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={
-                (value) => setTextInputLasttName(value)
-              }
+              onChangeText={(value) => setTextInputLasttName(value)}
               placeholder="Last Name *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
@@ -132,6 +136,7 @@ const ClientSignUp = ({ navigation }) => {
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
               spellCheck={false}
+              secureTextEntry={true}
               autoCorrect={false}
               maxLength={30}
             />
@@ -146,17 +151,24 @@ const ClientSignUp = ({ navigation }) => {
               underlineColorAndroid="transparent"
               spellCheck={false}
               autoCorrect={false}
+              secureTextEntry={true}
               maxLength={30}
             />
           </View>
           <View>
-            <Text style={styles.warning}>* Indicates that field is mandatory.</Text>
+            <Text style={styles.warning}>
+              * Indicates that field is mandatory.
+            </Text>
           </View>
         </ScrollView>
         <View style={styles.gap}>
-        <CustomButton name="Next" style="customBtn" onPress={checkTextInput} />
+          <CustomButton
+            name="Next"
+            style="customBtn"
+            onPress={checkTextInput}
+          />
+        </View>
       </View>
-      </View>  
     </SafeAreaView>
   );
 };

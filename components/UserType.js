@@ -1,41 +1,50 @@
 import React from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Text, RadioButton } from "react-native-paper";
-import CustomButton from "../components/CustomButton";
+import CustomButton from "./customButton";
 
 const UserType = ({ navigation }) => {
-
-  const [value, setValue] = React.useState('personal');
-
+  const [value, setValue] = React.useState("personal");
   const businessSignUp = () => {
-    if (value === 'business') {
-      navigation.navigate('BusinessSignUp');
-    } else if (value === 'personal') {
-      navigation.navigate('ClientSignUp');
+    if (value === "business") {
+      navigation.navigate("BusinessSignUp");
+    } else {
+      navigation.navigate("ClientSignUp");
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
       <Image source={require("../assets/logo.png")} style={styles.logoStyle} />
       <Text style={styles.titleHeading}>User Type</Text>
-      <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
-      
+      <RadioButton.Group
+        onValueChange={(value) => setValue(value)}
+        value={value}
+      >
         <View style={styles.divider}>
-          <View><RadioButton value="personal" uncheckedColor="#00C0C1"/></View>
-          <View><Text style={styles.radioText}>Personal</Text></View>
+          <View>
+            <RadioButton value="personal" uncheckedColor="#00C0C1" />
+          </View>
+          <View>
+            <Text style={styles.radioText}>Personal</Text>
+          </View>
         </View>
         <View style={styles.divider}>
-          <View><RadioButton value="business" uncheckedColor="#00C0C1"/></View>
-          <View><Text style={styles.radioText}>Business</Text></View>
+          <View>
+            <RadioButton value="business" uncheckedColor="#00C0C1" />
+          </View>
+          <View>
+            <Text style={styles.radioText}>Business</Text>
+          </View>
         </View>
       </RadioButton.Group>
 
       <View style={styles.gap}>
         <CustomButton name="Next" style="loginBtn" onPress={businessSignUp} />
-        <Text style={styles.cancel} onPress={() => navigation.goBack()}>Cancel</Text>
+        <Text style={styles.cancel} onPress={() => navigation.goBack()}>
+          Cancel
+        </Text>
       </View>
-
     </View>
   );
 };
@@ -102,7 +111,7 @@ const styles = StyleSheet.create({
   },
   titleHeading: {
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: "#00C0C1",
     marginBottom: 30,
   },
@@ -134,7 +143,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: "#FFFFFF",
     fontSize: 15,
-    textAlign: "center"
+    textAlign: "center",
   },
-
 });
