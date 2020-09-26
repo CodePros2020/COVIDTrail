@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   mainHeader: {
     alignSelf: "stretch",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
     height: 45,
     padding: 10,

@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, View, AppRegistry } from "react-native";
 import { NativeRouter, Switch, Route } from "react-router-native";
@@ -6,26 +5,9 @@ import { Provider as PaperProvider } from "react-native-paper";
 
 // import MSSQL from 'react-native-mssql';
 
-import WelcomePage from "./components/WelcomePage";
-import UserType from "./components/UserType";
-
-// <<<<<<< HEAD
-//       <CustomButton name="Login" style="loginBtn" />
-//       <View style={styles.line}></View>
-//       <View style={styles.signUp}>
-//         <Text style={styles.label}>
-//           Don't have an account?
-//           <Text
-//             style={{ color: "#00C0C1", paddingLeft: 10 }}
-//             // onPress={() => Linking.openURL("http://google.com")}
-//           >
-//             Sign Up
-//           </Text>
-//         </Text>
-//       </View>
-//     </View>
-//   );
-// };
+import WelcomePage from "./components/welcomePage";
+import UserType from "./components/userType";
+import QRCode from "./components/qrCodePage";
 
 // const config = {
 //   server: 'sqlservercovidtrail.database.windows.net',
@@ -46,6 +28,7 @@ export default class App extends React.Component {
             <Switch>
               <Route exact path="/" component={WelcomePage} />
               <Route exact path="/userType" component={UserType} />
+              <Route exact path="/scanner" component={QRCode} />
             </Switch>
           </View>
         </NativeRouter>
@@ -53,3 +36,15 @@ export default class App extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#262D37",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 0,
+    paddingTop: 60,
+  },
+});

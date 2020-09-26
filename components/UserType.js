@@ -1,29 +1,34 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Divider, Text, RadioButton } from "react-native-paper";
-import CustomButton from "../components/CustomButton";
+import CustomButton from "./customButton";
 
-const UserType = () => {
-  
-  const [value, setValue] = React.useState('individual');
+const UserType = ({ history }) => {
+  const [value, setValue] = React.useState("individual");
 
   return (
     <View style={styles.container}>
       <Image source={require("../assets/logo.png")} style={styles.logoStyle} />
       <Text style={styles.titleHeading}>User Type</Text>
-      <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
-      
+      <RadioButton.Group
+        onValueChange={(value) => setValue(value)}
+        value={value}
+      >
         <View>
           <Text>Individual</Text>
-          <RadioButton value="individual" uncheckedColor="00C0C1"/>
+          <RadioButton value="individual" uncheckedColor="00C0C1" />
         </View>
         <Divider />
         <View>
           <Text>Business</Text>
-          <RadioButton value="business" uncheckedColor="00C0C1"/>
+          <RadioButton value="business" uncheckedColor="00C0C1" />
         </View>
       </RadioButton.Group>
-
+      <CustomButton
+        name="Login"
+        style="loginBtn"
+        onPress={() => history.push("/scanner")}
+      />
     </View>
   );
 };
@@ -92,7 +97,7 @@ const styles = StyleSheet.create({
   },
   titleHeading: {
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: "#00C0C1",
   },
   btnText: {
@@ -103,5 +108,4 @@ const styles = StyleSheet.create({
     backgroundColor: "#f54260",
     color: "#f54260",
   },
-
 });
