@@ -11,6 +11,7 @@ import WelcomePage from "./components/welcomePage";
 import UserType from "./components/userType";
 import BusinessSignUp from "./components/businessSignUp";
 import ClientSignUp from "./components/clientSignUp";
+import QRCodePage from "./components/qrCodePage";
 
 const Stack = createStackNavigator();
 
@@ -34,6 +35,7 @@ export default class App extends React.Component {
             <Stack.Screen name="UserType" component={UserType} />
             <Stack.Screen name="BusinessSignUp" component={BusinessSignUp} />
             <Stack.Screen name="ClientSignUp" component={ClientSignUp} />
+            <Stack.Screen name="QRCodePage" component={QRCodePage} />
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>
