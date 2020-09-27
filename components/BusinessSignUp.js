@@ -1,3 +1,4 @@
+// import { Picker } from "@react-native-community/picker";
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -7,24 +8,154 @@ import {
   View,
   TextInput,
   Dimensions,
+  Alert,
+  Picker,
 } from "react-native";
 import Constants from "expo-constants";
 import Header from "./Header";
 import CustomButton from "./CustomButton";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import { color } from "react-native-reanimated";
+// import UserAccount from "../models/UserAccount";
 
 var width = Dimensions.get("window").width;
 var widthProportion = "80%";
 
 const BusinessSignUp = ({ navigation }) => {
-  const [txtBusinessName, setBusinessName] = useState("");
+  const [textInputBusinessName, setTextInputBusinessName] = useState("");
+  const [textInputPhoneNumber, setTextInputPhoneNumber] = useState("");
+  const [textInputEmail, setTextInputEmail] = useState("");
+  const [textInputAddressLine1, setTextInputAddressLine1] = useState("");
+  const [textInputAddressLine2, setTextInputAddressLine2] = useState("");
+  const [textInputCity, setTextInputCity] = useState("");
+  const [textInputProvince, setTextInputProvince] = useState("");
+  const [textInputPostalCode, setTextInputPostalCode] = useState("");
+  const [textInputPassword, setTextInputPassword] = useState("");
+  const [textInputConfirmPassword, setTextInputConfirmPassword] = useState("");
+  const [secure, setSecure] = useState({
+    secure: true,
+    icon: "eye",
+    color: "#979797",
+  });
+  // const [userModel, setUserModel] = useState({UserAccount});
 
-  const checkTextInput = () => {
-    if (!txtBusinessName.trim()) {
-      alert("Please Enter Business Name");
-      return;
-    }
+  const togglePasswordVisiblity = () => {
+    let iconName = secure.secure ? "eye-slash" : "eye";
+    let eyeColor = secure.secure ? "#979797" : "#00C0C1";
+    setSecure({
+      secure: !secure.secure,
+      icon: iconName,
+      color: eyeColor,
+    });
   };
+  //   const checkTextInput = () => {
+  //     if (!textInputBusinessName.trim()) {
+  //       Alert.alert(
+  //         "Information Required!",
+  //         "Please provide Business Name.",
+
+  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+  //         { cancelable: false }
+  //       );
+  //       return;
+  //     } else if (!textInputPhoneNumber.trim()) {
+  //       Alert.alert(
+  //         "Information Required!",
+  //         "Please provide Phone number.",
+
+  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+  //         { cancelable: false }
+  //       );
+  //       return;
+  //     } else if (!textInputAddressLine1.trim()) {
+  //       Alert.alert(
+  //         "Information Required!",
+  //         "Please provide address line1.",
+
+  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+  //         { cancelable: false }
+  //       );
+  //       return;
+  //     } else if (!textInputCity.trim()) {
+  //       Alert.alert(
+  //         "Information Required!",
+  //         "Please provide city.",
+
+  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+  //         { cancelable: false }
+  //       );
+  //       return;
+  //     } else if (!textInputProvince.trim()) {
+  //       Alert.alert(
+  //         "Information Required!",
+  //         "Please provide province.",
+
+  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+  //         { cancelable: false }
+  //       );
+  //       return;
+  //     } else if (!textInputPostalCode.trim()) {
+  //       Alert.alert(
+  //         "Information Required!",
+  //         "Please choose postal code.",
+
+  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+  //         { cancelable: false }
+  //       );
+  //       return;
+  //     } else if (!textInputPassword.trim()) {
+  //       Alert.alert(
+  //         "Information Required!",
+  //         "Please provide password.",
+
+  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+  //         { cancelable: false }
+  //       );
+  //       return;
+  //     } else if (!textInputConfirmPassword.trim()) {
+  //       Alert.alert(
+  //         "Information Required!",
+  //         "Please provide confirm password.",
+
+  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+  //         { cancelable: false }
+  //       );
+  //       return;
+  //     } else if (textInputPassword !== textInputConfirmPassword) {
+  //       Alert.alert(
+  //         "Information Required!",
+  //         "Password and Confirm Password fields does not match.",
+
+  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+  //         { cancelable: false }
+  //       );
+  //       return;
+  //     } else {
+  //       Alert.alert(
+  //         "Success!",
+  //         "Sign up Completed!",
+
+  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+  //         { cancelable: false }
+  //       );
+
+  //       // let userAccount = new UserAccount();
+  //       // userAccount.firstName = textInputFirstName;
+  //       // userAccount.middleName = textInputMiddleName;
+  //       // userAccount.lastName = textInputLastName;
+  //       // userAccount.phoneNumber = textInputPhoneNumber;
+  //       // userAccount.emailAddress = textInputEmail;
+  //       // userAccount.addressLine1 = textInputAddressLine1;
+  //       // userAccount.addressLine2 = textInputAddressLine2;
+  //       // userAccount.city = textInputCity;
+  //       // userAccount.province = textInputProvince;
+  //       // userAccount.postalCode = textInputPostalCode;
+  //       // userAccount.password = textInputPassword;
+
+  //       navigation.navigate("NavBarBottom");
+  //       return;
+  //     }
+  //   };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -36,58 +167,37 @@ const BusinessSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={(value) => setBusinessName(value)}
+              onChangeText={(value) => setTextInputBusinessName(value)}
+              value={textInputBusinessName}
               placeholder="Business Name *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
               spellCheck={false}
               autoCorrect={false}
-              maxLength={50}
-            />
-          </View>
-          <View style={styles.viewStyle}>
-            <TextInput
-              style={styles.input}
-              placeholder="Address Line 1 *"
-              placeholderTextColor={"#979797"}
-              underlineColorAndroid="transparent"
-              spellCheck={false}
-              autoCorrect={false}
               maxLength={100}
             />
           </View>
           <View style={styles.viewStyle}>
             <TextInput
+              keyboardType="numeric"
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
-              placeholder="Address Line 2"
+              onChangeText={(value) => setTextInputPhoneNumber(value)}
+              value={textInputPhoneNumber}
+              placeholder="Phone Number *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
               spellCheck={false}
               autoCorrect={false}
-              maxLength={100}
+              maxLength={10}
             />
           </View>
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
-              placeholder="City *"
-              placeholderTextColor={"#979797"}
-              underlineColorAndroid="transparent"
-              spellCheck={false}
-              autoCorrect={false}
-              maxLength={50}
-            />
-          </View>
-          <View style={styles.viewStyle}>
-            <TextInput
-              style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
-              placeholder="Province *"
+              onChangeText={(value) => setTextInputEmail(value)}
+              value={textInputEmail}
+              placeholder="Email"
+              keyboardType="email-address"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
               spellCheck={false}
@@ -98,48 +208,127 @@ const BusinessSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
-              placeholder="Postal Code *"
-              autoCompleteType="postal-code"
+              onChangeText={(value) => setTextInputAddressLine1(value)}
+              value={textInputAddressLine1}
+              placeholder="Address Line 1 *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
               spellCheck={false}
               autoCorrect={false}
-              maxLength={7}
+              maxLength={50}
             />
-          </View>
-          <View style={styles.viewStylePassword}>
-            <TextInput
-              style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
-              placeholder="Password *"
-              autoCompleteType="password"
-              inlineImageLeft=""
-              placeholderTextColor={"#979797"}
-              underlineColorAndroid="transparent"
-              secureTextEntry={true}
-              spellCheck={false}
-              autoCorrect={false}
-              maxLength={16}
-            >
-              {/* <Icon name="user" style={{ height: 30, width: 30 }} /> */}
-            </TextInput>
           </View>
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              //   onChangeText={(text) => onChangeText(text)}
-              //   value={value}
-              placeholder="Confirm Password *"
-              autoCompleteType="password"
+              onChangeText={(value) => setTextInputAddressLine2(value)}
+              value={textInputAddressLine2}
+              placeholder="Address Line 2"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
-              secureTextEntry={true}
               spellCheck={false}
               autoCorrect={false}
-              maxLength={16}
+              maxLength={50}
+            />
+          </View>
+          <View style={styles.viewStyle}>
+            <TextInput
+              style={styles.input}
+              onChangeText={(value) => setTextInputCity(value)}
+              value={textInputCity}
+              placeholder="City *"
+              placeholderTextColor={"#979797"}
+              underlineColorAndroid="transparent"
+              spellCheck={false}
+              autoCorrect={false}
+              maxLength={30}
+            />
+          </View>
+          <View style={styles.viewStyle}>
+            <Picker
+              style={{
+                height: 50,
+                width: width - 25,
+                color: "#ffffff",
+                fontSize: 30,
+                placeholderTextColor: "#979797",
+              }}
+              selectedValue={textInputProvince}
+              onValueChange={(itemValue, itemIndex) =>
+                setTextInputProvince(itemValue)
+              }
+            >
+              <Picker.Item label="Select Province *" value="" />
+              <Picker.Item label="Alberta" value="AB" />
+              <Picker.Item label="British Columbia" value="BC" />
+              <Picker.Item label="Manitoba" value="MB" />
+              <Picker.Item label="New Brunswick" value="NB" />
+              <Picker.Item label="Newfoundland and Labrador" value="NL" />
+              <Picker.Item label="Northwest Territories" value="NT" />
+              <Picker.Item label="Nova Scotia" value="NS" />
+              <Picker.Item label="Nunavut" value="NU" />
+              <Picker.Item label="Ontario" value="ON" />
+              <Picker.Item label="Prince Edward Island" value="PE" />
+              <Picker.Item label="Quebec" value="QC" />
+              <Picker.Item label="Saskatchewan" value="SK" />
+              <Picker.Item label="Yukon" value="YT" />
+            </Picker>
+          </View>
+          <View style={styles.viewStyle}>
+            <TextInput
+              style={styles.input}
+              onChangeText={(value) => setTextInputPostalCode(value)}
+              value={textInputPostalCode}
+              placeholder="Postal Code *"
+              placeholderTextColor={"#979797"}
+              underlineColorAndroid="transparent"
+              spellCheck={false}
+              autoCorrect={false}
+              maxLength={6}
+            />
+          </View>
+          <View style={styles.viewStyle}>
+            <TextInput
+              style={styles.input}
+              onChangeText={(value) => setTextInputPassword(value)}
+              value={textInputPassword}
+              secureTextEntry={secure.secure}
+              placeholder="Password *"
+              placeholderTextColor={"#979797"}
+              underlineColorAndroid="transparent"
+              spellCheck={false}
+              secureTextEntry={true}
+              autoCorrect={false}
+              maxLength={30}
+            />
+            <Icon
+              style={
+                secure.icon === "eye" ? styles.userIcon : styles.eyeVisible
+              }
+              name={secure.icon}
+              onPress={togglePasswordVisiblity}
+            />
+          </View>
+          <View style={styles.viewStyle}>
+            <TextInput
+              style={styles.input}
+              onChangeText={(value) => setTextInputConfirmPassword(value)}
+              value={textInputConfirmPassword}
+              secureTextEntry={secure.secure}
+              placeholder="Confirm Password *"
+              placeholderTextColor={"#979797"}
+              underlineColorAndroid="transparent"
+              spellCheck={false}
+              autoCorrect={false}
+              secureTextEntry={true}
+              maxLength={30}
+            />
+            <Icon
+              style={
+                secure.icon === "eye" ? styles.userIcon : styles.eyeVisible
+              }
+              name={secure.icon}
+              onPress={togglePasswordVisiblity}
             />
           </View>
           <View>
@@ -152,7 +341,8 @@ const BusinessSignUp = ({ navigation }) => {
           <CustomButton
             name="Next"
             style="customBtn"
-            onPress={checkTextInput}
+            // onPress={checkTextInput}
+            onPress={() => navigation.navigate("NavBarBottom")}
           />
         </View>
       </View>
@@ -176,16 +366,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 42,
   },
-  viewStylePassword: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#262D37",
-    borderBottomWidth: 1,
-    borderBottomColor: "#707070",
-    height: 60,
-    marginLeft: 10,
-    color: "#ffffff",
+  eyeVisible: {
+    color: "#00C0C1",
+    fontSize: 18,
   },
   viewStyle: {
     flexDirection: "row",
@@ -197,10 +380,12 @@ const styles = StyleSheet.create({
     height: 60,
     marginLeft: 10,
     color: "#ffffff",
+    width: 350,
   },
   input: {
+    flex: 1,
     height: 40,
-    width: 350,
+    // width: 350,
     color: "#ffffff",
     fontSize: 18,
   },
@@ -210,7 +395,7 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   gap: {
-    marginBottom: 35,
+    marginBottom: 8,
   },
   customBtn: {
     height: 45,
@@ -218,6 +403,13 @@ const styles = StyleSheet.create({
     borderColor: "#00C0C1",
     borderWidth: 1,
     backgroundColor: "#262D37",
+  },
+  userIcon: {
+    color: "#979797",
+    // margin: 5,
+    // paddingRight: 10,
+    // alignItems: "center",
+    fontSize: 18,
   },
 });
 

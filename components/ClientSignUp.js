@@ -12,6 +12,7 @@ import Constants from "expo-constants";
 import Header from "./Header";
 import CustomButton from "./CustomButton";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import { color } from "react-native-reanimated";
 // import UserAccount from "../models/UserAccount";
 
 var width = Dimensions.get("window").width;
@@ -31,25 +32,33 @@ const ClientSignUp = ({ navigation }) => {
   const [textInputPostalCode, setTextInputPostalCode] = useState('');
   const [textInputPassword, setTextInputPassword] = useState('');
   const [textInputConfirmPassword, setTextInputConfirmPassword] = useState('');
-  const [secure, setSecure] = useState({secure: true, icon: 'eye'});
-  const [secureConfirmPassword, setSecureConfirmPassword] = useState({secure: true, icon: 'eye'});
+  const [secureConfirmPassword, setSecureConfirmPassword] = useState({secure: true, icon: 'eye', color: "#979797",});
+  const [secure, setSecure] = useState({
+    secure: true,
+    icon: "eye",
+    color: "#979797",
+  });
   // const [userModel, setUserModel] = useState({UserAccount});
 
   const togglePasswordVisiblity = () => {
-    let iconName = secure.secure ? 'eye-slash' : 'eye';
+    let iconName = secure.secure ? "eye-slash" : "eye";
+    let eyeColor = secure.secure ? "#979797" : "#00C0C1";
 
     setSecure({
       secure: !secure.secure,
-      icon: iconName
+      icon: iconName,
+      color: eyeColor,
     });
-  }
+  };
 
   const toggleConfirmPasswordVisiblity = () => {
     let iconName = secureConfirmPassword.secure ? 'eye-slash' : 'eye';
+    let eyeColor = secureConfirmPassword.secure ? "#979797" : "#00C0C1";
 
     setSecureConfirmPassword({
       secure: !secureConfirmPassword.secure,
-      icon: iconName
+      icon: iconName,
+      color: eyeColor
     });
   }
 
@@ -57,55 +66,35 @@ const ClientSignUp = ({ navigation }) => {
     if (!textInputFirstName.trim()) {
       alert("Please Enter First Name");
       return;
-    }
-
-    else if (!textInputLastName.trim()) {
-      alert('Please Enter Last Name');
+    } else if (!textInputLastName.trim()) {
+      alert("Please Enter Last Name");
       return;
-    }
-
-    else if (!textInputPhoneNumber.trim()) {
-      alert('Please Enter Phone Number');
+    } else if (!textInputPhoneNumber.trim()) {
+      alert("Please Enter Phone Number");
       return;
-    }
-
-    else if (!textInputAddressLine1.trim()) {
-      alert('Please Enter Address Line 1');
+    } else if (!textInputAddressLine1.trim()) {
+      alert("Please Enter Address Line 1");
       return;
-    }
-
-    else if (!textInputCity.trim()) {
-      alert('Please Enter City');
+    } else if (!textInputCity.trim()) {
+      alert("Please Enter City");
       return;
-    }
-
-    else if (!textInputProvince.trim()) {
-      alert('Please Enter Province');
+    } else if (!textInputProvince.trim()) {
+      alert("Please Enter Province");
       return;
-    }
-
-    else if (!textInputPostalCode.trim()) {
-      alert('Please Enter Postal Code');
+    } else if (!textInputPostalCode.trim()) {
+      alert("Please Enter Postal Code");
       return;
-    }
-
-    else if (!textInputPassword.trim()) {
-      alert('Please enter a Password.');
+    } else if (!textInputPassword.trim()) {
+      alert("Please enter a Password.");
       return;
-    }
-
-    else if (!textInputConfirmPassword.trim()) {
-      alert('Please confirm the password you entered.');
+    } else if (!textInputConfirmPassword.trim()) {
+      alert("Please confirm the password you entered.");
       return;
-    }
-
-    else if (textInputPassword !== textInputConfirmPassword) {
-      alert('Password and Confirm Password fields does not match.');
+    } else if (textInputPassword !== textInputConfirmPassword) {
+      alert("Password and Confirm Password fields does not match.");
       return;
-    }
-
-    else {
-      alert('Sign Up Completed.');
+    } else {
+      alert("Sign Up Completed.");
 
       // let userAccount = new UserAccount();
       // userAccount.firstName = textInputFirstName;
@@ -120,7 +109,7 @@ const ClientSignUp = ({ navigation }) => {
       // userAccount.postalCode = textInputPostalCode;
       // userAccount.password = textInputPassword;
 
-      navigation.navigate('NavBarBottom');
+      navigation.navigate("NavBarBottom");
       return;
     }
   };
@@ -135,9 +124,7 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={
-                (value) => setTextInputFirsttName(value)
-              }
+              onChangeText={(value) => setTextInputFirsttName(value)}
               value={textInputFirstName}
               placeholder="First Name *"
               placeholderTextColor={"#979797"}
@@ -150,9 +137,7 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={
-                (value) => setTextInputMiddleName(value)
-              }
+              onChangeText={(value) => setTextInputMiddleName(value)}
               value={textInputMiddleName}
               placeholder="Middle Name"
               placeholderTextColor={"#979797"}
@@ -165,9 +150,7 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={
-                (value) => setTextInputLasttName(value)
-              }
+              onChangeText={(value) => setTextInputLasttName(value)}
               value={textInputLastName}
               placeholder="Last Name *"
               placeholderTextColor={"#979797"}
@@ -179,11 +162,9 @@ const ClientSignUp = ({ navigation }) => {
           </View>
           <View style={styles.viewStyle}>
             <TextInput
-              keyboardType='numeric'
+              keyboardType="numeric"
               style={styles.input}
-              onChangeText={
-                (value) => setTextInputPhoneNumber(value)
-              }
+              onChangeText={(value) => setTextInputPhoneNumber(value)}
               value={textInputPhoneNumber}
               placeholder="Phone Number *"
               placeholderTextColor={"#979797"}
@@ -196,9 +177,7 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={
-                (value) => setTextInputEmail(value)
-              }
+              onChangeText={(value) => setTextInputEmail(value)}
               value={textInputEmail}
               placeholder="Email"
               placeholderTextColor={"#979797"}
@@ -211,9 +190,7 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={
-                (value) => setTextInputAddressLine1(value)
-              }
+              onChangeText={(value) => setTextInputAddressLine1(value)}
               value={textInputAddressLine1}
               placeholder="Address Line 1 *"
               placeholderTextColor={"#979797"}
@@ -226,9 +203,7 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={
-                (value) => setTextInputAddressLine2(value)
-              }
+              onChangeText={(value) => setTextInputAddressLine2(value)}
               value={textInputAddressLine2}
               placeholder="Address Line 2"
               placeholderTextColor={"#979797"}
@@ -241,9 +216,7 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={
-                (value) => setTextInputCity(value)
-              }
+              onChangeText={(value) => setTextInputCity(value)}
               value={textInputCity}
               placeholder="City *"
               placeholderTextColor={"#979797"}
@@ -256,9 +229,7 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={
-                (value) => setTextInputProvince(value)
-              }
+              onChangeText={(value) => setTextInputProvince(value)}
               value={textInputProvince}
               placeholder="Province *"
               placeholderTextColor={"#979797"}
@@ -271,9 +242,7 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={
-                (value) => setTextInputPostalCode(value)
-              }
+              onChangeText={(value) => setTextInputPostalCode(value)}
               value={textInputPostalCode}
               placeholder="Postal Code *"
               placeholderTextColor={"#979797"}
@@ -286,9 +255,7 @@ const ClientSignUp = ({ navigation }) => {
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={
-                (value) => setTextInputPassword(value)
-              }
+              onChangeText={(value) => setTextInputPassword(value)}
               value={textInputPassword}
               secureTextEntry={secure.secure}
               placeholder="Password *"
@@ -298,14 +265,18 @@ const ClientSignUp = ({ navigation }) => {
               autoCorrect={false}
               maxLength={30}
             />
-            <Icon style={styles.userIcon} name={secure.icon} onPress={togglePasswordVisiblity} />
+            <Icon
+              style={
+                secure.icon === "eye" ? styles.userIcon : styles.eyeVisible
+              }
+              name={secure.icon}
+              onPress={togglePasswordVisiblity}
+            />
           </View>
           <View style={styles.viewStyle}>
             <TextInput
               style={styles.input}
-              onChangeText={
-                (value) => setTextInputConfirmPassword(value)
-              }
+              onChangeText={(value) => setTextInputConfirmPassword(value)}
               value={textInputConfirmPassword}
               secureTextEntry={secureConfirmPassword.secure}
               placeholder="Confirm Password *"
@@ -351,6 +322,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 42,
   },
+  eyeVisible: {
+    color: "#00C0C1",
+    fontSize: 18,
+  },
   viewStyle: {
     flexDirection: "row",
     justifyContent: "center",
@@ -361,7 +336,7 @@ const styles = StyleSheet.create({
     height: 60,
     marginLeft: 10,
     color: "#ffffff",
-    width: 350
+    width: 350,
   },
   input: {
     flex: 1,

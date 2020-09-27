@@ -19,26 +19,26 @@ function MyTabs() {
     <Tab.Navigator
       initialRouteName="ScanPage"
       tabBarOptions={{
-        activeTintColor: '#00C0C1',
-        activeBackgroundColor: '#262D37',
-        inactiveBackgroundColor: '#262D37'
+        activeTintColor: "#00C0C1",
+        activeBackgroundColor: "#262D37",
+        inactiveBackgroundColor: "#262D37",
       }}
     >
       <Tab.Screen
         name="ScanPage"
         component={ScanPage}
         options={{
-          tabBarLabel: 'Scan',
+          tabBarLabel: "Scan",
           tabBarIcon: ({ color, size }) => (
             <IconScan name="qrcode-scan" size={size} color={color} />
           ),
         }}
       />
       <Tab.Screen
-        name="AccountPage"
-        component={AccountPage}
+        name="BusinessAccount"
+        component={BusinessAccount}
         options={{
-          tabBarLabel: 'Account',
+          tabBarLabel: "Account",
           tabBarIcon: ({ color, size }) => (
             <Icon name="user" size={size} color={color} />
           ),
@@ -48,7 +48,7 @@ function MyTabs() {
         name="LogsStackScreen"
         component={LogsStackScreen}
         options={{
-          tabBarLabel: 'Logs',
+          tabBarLabel: "Logs",
           tabBarIcon: ({ color, size }) => (
             <Icon name="list-alt" size={size} color={color} />
           ),
@@ -81,7 +81,6 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
 
 const NavBarBottom = () => {
   return (
