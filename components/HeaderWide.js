@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/Feather";
 
 const HeaderWide = ({ title, navigation }) => {
   return (
-    <View style={{ marginTop: 0 }}>
+    <View style={{ marginTop: 0, flexDirection: "row", alignItems: "center" }}>
       <View style={styles.mainHeader}>
         <Image source={require("../assets/logosml.png")} />
         <Text style={styles.text}>{title}</Text>
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: Dimensions.get("window").width,
     justifyContent: "space-between",
-    height: 80,
+    height: 100,
     padding: 10,
   },
   header: {

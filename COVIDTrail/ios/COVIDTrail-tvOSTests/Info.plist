@@ -20,5 +20,14 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Allow camera to take pictures and record video?</string>
+    <!-- Required with iOS 11 and higher: include this only if you are planning to use the camera roll -->
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Allow camera to take pictures and record video?</string>
+
+    <!-- Include this only if you are planning to use the camera roll -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Allow camera to take pictures and record video?</string>
 </dict>
 </plist>

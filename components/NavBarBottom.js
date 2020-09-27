@@ -2,12 +2,12 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import IconScan from "react-native-vector-icons/MaterialCommunityIcons";
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import ScanPage from "./ScanPage";
-import AccountPage from "./AccountPage";
-import IndividualLogsPage from "./IndividualLogsPage";
+import ScanPage from "./scanPage";
+import BusinessAccount from "./businessAccount";
+import BusinessLogs from "./businessLogsPage";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,36 +16,36 @@ function MyTabs() {
     <Tab.Navigator
       initialRouteName="ScanPage"
       tabBarOptions={{
-        activeTintColor: '#00C0C1',
-        activeBackgroundColor: '#262D37',
-        inactiveBackgroundColor: '#262D37'
+        activeTintColor: "#00C0C1",
+        activeBackgroundColor: "#262D37",
+        inactiveBackgroundColor: "#262D37",
       }}
     >
       <Tab.Screen
         name="ScanPage"
         component={ScanPage}
         options={{
-          tabBarLabel: 'Scan',
+          tabBarLabel: "Scan",
           tabBarIcon: ({ color, size }) => (
             <IconScan name="qrcode-scan" size={size} color={color} />
           ),
         }}
       />
       <Tab.Screen
-        name="AccountPage"
-        component={AccountPage}
+        name="BusinessAccount"
+        component={BusinessAccount}
         options={{
-          tabBarLabel: 'Account',
+          tabBarLabel: "Account",
           tabBarIcon: ({ color, size }) => (
             <Icon name="user" size={size} color={color} />
           ),
         }}
       />
       <Tab.Screen
-        name="IndividualLogsPage"
-        component={IndividualLogsPage}
+        name="BusinessLogs"
+        component={BusinessLogs}
         options={{
-          tabBarLabel: 'Logs',
+          tabBarLabel: "Logs",
           tabBarIcon: ({ color, size }) => (
             <Icon name="list-alt" size={size} color={color} />
           ),
@@ -62,7 +62,6 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
 
 const NavBarBottom = () => {
   return (

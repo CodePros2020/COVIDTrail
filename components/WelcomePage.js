@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -15,8 +15,21 @@ import CustomButton from "./customButton";
 // import NavBarBottom from "./NavBarBottom";
 
 export default function WelcomePage({ navigation }) {
-  const [value, onChangeText] = React.useState();
+  const [username, onUserNameChange] = React.useState();
+  const [password, onPasswordChange] = React.useState();
   const [isSelected, setSelection] = React.useState(false);
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+  const baseUrl = "http://covidtrail-backend.azurewebsites.net";
+  const success = () => {
+    fetch(baseUrl + "/auth")
+      .then((response) => {
+        console.log("Data recaived", response);
+        navigation.navigate("BusinessLogsPage");
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  };
 
   const userTypeHandler = () => {
     navigation.navigate("UserType");
@@ -30,8 +43,9 @@ export default function WelcomePage({ navigation }) {
         <TextInput
           keyboardType="numeric"
           style={styles.input}
-          //   onChangeText={(text) => onChangeText(text)}
-          //   value={value}
+          onChangeText={(text) => onUserNameChange(text)}
+          value={username}
+          name={username}
           placeholder="Phone Number"
           placeholderTextColor={"#979797"}
           underlineColorAndroid="transparent"
@@ -44,9 +58,11 @@ export default function WelcomePage({ navigation }) {
         <Icon style={styles.userIcon} name="lock" />
         <TextInput
           style={styles.input}
-          //   onChangeText={(text) => onChangeText(text)}
-          //   value={value}
+          onChangeText={(text) => onPasswordChange(text)}
+          value={password}
+          name={password}
           placeholder="Password"
+          secureTextEntry={true}
           placeholderTextColor={"#979797"}
           underlineColorAndroid="transparent"
           spellCheck={false}
@@ -69,7 +85,7 @@ export default function WelcomePage({ navigation }) {
         </View>
       </View>
 
-      <CustomButton name="Login" style="loginBtn" />
+      <CustomButton name="Login" style="loginBtn" onPress={success} />
       <View style={styles.line}></View>
       <View style={styles.signUp}>
         <Text style={styles.label}>
@@ -98,7 +114,7 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     width: 250,
-    color: "#262D37",
+    color: "#FFF",
     fontSize: 18,
   },
   text: {
