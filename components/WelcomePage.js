@@ -11,8 +11,10 @@ import {
   SafeAreaView,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import CustomButton from "./CustomButton";
+import CustomButton from "./customButton";
+import API from "../api";
 // import NavBarBottom from "./NavBarBottom";
+import AccountDetailsModel from "../models/AccountDetails";
 
 export default function WelcomePage({ navigation }) {
   const [username, onUserNameChange] = React.useState();
@@ -20,15 +22,33 @@ export default function WelcomePage({ navigation }) {
   const [isSelected, setSelection] = React.useState(false);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const baseUrl = "http://covidtrail-backend.azurewebsites.net";
+  const account = {
+    addressLineOne: "",
+    addressLineTwo: "",
+    businessName: "",
+    city: "",
+    email: "",
+    firstName: "",
+    id: "",
+    lastName: "",
+    middleName: "",
+    phone: "",
+    postalCode: "",
+    province: "",
+  };
   const success = () => {
-    fetch(baseUrl + "/auth")
+    API.post(`/login?password=${password}&username=${username}`)
       .then((response) => {
-        console.log("Data received", response);
-        navigation.navigate("NavBarBottom");
+        account = response.data;
+        alert("Data received" + JSON.stringify(response.data));
+        // navigation.navigate("NavBarBottom", { accountId: account.id });
       })
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
+      .catch((e) => {
+        (error) => {
+          console.error(error);
+          alert("Error is " + error);
+        };
+      });
   };
 
   const userTypeHandler = () => {

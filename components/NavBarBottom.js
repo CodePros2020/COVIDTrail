@@ -2,19 +2,22 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import IconScan from "react-native-vector-icons/MaterialCommunityIcons";
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-
-import ScanPage from "./ScanPage";
-import AccountPage from "./AccountPage";
+import ScanPage from "./scanPage";
+import AccountPage from "./accountPage";
 import IndividualLogsPage from "./IndividualLogsPage";
 import IndividualLogsDetailPage from "./IndividualLogsDetailPage";
+import BusinessLogs from "./businessLogsPage";
+import BusinessAccount from "./businessAccount";
 
 const Tab = createBottomTabNavigator();
 const LogStack = createStackNavigator();
 
-function MyTabs() {
+function MyTabs({ route }) {
+  const { accId } = route.params;
+  alert(JSON.stringify(accId));
   return (
     <Tab.Navigator
       initialRouteName="ScanPage"
@@ -67,7 +70,7 @@ function LogsStackScreen() {
         // options={{ tabBarLabel: 'Settings!' }}
       />
       <LogStack.Screen
-        name="IndividualLogsDetailPage" 
+        name="IndividualLogsDetailPage"
         component={IndividualLogsDetailPage}
       />
     </LogStack.Navigator>

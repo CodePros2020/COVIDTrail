@@ -1,7 +1,7 @@
 import UserAccount from "./UserAccount";
 
 export default class PlacesVisitedLog {
-    userAccount = UserAccount;
-    dateVisited = "";
-    timeVisited = "";
+  userAccount = UserAccount;
+  dateVisited;
+  timeVisited;
 }

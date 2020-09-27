@@ -9,8 +9,8 @@ import {
   Dimensions,
 } from "react-native";
 import Constants from "expo-constants";
-import Header from "./Header";
-import CustomButton from "./CustomButton";
+import Header from "./header";
+import CustomButton from "./customButton";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { color } from "react-native-reanimated";
 // import UserAccount from "../models/UserAccount";
@@ -19,20 +19,23 @@ var width = Dimensions.get("window").width;
 var widthProportion = "80%";
 
 const ClientSignUp = ({ navigation }) => {
-
-  const [textInputFirstName, setTextInputFirsttName] = useState('');
-  const [textInputMiddleName, setTextInputMiddletName] = useState('');
-  const [textInputLastName, setTextInputLasttName] = useState('');
-  const [textInputPhoneNumber, setTextInputPhoneNumber] = useState('');
-  const [textInputEmail, setTextInputEmail] = useState('');
-  const [textInputAddressLine1, setTextInputAddressLine1] = useState('');
-  const [textInputAddressLine2, setTextInputAddressLine2] = useState('');
-  const [textInputCity, setTextInputCity] = useState('');
-  const [textInputProvince, setTextInputProvince] = useState('');
-  const [textInputPostalCode, setTextInputPostalCode] = useState('');
-  const [textInputPassword, setTextInputPassword] = useState('');
-  const [textInputConfirmPassword, setTextInputConfirmPassword] = useState('');
-  const [secureConfirmPassword, setSecureConfirmPassword] = useState({secure: true, icon: 'eye', color: "#979797",});
+  const [textInputFirstName, setTextInputFirsttName] = useState("");
+  const [textInputMiddleName, setTextInputMiddletName] = useState("");
+  const [textInputLastName, setTextInputLasttName] = useState("");
+  const [textInputPhoneNumber, setTextInputPhoneNumber] = useState("");
+  const [textInputEmail, setTextInputEmail] = useState("");
+  const [textInputAddressLine1, setTextInputAddressLine1] = useState("");
+  const [textInputAddressLine2, setTextInputAddressLine2] = useState("");
+  const [textInputCity, setTextInputCity] = useState("");
+  const [textInputProvince, setTextInputProvince] = useState("");
+  const [textInputPostalCode, setTextInputPostalCode] = useState("");
+  const [textInputPassword, setTextInputPassword] = useState("");
+  const [textInputConfirmPassword, setTextInputConfirmPassword] = useState("");
+  const [secureConfirmPassword, setSecureConfirmPassword] = useState({
+    secure: true,
+    icon: "eye",
+    color: "#979797",
+  });
   const [secure, setSecure] = useState({
     secure: true,
     icon: "eye",
@@ -52,15 +55,15 @@ const ClientSignUp = ({ navigation }) => {
   };
 
   const toggleConfirmPasswordVisiblity = () => {
-    let iconName = secureConfirmPassword.secure ? 'eye-slash' : 'eye';
+    let iconName = secureConfirmPassword.secure ? "eye-slash" : "eye";
     let eyeColor = secureConfirmPassword.secure ? "#979797" : "#00C0C1";
 
     setSecureConfirmPassword({
       secure: !secureConfirmPassword.secure,
       icon: iconName,
-      color: eyeColor
+      color: eyeColor,
     });
-  }
+  };
 
   const checkTextInput = () => {
     if (!textInputFirstName.trim()) {
@@ -286,7 +289,11 @@ const ClientSignUp = ({ navigation }) => {
               autoCorrect={false}
               maxLength={30}
             />
-            <Icon style={styles.userIcon} name={secureConfirmPassword.icon} onPress={toggleConfirmPasswordVisiblity} />
+            <Icon
+              style={styles.userIcon}
+              name={secureConfirmPassword.icon}
+              onPress={toggleConfirmPasswordVisiblity}
+            />
           </View>
           <View>
             <Text style={styles.warning}>

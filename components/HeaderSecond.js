@@ -2,14 +2,19 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const Header = ({ title, navigation }) => {
+  const baseUrl = "http://covidtrail-backend.azurewebsites.net";
+  const save = () => {};
   return (
     <View style={styles.mainHeader}>
       <View style={styles.headerStyle}></View>
       <View style={styles.header}>
         <Text style={styles.back} onPress={() => navigation.goBack()}>
-          Back
+          Cancel
         </Text>
         <Text style={styles.text}>{title}</Text>
+        <Text style={styles.back} onPress={() => navigation.goBack()}>
+          Save
+        </Text>
       </View>
     </View>
   );
