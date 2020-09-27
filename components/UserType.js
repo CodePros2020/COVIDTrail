@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Text, RadioButton } from "react-native-paper";
-import CustomButton from "./customButton";
+import CustomButton from "./CustomButton";
 
 const UserType = ({ navigation }) => {
   const [value, setValue] = React.useState("personal");

@@ -1,7 +1,7 @@
 export default class Address {
-  addressLineOne = "";
-  addressLineTwo = "";
-  city = "";
-  postalCode = "";
-  province = "";
+  addressLineOne;
+  addressLineTwo;
+  city;
+  postalCode;
+  province;
 }

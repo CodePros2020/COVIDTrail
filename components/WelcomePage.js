@@ -11,10 +11,8 @@ import {
   SafeAreaView,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import CustomButton from "./customButton";
+import CustomButton from "./CustomButton";
 import API from "../api";
-// import NavBarBottom from "./NavBarBottom";
-import AccountDetailsModel from "../models/AccountDetails";
 
 export default function WelcomePage({ navigation }) {
   const [username, onUserNameChange] = React.useState();
