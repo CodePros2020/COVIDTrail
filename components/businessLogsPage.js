@@ -11,7 +11,6 @@ import {
   CheckBox,
 } from "react-native";
 import HeaderWide from "./headerWide";
-
 import CustomButton from "./customButton";
 // import CheckBox from "@react-native-community/checkbox";
 
