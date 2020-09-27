@@ -5,9 +5,8 @@ import HeaderWide from "./headerWide";
 
 const Scanner = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <HeaderWide title="Account" />
-
       <View>
         <Text>this is Scanner</Text>
       </View>
@@ -16,4 +15,14 @@ const Scanner = () => {
 };
 export default Scanner;
 
-// const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 0,
+    marginTop: 0,
+    flex: 1,
+    alignSelf: "stretch",
+    backgroundColor: "#262D37",
+    alignItems: "center",
+    color: "#fff",
+  },
+});
