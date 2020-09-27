@@ -2,14 +2,17 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import IconScan from "react-native-vector-icons/MaterialCommunityIcons";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from "@react-navigation/stack";
 
-import ScanPage from "./scanPage";
-import BusinessAccount from "./businessAccount";
-import BusinessLogs from "./businessLogsPage";
+import ScanPage from "./ScanPage";
+import AccountPage from "./AccountPage";
+import IndividualLogsPage from "./IndividualLogsPage";
+import IndividualLogsDetailPage from "./IndividualLogsDetailPage";
 
 const Tab = createBottomTabNavigator();
+const LogStack = createStackNavigator();
 
 function MyTabs() {
   return (
@@ -42,8 +45,8 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="BusinessLogs"
-        component={BusinessLogs}
+        name="LogsStackScreen"
+        component={LogsStackScreen}
         options={{
           tabBarLabel: "Logs",
           tabBarIcon: ({ color, size }) => (
@@ -52,6 +55,22 @@ function MyTabs() {
         }}
       />
     </Tab.Navigator>
+  );
+}
+
+function LogsStackScreen() {
+  return (
+    <LogStack.Navigator screenOptions={{ headerShown: false }}>
+      <LogStack.Screen
+        name="IndividualLogsPage"
+        component={IndividualLogsPage}
+        // options={{ tabBarLabel: 'Settings!' }}
+      />
+      <LogStack.Screen
+        name="IndividualLogsDetailPage" 
+        component={IndividualLogsDetailPage}
+      />
+    </LogStack.Navigator>
   );
 }
 

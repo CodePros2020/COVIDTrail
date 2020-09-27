@@ -11,7 +11,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import CustomButton from "./customButton";
+import CustomButton from "./CustomButton";
 // import NavBarBottom from "./NavBarBottom";
 
 export default function WelcomePage({ navigation }) {
@@ -24,8 +24,8 @@ export default function WelcomePage({ navigation }) {
   const success = () => {
     fetch(baseUrl + "/auth")
       .then((response) => {
-        console.log("Data recaived", response);
-        navigation.navigate("BusinessLogsPage");
+        console.log("Data received", response);
+        navigation.navigate("NavBarBottom");
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
