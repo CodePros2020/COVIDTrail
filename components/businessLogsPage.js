@@ -10,8 +10,8 @@ import {
   Divider,
   CheckBox,
 } from "react-native";
-import HeaderWide from "./headerWide";
-import CustomButton from "./customButton";
+import HeaderWide from "./HeaderWide";
+import CustomButton from "./CustomButton";
 // import CheckBox from "@react-native-community/checkbox";
 
 const BusinessLogsPage = ({ navigation }) => {
