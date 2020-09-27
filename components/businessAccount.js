@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Divider, Text, RadioButton } from "react-native-paper";
-import HeaderWide from "./headerWide";
+import HeaderWide from "./HeaderWide";
 
 const Scanner = () => {
   return (

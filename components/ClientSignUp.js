@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 import Header from "./Header";
-import CustomButton from "../components/CustomButton";
+import CustomButton from "./CustomButton";
 import Icon from "react-native-vector-icons/FontAwesome5";
 // import UserAccount from "../models/UserAccount";
 
@@ -32,6 +32,7 @@ const ClientSignUp = ({ navigation }) => {
   const [textInputPassword, setTextInputPassword] = useState('');
   const [textInputConfirmPassword, setTextInputConfirmPassword] = useState('');
   const [secure, setSecure] = useState({secure: true, icon: 'eye'});
+  const [secureConfirmPassword, setSecureConfirmPassword] = useState({secure: true, icon: 'eye'});
   // const [userModel, setUserModel] = useState({UserAccount});
 
   const togglePasswordVisiblity = () => {
@@ -39,6 +40,15 @@ const ClientSignUp = ({ navigation }) => {
 
     setSecure({
       secure: !secure.secure,
+      icon: iconName
+    });
+  }
+
+  const toggleConfirmPasswordVisiblity = () => {
+    let iconName = secureConfirmPassword.secure ? 'eye-slash' : 'eye';
+
+    setSecureConfirmPassword({
+      secure: !secureConfirmPassword.secure,
       icon: iconName
     });
   }
@@ -285,7 +295,6 @@ const ClientSignUp = ({ navigation }) => {
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
               spellCheck={false}
-              secureTextEntry={true}
               autoCorrect={false}
               maxLength={30}
             />
@@ -298,16 +307,15 @@ const ClientSignUp = ({ navigation }) => {
                 (value) => setTextInputConfirmPassword(value)
               }
               value={textInputConfirmPassword}
-              secureTextEntry={secure.secure}
+              secureTextEntry={secureConfirmPassword.secure}
               placeholder="Confirm Password *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
               spellCheck={false}
               autoCorrect={false}
-              secureTextEntry={true}
               maxLength={30}
             />
-            <Icon style={styles.userIcon} name={secure.icon} onPress={togglePasswordVisiblity} />
+            <Icon style={styles.userIcon} name={secureConfirmPassword.icon} onPress={toggleConfirmPasswordVisiblity} />
           </View>
           <View>
             <Text style={styles.warning}>

@@ -11,7 +11,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import CustomButton from "./customButton";
+import CustomButton from "./CustomButton";
 // import NavBarBottom from "./NavBarBottom";
 
 export default function WelcomePage({ navigation }) {
@@ -69,7 +69,7 @@ export default function WelcomePage({ navigation }) {
         </View>
       </View>
 
-      <CustomButton name="Login" style="loginBtn" />
+      <CustomButton name="Login" style="loginBtn" onPress={() => navigation.navigate('NavBarBottom')} />
       <View style={styles.line}></View>
       <View style={styles.signUp}>
         <Text style={styles.label}>
