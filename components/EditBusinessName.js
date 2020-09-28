@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Image, SafeAreaView } from "react-native";
 import { Divider, Text, RadioButton } from "react-native-paper";
-import HeaderSecond from "./headerSecond";
+import HeaderSecond from "./HeaderSecond";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 const EditBusinessAccount = ({ navigation }) => {

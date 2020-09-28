@@ -25,14 +25,15 @@ export default function WelcomePage({ navigation }) {
     API.post('login?password=' + password + '&username=' + username)
       .then((response) => {
 
-        account = response.data;
+        var account = response.data;
 
         if (account) {
+          // alert('what is account' + JSON.stringify(account));
           navigation.navigate('NavBarBottom', { account: account }); 
         }
       })
       .catch(error => {
-        alert('Invalid username and/or password!');
+        alert('Invalid username and/or password!' + error);
       });
   };
 

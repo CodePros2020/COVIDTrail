@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,12 +10,40 @@ import {
   Dimensions,
 } from "react-native";
 import Constants from "expo-constants";
-import HeaderWide from "./headerWide";
+import HeaderWide from "./HeaderWide";
 import { List } from "react-native-paper";
+import API from "../api";
 
 var width = Dimensions.get("window").width;
 
+// const success = () => {
+//   console.log('coming to this');
+//   API.get('api/placesVisitedLog/1/user')
+//     .then((response) => {
+
+//       var account = response.data;
+//       console.log('account inside sucesss', account);
+//       return account;
+
+//       // if (account) {
+//       //   // alert('what is account' + JSON.stringify(account));
+//       //   // navigation.navigate('NavBarBottom', { account: account }); 
+//       //   console.log('this is account log', JSON.stringify(account));
+//       // }
+//     })
+//     .catch(error => {
+//       alert('Error' + error);
+//     });
+// };
+
 const InvididualLogsPage = ({ navigation }) => {
+
+// var account;
+
+  const [logsData, setLogsData] = useState([]);
+  const [desiredData, setDesiredData] = useState([]);
+
+
   const data = [
     {
       title: "September 7, 2020",
@@ -108,6 +136,25 @@ const InvididualLogsPage = ({ navigation }) => {
       ],
     },
   ];
+
+  useEffect( () => {
+    
+    API.get('api/placesVisitedLog/1/user')
+    .then((response) => {
+
+      var account = response.data;
+      setLogsData(account);
+
+    })
+    .catch(error => {
+      alert('Error' + error);
+    });
+
+    logsData.map( res => {
+      // console.log('check', res.visitedDate);
+    })
+
+  });
 
   return (
     <SafeAreaView style={styles.container}>

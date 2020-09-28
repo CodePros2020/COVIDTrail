@@ -9,8 +9,8 @@ import {
   Dimensions,
 } from "react-native";
 import Constants from "expo-constants";
-import Header from "./header";
-import CustomButton from "./customButton";
+import Header from "./Header";
+import CustomButton from "./CustomButton";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { color } from "react-native-reanimated";
 // import UserAccount from "../models/UserAccount";

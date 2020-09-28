@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from "react-native";
 import Constants from "expo-constants";
-import Header from "./header";
+import Header from "./Header";
 
 var width = Dimensions.get("window").width;
 
