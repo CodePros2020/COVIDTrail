@@ -12,8 +12,29 @@ import {
 import Constants from "expo-constants";
 import HeaderWide from "./HeaderWide";
 import { List } from "react-native-paper";
+import API from "../api";
 
 var width = Dimensions.get("window").width;
+
+// const success = () => {
+//   console.log('coming to this');
+//   API.get('api/placesVisitedLog/1/user')
+//     .then((response) => {
+
+//       var account = response.data;
+//       console.log('account inside sucesss', account);
+//       return account;
+
+//       // if (account) {
+//       //   // alert('what is account' + JSON.stringify(account));
+//       //   // navigation.navigate('NavBarBottom', { account: account });
+//       //   console.log('this is account log', JSON.stringify(account));
+//       // }
+//     })
+//     .catch(error => {
+//       alert('Error' + error);
+//     });
+// };
 
 const InvididualLogsPage = ({ navigation }) => {
   const { logsData, setLogsData } = useState("");
@@ -124,6 +145,21 @@ const InvididualLogsPage = ({ navigation }) => {
       ],
     },
   ];
+
+  useEffect(() => {
+    API.get("api/placesVisitedLog/1/user")
+      .then((response) => {
+        var account = response.data;
+        setLogsData(account);
+      })
+      .catch((error) => {
+        alert("Error" + error);
+      });
+
+    logsData.map((res) => {
+      // console.log('check', res.visitedDate);
+    });
+  });
 
   return (
     <SafeAreaView style={styles.container}>
