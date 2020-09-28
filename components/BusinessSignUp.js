@@ -41,18 +41,6 @@ const BusinessSignUp = ({ navigation }) => {
     icon: "eye",
     color: "#979797",
   });
-  const [userAccount, setUserAccount] = useState({
-    businessName: "",
-    phoneNumber: "",
-    emailAddress: "",
-    addressLine1: "",
-    addressLine2: "",
-    city: "",
-    province: "",
-    postalCode: "",
-    password: "",
-  });
-
   const togglePasswordVisiblity = () => {
     let iconName = secure.secure ? "eye-slash" : "eye";
     let eyeColor = secure.secure ? "#979797" : "#00C0C1";
@@ -158,7 +146,7 @@ const BusinessSignUp = ({ navigation }) => {
       );
       return;
     } else {
-      userAccount = {
+      var userAccount = {
         address: {
           addressLineOne: textInputAddressLine1,
           addressLineTwo: textInputAddressLine2,
@@ -182,8 +170,6 @@ const BusinessSignUp = ({ navigation }) => {
             [{ text: "OK", onPress: () => console.log("OK Pressed") }],
             { cancelable: false }
           );
-
-          //navigation.navigate("NavBarBottom");
           navigation.navigate("WelcomePage");
         })
         .catch((e) => {
