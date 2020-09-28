@@ -12,9 +12,27 @@ import {
 } from "react-native";
 import HeaderWide from "./HeaderWide";
 import CustomButton from "./CustomButton";
+import { NetworkContext } from "../NetworkContext";
 // import CheckBox from "@react-native-community/checkbox";
 
 const BusinessLogsPage = ({ navigation }) => {
+  const network = React.useContext(NetworkContext);
+  const { logsData, setLogsData } = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      API.get("api/placesVisitedLog/" + network.id + "/business/")
+        .then((res) => {
+          setLogsData(res.data);
+          alert("dATA Is " + res.data);
+        })
+        .catch((error) => {
+          alert("Unable to get logs " + error);
+        });
+    };
+    fetchData();
+  }, []);
+
   const DATA = [];
   const [isSelected, setSelection] = React.useState(false);
   const getItem = (data, index) => {
@@ -46,7 +64,7 @@ const BusinessLogsPage = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <HeaderWide title="Logs"></HeaderWide>
+        <HeaderWide title="Logs" />
         <ScrollView style={styles.scrollView}>
           <View style={{ width: Dimensions.get("window").width }}>
             <View

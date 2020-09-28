@@ -182,7 +182,7 @@ const BusinessSignUp = ({ navigation }) => {
           );
 
           //navigation.navigate("NavBarBottom");
-          navigation.navigate("NavBarBottom", { accountId: account.id });
+          navigation.navigate("WelcomePage");
         })
         .catch((e) => {
           (error) => {

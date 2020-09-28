@@ -21,7 +21,7 @@ export default function WelcomePage({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  const success = () => {
+  const success = async () => {
     API.post("login?password=" + password + "&username=" + username)
       .then((response) => {
         account = response.data;
@@ -54,6 +54,7 @@ export default function WelcomePage({ navigation }) {
           underlineColorAndroid="transparent"
           spellCheck={false}
           autoCorrect={false}
+          maxLength={10}
         />
       </View>
 
@@ -70,6 +71,7 @@ export default function WelcomePage({ navigation }) {
           underlineColorAndroid="transparent"
           spellCheck={false}
           autoCorrect={false}
+          maxLength={25}
         />
       </View>
 

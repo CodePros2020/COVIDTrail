@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  Alert,
+  Dimensions,
+} from "react-native";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 import HeaderWide from "./HeaderWide";
@@ -31,18 +38,13 @@ export default class ScanPage extends React.Component {
       return <Text>No access to camera</Text>;
     }
     return (
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "column",
-          justifyContent: "flex-end",
-        }}
-      >
+      <View style={styles.container}>
+        <HeaderWide title="Scan" />
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject}
+          //   style={[StyleSheet.absoluteFillObject, styles.scanner]}
+          style={styles.scanner}
         />
-
         {scanned && (
           <Button
             title={"Tap to Scan Again"}
@@ -67,6 +69,26 @@ export default class ScanPage extends React.Component {
           alert("Error is " + error);
         };
       });
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    Alert.alert(
+      "Success",
+      `Bar code with type ${type} and data ${data} has been scanned!`
+    );
   };
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#262D37",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+  },
+  scanner: {
+    height: "80%",
+    width: Dimensions.get("window").width,
+    marginTop: 0,
+    borderColor: "#979797",
+    backgroundColor: "#262D37",
+    marginBottom: 30,
+  },
+});

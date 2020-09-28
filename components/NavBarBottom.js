@@ -18,8 +18,8 @@ const LogStack = createStackNavigator();
 let loggedInAccount;
 
 function MyTabs() {
-  const { accountId } = route.params;
-  alert(JSON.stringify(accountId));
+  //   const { accountId } = route.params;
+  //   alert(JSON.stringify(accountId));
   return (
     <NetworkContext.Provider value={loggedInAccount}>
       <Tab.Navigator
@@ -90,9 +90,9 @@ function logScreenDisplay() {
 }
 
 export default function App({ route, navigation }) {
-  const { account } = route.params;
-  loggedInAccount = account;
-  console.log("object222222", JSON.stringify(loggedInAccount));
+  //   const { account } = route.params;
+  //   loggedInAccount = account;
+  //   console.log("object222222", JSON.stringify(loggedInAccount));
 
   return (
     <NavigationContainer independent={true}>
