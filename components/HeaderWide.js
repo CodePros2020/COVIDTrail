@@ -1,14 +1,28 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
+import API from "../api";
 
 const HeaderWide = ({ title, navigation }) => {
+
+  const logout = () => {
+    API.post("/logout")
+      .then((response) => {
+        console.log("Data received", response);
+        alert("Logged out!");
+        navigation.navigate("WelcomePage");
+      })
+      .catch((e) => {
+        (error) => console.error(error);
+      });
+  };
+
   return (
     <View style={{ marginTop: 0, flexDirection: "row", alignItems: "center" }}>
       <View style={styles.mainHeader}>
         <Image source={require("../assets/logosml.png")} />
         <Text style={styles.text}>{title}</Text>
-        <Icon name="log-out" size={30} color="#707070" />
+        <Icon name="log-out" size={30} onPress={logout} color="#707070" />
       </View>
     </View>
   );

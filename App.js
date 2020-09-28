@@ -1,32 +1,17 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, View, AppRegistry } from "react-native";
+import { StyleSheet } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-
-// import MSSQL from 'react-native-mssql';
 
 import WelcomePage from "./components/WelcomePage";
 import UserType from "./components/UserType";
 import BusinessSignUp from "./components/BusinessSignUp";
 import ClientSignUp from "./components/ClientSignUp";
 import NavBarBottom from "./components/NavBarBottom";
-import QRCodePage from "./components/QRCodePage";
-import BusinessLogsPage from "./components/businessLogsPage";
 
 const Stack = createStackNavigator();
 
-// const config = {
-//   server: 'sqlservercovidtrail.database.windows.net',
-//   username: 'codepros',
-//   password: '@Covidtrail123',
-//   database: 'sqlcovidtrail',
-//   port: 8080,
-//   timeout: 30
-// }
-// MSSQL.connect(config);
-// =======
 export default class App extends React.Component {
   render() {
     return (
@@ -36,13 +21,8 @@ export default class App extends React.Component {
             <Stack.Screen name="WelcomePage" component={WelcomePage} />
             <Stack.Screen name="UserType" component={UserType} />
             <Stack.Screen name="BusinessSignUp" component={BusinessSignUp} />
-            <Stack.Screen
-              name="BusinessLogsPage"
-              component={BusinessLogsPage}
-            />
             <Stack.Screen name="ClientSignUp" component={ClientSignUp} />
             <Stack.Screen name="NavBarBottom" component={NavBarBottom} />
-            {/* <Stack.Screen name="QRCodePage" component={QRCodePage} /> */}
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>
