@@ -8,8 +8,6 @@ import UserType from "./components/UserType";
 import BusinessSignUp from "./components/BusinessSignUp";
 import ClientSignUp from "./components/ClientSignUp";
 import NavBarBottom from "./components/NavBarBottom";
-import BusinessLogsPage from "./components/BusinessLogsPage";
-import EditBusinessName from "./components/EditBusinessName";
 
 const Stack = createStackNavigator();
 export default class App extends React.Component {
@@ -21,10 +19,6 @@ export default class App extends React.Component {
             <Stack.Screen name="WelcomePage" component={WelcomePage} />
             <Stack.Screen name="UserType" component={UserType} />
             <Stack.Screen name="BusinessSignUp" component={BusinessSignUp} />
-            <Stack.Screen
-              name="EditBusinessName"
-              component={EditBusinessName}
-            />
             <Stack.Screen name="ClientSignUp" component={ClientSignUp} />
             <Stack.Screen name="NavBarBottom" component={NavBarBottom} />
           </Stack.Navigator>
