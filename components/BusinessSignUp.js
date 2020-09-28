@@ -41,6 +41,7 @@ const BusinessSignUp = ({ navigation }) => {
     icon: "eye",
     color: "#979797",
   });
+
   const togglePasswordVisiblity = () => {
     let iconName = secure.secure ? "eye-slash" : "eye";
     let eyeColor = secure.secure ? "#979797" : "#00C0C1";
@@ -162,7 +163,6 @@ const BusinessSignUp = ({ navigation }) => {
 
       API.post("api/businessAccount/create", userAccount)
         .then((response) => {
-          alert("Data received" + JSON.stringify(response.data));
           Alert.alert(
             "Success!",
             "Sign up Completed!",
@@ -174,8 +174,9 @@ const BusinessSignUp = ({ navigation }) => {
         })
         .catch((e) => {
           (error) => {
-            console.error(error);
-            alert("Unable to create account! " + error);
+            console.error("error is sign up business " + error);
+            alert("Unable to create account! ");
+            navigation.navigate("WelcomePage");
           };
         });
     }
