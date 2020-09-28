@@ -20,29 +20,13 @@ export default function WelcomePage({ navigation }) {
   const [isSelected, setSelection] = React.useState(false);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const account = {
-    addressLineOne: "",
-    addressLineTwo: "",
-    businessName: "",
-    city: "",
-    email: "",
-    firstName: "",
-    id: "",
-    lastName: "",
-    middleName: "",
-    phone: "",
-    postalCode: "",
-    province: "",
-  };
+
   const success = () => {
     API.post("login?password=" + password + "&username=" + username)
       .then((response) => {
         account = response.data;
-
         if (account) {
-          navigation.navigate("NavBarBottom", {
-            account: account,
-          });
+          navigation.navigate("NavBarBottom", { account: account });
         }
       })
       .catch((error) => {
