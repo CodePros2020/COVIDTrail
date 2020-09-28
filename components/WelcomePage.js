@@ -21,19 +21,16 @@ export default function WelcomePage({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   
-  const success = () => {
-    API.post('login?password=' + password + '&username=' + username)
+const success = async () => {
+    API.post("login?password=" + password + "&username=" + username)
       .then((response) => {
-
         var account = response.data;
-
         if (account) {
-          // alert('what is account' + JSON.stringify(account));
-          navigation.navigate('NavBarBottom', { account: account }); 
+          navigation.navigate("NavBarBottom", { account: account });
         }
       })
-      .catch(error => {
-        alert('Invalid username and/or password!' + error);
+      .catch((error) => {
+        alert("Invalid username and/or password!");
       });
   };
 
