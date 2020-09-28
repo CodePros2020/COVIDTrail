@@ -159,15 +159,17 @@ const BusinessSignUp = ({ navigation }) => {
       return;
     } else {
       userAccount = {
+        address: {
+          addressLineOne: textInputAddressLine1,
+          addressLineTwo: textInputAddressLine2,
+          city: textInputCity,
+          postalCode: textInputPostalCode,
+          province: textInputProvince,
+        },
         businessName: textInputBusinessName,
-        phoneNumber: textInputPhoneNumber,
-        emailAddress: textInputEmail,
-        addressLine1: textInputAddressLine1,
-        addressLine2: textInputAddressLine2,
-        city: textInputCity,
-        province: textInputProvince,
-        postalCode: textInputPostalCode,
+        email: textInputEmail,
         password: textInputPassword,
+        phone: textInputPhoneNumber,
       };
 
       API.post("api/businessAccount/create", userAccount)
