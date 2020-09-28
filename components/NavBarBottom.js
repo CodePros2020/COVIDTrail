@@ -12,6 +12,7 @@ import IndividualLogsDetailPage from "./IndividualLogsDetailPage";
 import BusinessAccount from "./BusinessAccount";
 import BusinessLogsPage from "./BusinessLogsPage";
 import { NetworkContext } from "../NetworkContext";
+import QRCodeGenerator from "./QRCodePage";
 
 const Tab = createBottomTabNavigator();
 const LogStack = createStackNavigator();
@@ -29,8 +30,10 @@ function MyTabs() {
         }}
       >
         <Tab.Screen
+          component={
+            loggedInAccount.businessName !== null ? QRCodeGenerator : ScanPage
+          }
           name="ScanPage"
-          component={ScanPage}
           options={{
             tabBarLabel: "Scan",
             tabBarIcon: ({ color, size }) => (
@@ -88,9 +91,9 @@ function logScreenDisplay() {
 }
 
 export default function App({ route, navigation }) {
-  //   const { account } = route.params;
-  //   loggedInAccount = account;
-  //   console.log("object222222", JSON.stringify(loggedInAccount));
+  const { account } = route.params;
+  loggedInAccount = account;
+  console.log("object222222", JSON.stringify(loggedInAccount));
 
   return (
     <NavigationContainer independent={true}>

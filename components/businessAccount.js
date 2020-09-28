@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Image, SafeAreaView } from "react-native";
-import { Divider, Text, RadioButton } from "react-native-paper";
+import { Text, RadioButton } from "react-native-paper";
 import HeaderWide from "./HeaderWide";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { NetworkContext } from "../NetworkContext";
@@ -14,7 +14,6 @@ const BusinessAccount = ({ navigation }) => {
         <HeaderWide title="Account"></HeaderWide>
         <View style={styles.mainView}>
           <Text style={styles.textField}>NAME</Text>
-
           <View style={styles.subView}>
             <Text style={styles.subTxtField}>{network.businessName}</Text>
             <Icon
@@ -26,9 +25,6 @@ const BusinessAccount = ({ navigation }) => {
                 })
               }
             />
-          </View>
-          <View style={{ paddingTop: 10 }}>
-            <Divider style={{ backgroundColor: "#979797" }} />
           </View>
         </View>
         <View style={styles.mainView}>
@@ -42,42 +38,27 @@ const BusinessAccount = ({ navigation }) => {
             </Text>
             <Icon name="chevron-right" style={styles.icon} />
           </View>
-          <View style={{ paddingTop: 10 }}>
-            <Divider style={{ backgroundColor: "#979797" }} />
-          </View>
         </View>
         <View style={styles.mainView}>
           <Text style={styles.textField}>PHONE</Text>
-
           <View style={styles.subView}>
             <Text style={styles.subTxtField}>{network.phone}</Text>
             <Icon name="edit" style={styles.icon} />
           </View>
-          <View style={{ paddingTop: 10 }}>
-            <Divider style={{ backgroundColor: "#979797" }} />
-          </View>
         </View>
         <View style={styles.mainView}>
           <Text style={styles.textField}>EMAIL</Text>
-
           <View style={styles.subView}>
             <Text style={styles.subTxtField}>{network.email || ""}</Text>
             <Icon name="edit" style={styles.icon} />
-          </View>
-          <View style={{ paddingTop: 10 }}>
-            <Divider style={{ backgroundColor: "#979797" }} />
           </View>
         </View>
 
         <View style={styles.mainView}>
           <Text style={styles.textField}>PASSWORD</Text>
-
           <View style={styles.subView}>
             <Text style={styles.subTxtField}>********</Text>
             <Icon name="edit" style={styles.icon} />
-          </View>
-          <View style={{ paddingTop: 10 }}>
-            <Divider style={{ backgroundColor: "#979797" }} />
           </View>
         </View>
       </View>
@@ -99,10 +80,12 @@ const styles = StyleSheet.create({
   mainView: {
     flexDirection: "column",
     alignSelf: "stretch",
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
     paddingLeft: 20,
     paddingRight: 20,
+    borderBottomColor: "#979797",
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   subView: {
     flexDirection: "row",
