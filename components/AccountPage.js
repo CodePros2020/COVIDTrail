@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, SafeAreaView, ScrollView, View } from "react-native";
 import Constants from "expo-constants";
-import HeaderWide from "./headerWide";
+import HeaderWide from "./HeaderWide";
 
 const AccountPage = ({ navigation }) => {
   return (

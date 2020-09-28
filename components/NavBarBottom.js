@@ -10,13 +10,14 @@ import ScanPage from "./ScanPage";
 import AccountPage from "./AccountPage";
 import IndividualLogsPage from "./IndividualLogsPage";
 import IndividualLogsDetailPage from "./IndividualLogsDetailPage";
+import BusinessAccount from "./businessAccount";
 
 const Tab = createBottomTabNavigator();
 const LogStack = createStackNavigator();
 
 function MyTabs() {
   return (
-    <Tab.Navigator
+    <Tab.Navigator screenProps
       initialRouteName="ScanPage"
       tabBarOptions={{
         activeTintColor: "#00C0C1",
@@ -74,7 +75,11 @@ function LogsStackScreen() {
   );
 }
 
-export default function App() {
+export default function App({ route, navigation }) {
+
+  const { businessName } = route.params;
+  console.log('businessName', JSON.stringify(businessName));
+
   return (
     <NavigationContainer independent={true}>
       <MyTabs />
