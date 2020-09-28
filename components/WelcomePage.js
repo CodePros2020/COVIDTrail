@@ -35,7 +35,7 @@ export default function WelcomePage({ navigation }) {
     province: "",
   };
   const success = () => {
-    API.post(`/login?password=${password}&username=${username}`)
+    API.post("/login?password=" + password + "&username=" + username)
       .then((response) => {
         account = response.data;
         alert("Data received" + JSON.stringify(response.data));

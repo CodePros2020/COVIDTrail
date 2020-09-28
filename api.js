@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = () => {
   const defaultOptions = {
-    baseURL: `http://covidtrail-backend.azurewebsites.net`,
+    baseURL: "http://covidtrail-backend.azurewebsites.net/",
     headers: {
       "Content-Type": "application/json",
     },
