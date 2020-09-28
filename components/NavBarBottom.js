@@ -2,25 +2,24 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import IconScan from "react-native-vector-icons/MaterialCommunityIcons";
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-
-import ScanPage from "./ScanPage";
-import AccountPage from "./AccountPage";
+import ScanPage from "./scanPage";
+import AccountPage from "./accountPage";
 import IndividualLogsPage from "./IndividualLogsPage";
 import IndividualLogsDetailPage from "./IndividualLogsDetailPage";
 import BusinessAccount from "./BusinessAccount";
 import BusinessLogsPage from "./BusinessLogsPage";
 import { NetworkContext } from "../NetworkContext";
 
-// import NetworkContext from "../NetworkContext";
-
 const Tab = createBottomTabNavigator();
 const LogStack = createStackNavigator();
 let loggedInAccount;
 
-function MyTabs() {
+function MyTabs({ route }) {
+  const { accId } = route.params;
+  alert(JSON.stringify(accId));
   return (
 
     <NetworkContext.Provider value={loggedInAccount}>
@@ -78,7 +77,7 @@ function LogsStackScreen() {
         component={IndividualLogsPage}
       />
       <LogStack.Screen
-        name="IndividualLogsDetailPage" 
+        name="IndividualLogsDetailPage"
         component={IndividualLogsDetailPage}
       />
     </LogStack.Navigator>

@@ -16,7 +16,6 @@ const HeaderWide = ({ title, navigation }) => {
         (error) => console.error(error);
       });
   };
-
   return (
     <View style={{ marginTop: 0, flexDirection: "row", alignItems: "center" }}>
       <View style={styles.mainHeader}>

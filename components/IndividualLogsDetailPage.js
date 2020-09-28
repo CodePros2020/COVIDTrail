@@ -1,12 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, SafeAreaView, ScrollView, View, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  View,
+  Dimensions,
+} from "react-native";
 import Constants from "expo-constants";
-import Header from "./Header";
+import Header from "./header";
 
 var width = Dimensions.get("window").width;
 
 const AccountPage = ({ route, navigation }) => {
-
   const { date } = route.params;
   const { time } = route.params;
   const { name } = route.params;
@@ -18,36 +24,36 @@ const AccountPage = ({ route, navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <View style={{ width: width }}>
-            <Header title="Log Details" navigation={navigation}></Header>
+          <Header title="Log Details" navigation={navigation}></Header>
         </View>
 
         <View style={styles.line}>
-            <Text style={styles.label}>VISITED DATE AND TIME</Text>
-            <Text style={styles.item}>{date}, {time}</Text>
+          <Text style={styles.label}>VISITED DATE AND TIME</Text>
+          <Text style={styles.item}>
+            {date}, {time}
+          </Text>
         </View>
 
         <View style={styles.line}>
-            <Text style={styles.label}>NAME</Text>
-            <Text style={styles.item}>{name}</Text>
+          <Text style={styles.label}>NAME</Text>
+          <Text style={styles.item}>{name}</Text>
         </View>
 
         <View style={styles.line}>
-            <Text style={styles.label}>ADDRESS</Text>
-            <Text style={styles.item}>{address}</Text>
+          <Text style={styles.label}>ADDRESS</Text>
+          <Text style={styles.item}>{address}</Text>
         </View>
 
         <View style={styles.line}>
-            <Text style={styles.label}>PHONE</Text>
-            <Text style={styles.item}>{phone}</Text>
+          <Text style={styles.label}>PHONE</Text>
+          <Text style={styles.item}>{phone}</Text>
         </View>
 
         <View style={styles.line}>
-            <Text style={styles.label}>EMAIL</Text>
-            <Text style={styles.item}>{email}</Text>
+          <Text style={styles.label}>EMAIL</Text>
+          <Text style={styles.item}>{email}</Text>
         </View>
-        
-        
-      </View>  
+      </View>
     </SafeAreaView>
   );
 };
@@ -66,7 +72,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    color: '#00C0C1',
+    color: "#00C0C1",
   },
   line: {
     backgroundColor: "#262D37",
@@ -77,9 +83,8 @@ const styles = StyleSheet.create({
   item: {
     fontSize: 16,
     marginTop: 10,
-    color: '#fff',
-  }
-
+    color: "#fff",
+  },
 });
 
 export default AccountPage;

@@ -1,14 +1,13 @@
-import CustomersVisited from "./CustomersVisitedLog"
+import CustomersVisited from "./CustomersVisitedLog";
+import Address from "./address";
 
 export default class BusinessAccount {
-    businessName = "";
-    addressLine1 = "";
-    addressLine2 = "";
-    city = "";
-    province = "";
-    postalCode = "";
-    password = "";
-    phoneNumber = "";
-    emailAddress = "";
-    customerVisitedLog = [CustomersVisited];
+  id;
+  address = new Address();
+  businessName;
+  password;
+  phoneNumber;
+  email;
+  phone;
+  customerVisitedLog = [CustomersVisited];
 }

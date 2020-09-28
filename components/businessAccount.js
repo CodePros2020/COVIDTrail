@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Image, SafeAreaView } from "react-native";
 import { Divider, Text, RadioButton } from "react-native-paper";
-import HeaderWide from "./HeaderWide";
+import HeaderWide from "./headerWide";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import BusinessAccountModel from "../models/BusinessAccount";
 
-const Scanner = () => {
+const BusinessAccount = () => {
+  const businessAccount = new BusinessAccountModel();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
@@ -14,7 +16,11 @@ const Scanner = () => {
 
           <View style={styles.subView}>
             <Text style={styles.subTxtField}>My Resturant</Text>
-            <Icon name="chevron-right" style={styles.icon} />
+            <Icon
+              name="chevron-right"
+              style={styles.icon}
+              onPress={() => navigation.navigate("EditBusinessName")}
+            />
           </View>
           <View style={{ paddingTop: 10 }}>
             <Divider style={{ backgroundColor: "#979797" }} />
@@ -71,7 +77,7 @@ const Scanner = () => {
     </SafeAreaView>
   );
 };
-export default Scanner;
+export default BusinessAccount;
 
 const styles = StyleSheet.create({
   container: {
