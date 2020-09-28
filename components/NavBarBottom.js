@@ -15,8 +15,8 @@ const Tab = createBottomTabNavigator();
 const LogStack = createStackNavigator();
 
 function MyTabs() {
-  //   const { accountId } = route.params;
-  //   alert(JSON.stringify(accountId));
+  const { accountId } = route.params;
+  alert(JSON.stringify(accountId));
   return (
     <Tab.Navigator
       initialRouteName="ScanPage"
@@ -76,7 +76,7 @@ function LogsStackScreen() {
   );
 }
 
-export default function App() {
+export default function App({ route, navigation }) {
   return (
     <NavigationContainer independent={true}>
       <MyTabs />

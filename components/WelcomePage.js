@@ -35,21 +35,18 @@ export default function WelcomePage({ navigation }) {
     province: "",
   };
   const success = () => {
-    API.post("/login?password=" + password + "&username=" + username)
+    API.post("login?password=" + password + "&username=" + username)
       .then((response) => {
-        if (response.status === 500) {
-          account = response.data;
-          alert("Data received" + JSON.stringify(response.data));
-          // navigation.navigate("NavBarBottom", { accountId: account.id });
-        } else {
-          alert("Invalid Password! ");
+        account = response.data;
+
+        if (account) {
+          navigation.navigate("NavBarBottom", {
+            account: account,
+          });
         }
       })
-      .catch((e) => {
-        (error) => {
-          console.error(error);
-          alert("Error is " + error);
-        };
+      .catch((error) => {
+        alert("Invalid username and/or password!");
       });
   };
 
