@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,12 +10,28 @@ import {
   Dimensions,
 } from "react-native";
 import Constants from "expo-constants";
-import HeaderWide from "./headerWide";
+import HeaderWide from "./HeaderWide";
 import { List } from "react-native-paper";
 
 var width = Dimensions.get("window").width;
 
 const InvididualLogsPage = ({ navigation }) => {
+  const { logsData, setLogsData } = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      API.get("api/placesVisitedLog/" + id + "/user")
+        .then((res) => {
+          setLogsData(res.data);
+          alert("dATA Is " + res.data);
+        })
+        .catch((error) => {
+          alert("Unable to get logs " + error);
+        });
+    };
+    fetchData();
+  }, []);
+
   const data = [
     {
       title: "September 7, 2020",

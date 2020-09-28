@@ -5,19 +5,18 @@ import IconScan from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import ScanPage from "./scanPage";
-import AccountPage from "./accountPage";
+import ScanPage from "./ScanPage";
+import AccountPage from "./AccountPage";
 import IndividualLogsPage from "./IndividualLogsPage";
 import IndividualLogsDetailPage from "./IndividualLogsDetailPage";
-import BusinessLogs from "./businessLogsPage";
-import BusinessAccount from "./businessAccount";
+import BusinessAccount from "./BusinessAccount";
 
 const Tab = createBottomTabNavigator();
 const LogStack = createStackNavigator();
 
-function MyTabs({ route }) {
-  const { accId } = route.params;
-  alert(JSON.stringify(accId));
+function MyTabs() {
+  //   const { accountId } = route.params;
+  //   alert(JSON.stringify(accountId));
   return (
     <Tab.Navigator
       initialRouteName="ScanPage"

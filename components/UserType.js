@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   cancel: {
-    marginTop: 10,
+    marginTop: 20,
     color: "#FFFFFF",
     fontSize: 15,
     textAlign: "center",

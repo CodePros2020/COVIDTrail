@@ -37,9 +37,13 @@ export default function WelcomePage({ navigation }) {
   const success = () => {
     API.post("/login?password=" + password + "&username=" + username)
       .then((response) => {
-        account = response.data;
-        alert("Data received" + JSON.stringify(response.data));
-        // navigation.navigate("NavBarBottom", { accountId: account.id });
+        if (response.status === 500) {
+          account = response.data;
+          alert("Data received" + JSON.stringify(response.data));
+          // navigation.navigate("NavBarBottom", { accountId: account.id });
+        } else {
+          alert("Invalid Password! ");
+        }
       })
       .catch((e) => {
         (error) => {

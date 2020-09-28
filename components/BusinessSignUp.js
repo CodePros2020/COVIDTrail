@@ -11,12 +11,11 @@ import {
   Alert,
   Picker,
 } from "react-native";
-import Constants from "expo-constants";
-import Header from "./header";
-import CustomButton from "./customButton";
+import Header from "./Header";
+import CustomButton from "./CustomButton";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { color } from "react-native-reanimated";
-// import UserAccount from "../models/UserAccount";
+import API from "../api";
 
 var width = Dimensions.get("window").width;
 var widthProportion = "80%";
@@ -32,130 +31,167 @@ const BusinessSignUp = ({ navigation }) => {
   const [textInputPostalCode, setTextInputPostalCode] = useState("");
   const [textInputPassword, setTextInputPassword] = useState("");
   const [textInputConfirmPassword, setTextInputConfirmPassword] = useState("");
+  const [secureConfirmPassword, setSecureConfirmPassword] = useState({
+    secure: true,
+    icon: "eye",
+    color: "#979797",
+  });
   const [secure, setSecure] = useState({
     secure: true,
     icon: "eye",
     color: "#979797",
   });
-  // const [userModel, setUserModel] = useState({UserAccount});
+  const [userAccount, setUserAccount] = useState({
+    businessName: "",
+    phoneNumber: "",
+    emailAddress: "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    province: "",
+    postalCode: "",
+    password: "",
+  });
 
   const togglePasswordVisiblity = () => {
     let iconName = secure.secure ? "eye-slash" : "eye";
     let eyeColor = secure.secure ? "#979797" : "#00C0C1";
+
     setSecure({
       secure: !secure.secure,
       icon: iconName,
       color: eyeColor,
     });
   };
-  //   const checkTextInput = () => {
-  //     if (!textInputBusinessName.trim()) {
-  //       Alert.alert(
-  //         "Information Required!",
-  //         "Please provide Business Name.",
 
-  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-  //         { cancelable: false }
-  //       );
-  //       return;
-  //     } else if (!textInputPhoneNumber.trim()) {
-  //       Alert.alert(
-  //         "Information Required!",
-  //         "Please provide Phone number.",
+  const toggleConfirmPasswordVisiblity = () => {
+    let iconName = secureConfirmPassword.secure ? "eye-slash" : "eye";
+    let eyeColor = secureConfirmPassword.secure ? "#979797" : "#00C0C1";
 
-  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-  //         { cancelable: false }
-  //       );
-  //       return;
-  //     } else if (!textInputAddressLine1.trim()) {
-  //       Alert.alert(
-  //         "Information Required!",
-  //         "Please provide address line1.",
+    setSecureConfirmPassword({
+      secure: !secureConfirmPassword.secure,
+      icon: iconName,
+      color: eyeColor,
+    });
+  };
 
-  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-  //         { cancelable: false }
-  //       );
-  //       return;
-  //     } else if (!textInputCity.trim()) {
-  //       Alert.alert(
-  //         "Information Required!",
-  //         "Please provide city.",
+  const checkTextInput = () => {
+    if (!textInputBusinessName.trim()) {
+      Alert.alert(
+        "Information Required!",
+        "Please provide Business Name.",
 
-  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-  //         { cancelable: false }
-  //       );
-  //       return;
-  //     } else if (!textInputProvince.trim()) {
-  //       Alert.alert(
-  //         "Information Required!",
-  //         "Please provide province.",
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
+      return;
+    } else if (!textInputPhoneNumber.trim()) {
+      Alert.alert(
+        "Information Required!",
+        "Please provide Phone number.",
 
-  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-  //         { cancelable: false }
-  //       );
-  //       return;
-  //     } else if (!textInputPostalCode.trim()) {
-  //       Alert.alert(
-  //         "Information Required!",
-  //         "Please choose postal code.",
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
+      return;
+    } else if (!textInputAddressLine1.trim()) {
+      Alert.alert(
+        "Information Required!",
+        "Please provide address line1.",
 
-  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-  //         { cancelable: false }
-  //       );
-  //       return;
-  //     } else if (!textInputPassword.trim()) {
-  //       Alert.alert(
-  //         "Information Required!",
-  //         "Please provide password.",
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
+      return;
+    } else if (!textInputCity.trim()) {
+      Alert.alert(
+        "Information Required!",
+        "Please provide city.",
 
-  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-  //         { cancelable: false }
-  //       );
-  //       return;
-  //     } else if (!textInputConfirmPassword.trim()) {
-  //       Alert.alert(
-  //         "Information Required!",
-  //         "Please provide confirm password.",
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
+      return;
+    } else if (!textInputProvince.trim()) {
+      Alert.alert(
+        "Information Required!",
+        "Please provide province.",
 
-  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-  //         { cancelable: false }
-  //       );
-  //       return;
-  //     } else if (textInputPassword !== textInputConfirmPassword) {
-  //       Alert.alert(
-  //         "Information Required!",
-  //         "Password and Confirm Password fields does not match.",
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
+      return;
+    } else if (!textInputPostalCode.trim()) {
+      Alert.alert(
+        "Information Required!",
+        "Please choose postal code.",
 
-  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-  //         { cancelable: false }
-  //       );
-  //       return;
-  //     } else {
-  //       Alert.alert(
-  //         "Success!",
-  //         "Sign up Completed!",
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
+      return;
+    } else if (!textInputPassword.trim()) {
+      Alert.alert(
+        "Information Required!",
+        "Please provide password.",
 
-  //         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-  //         { cancelable: false }
-  //       );
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
+      return;
+    } else if (!textInputConfirmPassword.trim()) {
+      Alert.alert(
+        "Information Required!",
+        "Please provide confirm password.",
 
-  //       // let userAccount = new UserAccount();
-  //       // userAccount.firstName = textInputFirstName;
-  //       // userAccount.middleName = textInputMiddleName;
-  //       // userAccount.lastName = textInputLastName;
-  //       // userAccount.phoneNumber = textInputPhoneNumber;
-  //       // userAccount.emailAddress = textInputEmail;
-  //       // userAccount.addressLine1 = textInputAddressLine1;
-  //       // userAccount.addressLine2 = textInputAddressLine2;
-  //       // userAccount.city = textInputCity;
-  //       // userAccount.province = textInputProvince;
-  //       // userAccount.postalCode = textInputPostalCode;
-  //       // userAccount.password = textInputPassword;
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
+      return;
+    } else if (textInputPassword !== textInputConfirmPassword) {
+      Alert.alert(
+        "Information Required!",
+        "Password and Confirm Password fields does not match.",
 
-  //       navigation.navigate("NavBarBottom");
-  //       return;
-  //     }
-  //   };
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
+      return;
+    } else {
+      userAccount = {
+        businessName: textInputBusinessName,
+        phoneNumber: textInputPhoneNumber,
+        emailAddress: textInputEmail,
+        addressLine1: textInputAddressLine1,
+        addressLine2: textInputAddressLine2,
+        city: textInputCity,
+        province: textInputProvince,
+        postalCode: textInputPostalCode,
+        password: textInputPassword,
+      };
+
+      API.post("api/businessAccount/create", userAccount)
+        .then((response) => {
+          alert("Data received" + JSON.stringify(response.data));
+          Alert.alert(
+            "Success!",
+            "Sign up Completed!",
+
+            [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+            { cancelable: false }
+          );
+
+          //navigation.navigate("NavBarBottom");
+          navigation.navigate("NavBarBottom", { accountId: account.id });
+        })
+        .catch((e) => {
+          (error) => {
+            console.error(error);
+            alert("Unable to create account! " + error);
+          };
+        });
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -297,7 +333,6 @@ const BusinessSignUp = ({ navigation }) => {
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
               spellCheck={false}
-              secureTextEntry={true}
               autoCorrect={false}
               maxLength={30}
             />
@@ -314,21 +349,18 @@ const BusinessSignUp = ({ navigation }) => {
               style={styles.input}
               onChangeText={(value) => setTextInputConfirmPassword(value)}
               value={textInputConfirmPassword}
-              secureTextEntry={secure.secure}
+              secureTextEntry={secureConfirmPassword.secure}
               placeholder="Confirm Password *"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
               spellCheck={false}
               autoCorrect={false}
-              secureTextEntry={true}
               maxLength={30}
             />
             <Icon
-              style={
-                secure.icon === "eye" ? styles.userIcon : styles.eyeVisible
-              }
-              name={secure.icon}
-              onPress={togglePasswordVisiblity}
+              style={styles.userIcon}
+              name={secureConfirmPassword.icon}
+              onPress={toggleConfirmPasswordVisiblity}
             />
           </View>
           <View>
@@ -341,8 +373,8 @@ const BusinessSignUp = ({ navigation }) => {
           <CustomButton
             name="Next"
             style="customBtn"
-            // onPress={checkTextInput}
-            onPress={() => navigation.navigate("NavBarBottom")}
+            onPress={checkTextInput}
+            // onPress={() => navigation.navigate("NavBarBottom")}
           />
         </View>
       </View>

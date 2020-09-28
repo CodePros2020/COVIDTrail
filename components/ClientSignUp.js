@@ -7,13 +7,13 @@ import {
   View,
   TextInput,
   Dimensions,
+  Picker,
 } from "react-native";
 import Constants from "expo-constants";
-import Header from "./header";
-import CustomButton from "./customButton";
+import Header from "./Header";
+import CustomButton from "./CustomButton";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { color } from "react-native-reanimated";
-// import UserAccount from "../models/UserAccount";
 
 var width = Dimensions.get("window").width;
 var widthProportion = "80%";
@@ -230,17 +230,34 @@ const ClientSignUp = ({ navigation }) => {
             />
           </View>
           <View style={styles.viewStyle}>
-            <TextInput
-              style={styles.input}
-              onChangeText={(value) => setTextInputProvince(value)}
-              value={textInputProvince}
-              placeholder="Province *"
-              placeholderTextColor={"#979797"}
-              underlineColorAndroid="transparent"
-              spellCheck={false}
-              autoCorrect={false}
-              maxLength={30}
-            />
+            <Picker
+              style={{
+                height: 50,
+                width: width - 25,
+                color: "#ffffff",
+                fontSize: 30,
+                placeholderTextColor: "#979797",
+              }}
+              selectedValue={textInputProvince}
+              onValueChange={(itemValue, itemIndex) =>
+                setTextInputProvince(itemValue)
+              }
+            >
+              <Picker.Item label="Select Province *" value="" />
+              <Picker.Item label="Alberta" value="AB" />
+              <Picker.Item label="British Columbia" value="BC" />
+              <Picker.Item label="Manitoba" value="MB" />
+              <Picker.Item label="New Brunswick" value="NB" />
+              <Picker.Item label="Newfoundland and Labrador" value="NL" />
+              <Picker.Item label="Northwest Territories" value="NT" />
+              <Picker.Item label="Nova Scotia" value="NS" />
+              <Picker.Item label="Nunavut" value="NU" />
+              <Picker.Item label="Ontario" value="ON" />
+              <Picker.Item label="Prince Edward Island" value="PE" />
+              <Picker.Item label="Quebec" value="QC" />
+              <Picker.Item label="Saskatchewan" value="SK" />
+              <Picker.Item label="Yukon" value="YT" />
+            </Picker>
           </View>
           <View style={styles.viewStyle}>
             <TextInput

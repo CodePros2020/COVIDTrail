@@ -9,8 +9,7 @@ import UserType from "./components/UserType";
 import BusinessSignUp from "./components/BusinessSignUp";
 import ClientSignUp from "./components/ClientSignUp";
 import NavBarBottom from "./components/NavBarBottom";
-import BusinessLogsPage from "./components/businessLogsPage";
-import EditBusinessName from "./components/editBusinessName";
+import EditBusinessName from "./components/EditBusinessName";
 
 const Stack = createStackNavigator();
 export default class App extends React.Component {
