@@ -10,7 +10,7 @@ import {
   Dimensions,
 } from "react-native";
 import Constants from "expo-constants";
-import HeaderWide from "./headerWide";
+import HeaderWide from "./HeaderWide";
 import { List } from "react-native-paper";
 
 var width = Dimensions.get("window").width;

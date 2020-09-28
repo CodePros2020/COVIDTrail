@@ -25,7 +25,7 @@ export default function WelcomePage({ navigation }) {
     API.post('login?password=' + password + '&username=' + username)
       .then((response) => {
 
-        account = response.data;
+        var account = response.data;
 
         if (account) {
           navigation.navigate('NavBarBottom', { account: account }); 
