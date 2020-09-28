@@ -12,59 +12,61 @@ import IndividualLogsDetailPage from "./IndividualLogsDetailPage";
 import BusinessAccount from "./BusinessAccount";
 import BusinessLogsPage from "./BusinessLogsPage";
 import { NetworkContext } from "../NetworkContext";
+import QRCodeGenerator from "./QRCodePage";
 
 const Tab = createBottomTabNavigator();
 const LogStack = createStackNavigator();
 let loggedInAccount;
 
 function MyTabs() {
-
   return (
-
     <NetworkContext.Provider value={loggedInAccount}>
       <Tab.Navigator
-      initialRouteName="ScanPage"
-      tabBarOptions={{
-        activeTintColor: "#00C0C1",
-        activeBackgroundColor: "#262D37",
-        inactiveBackgroundColor: "#262D37",
-      }}
-    >
-      <Tab.Screen
-        name="ScanPage"
-        component={ScanPage}
-        options={{
-          tabBarLabel: "Scan",
-          tabBarIcon: ({ color, size }) => (
-            <IconScan name="qrcode-scan" size={size} color={color} />
-          ),
+        initialRouteName="ScanPage"
+        tabBarOptions={{
+          activeTintColor: "#00C0C1",
+          activeBackgroundColor: "#262D37",
+          inactiveBackgroundColor: "#262D37",
         }}
-        
-      />
-      <Tab.Screen
-        name="BusinessAccount"
-        component={BusinessAccount}
-        options={{
-          tabBarLabel: "Account",
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="user" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="LogsStackScreen"
-        component={loggedInAccount.businessName !== null ? BusinessLogsPage : LogsStackScreen}
-        options={{
-          tabBarLabel: "Logs",
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="list-alt" size={size} color={color} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
-  </NetworkContext.Provider>
-
-    
+      >
+        <Tab.Screen
+          component={
+            loggedInAccount.businessName !== null ? QRCodeGenerator : ScanPage
+          }
+          name="ScanPage"
+          options={{
+            tabBarLabel: "Scan",
+            tabBarIcon: ({ color, size }) => (
+              <IconScan name="qrcode-scan" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="BusinessAccount"
+          component={BusinessAccount}
+          options={{
+            tabBarLabel: "Account",
+            tabBarIcon: ({ color, size }) => (
+              <Icon name="user" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="LogsStackScreen"
+          component={
+            loggedInAccount.businessName !== null
+              ? BusinessLogsPage
+              : LogsStackScreen
+          }
+          options={{
+            tabBarLabel: "Logs",
+            tabBarIcon: ({ color, size }) => (
+              <Icon name="list-alt" size={size} color={color} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </NetworkContext.Provider>
   );
 }
 
@@ -84,18 +86,14 @@ function LogsStackScreen() {
 }
 
 function logScreenDisplay() {
-
-  console.log('logged in account', loggedInAccount);
-  return(
-    LogsStackScreen
-  );
+  console.log("logged in account", loggedInAccount);
+  return LogsStackScreen;
 }
 
 export default function App({ route, navigation }) {
-
   const { account } = route.params;
   loggedInAccount = account;
-  console.log('object222222', JSON.stringify(loggedInAccount));
+  console.log("object222222", JSON.stringify(loggedInAccount));
 
   return (
     <NavigationContainer independent={true}>

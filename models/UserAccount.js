@@ -1,4 +1,4 @@
-import Address from "./address";
+import Address from "./Address";
 import PlacesVisited from "./PlacesVisitedLog";
 
 export default class UserAccount {

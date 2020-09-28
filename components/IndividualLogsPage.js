@@ -27,7 +27,7 @@ var width = Dimensions.get("window").width;
 
 //       // if (account) {
 //       //   // alert('what is account' + JSON.stringify(account));
-//       //   // navigation.navigate('NavBarBottom', { account: account }); 
+//       //   // navigation.navigate('NavBarBottom', { account: account });
 //       //   console.log('this is account log', JSON.stringify(account));
 //       // }
 //     })
@@ -37,12 +37,21 @@ var width = Dimensions.get("window").width;
 // };
 
 const InvididualLogsPage = ({ navigation }) => {
+  const { logsData, setLogsData } = useState("");
 
-// var account;
-
-  const [logsData, setLogsData] = useState([]);
-  const [desiredData, setDesiredData] = useState([]);
-
+  useEffect(() => {
+    const fetchData = async () => {
+      API.get("api/placesVisitedLog/" + id + "/user")
+        .then((res) => {
+          setLogsData(res.data);
+          alert("dATA Is " + res.data);
+        })
+        .catch((error) => {
+          alert("Unable to get logs " + error);
+        });
+    };
+    fetchData();
+  }, []);
 
   const data = [
     {
@@ -137,23 +146,19 @@ const InvididualLogsPage = ({ navigation }) => {
     },
   ];
 
-  useEffect( () => {
-    
-    API.get('api/placesVisitedLog/1/user')
-    .then((response) => {
+  useEffect(() => {
+    API.get("api/placesVisitedLog/1/user")
+      .then((response) => {
+        var account = response.data;
+        setLogsData(account);
+      })
+      .catch((error) => {
+        alert("Error" + error);
+      });
 
-      var account = response.data;
-      setLogsData(account);
-
-    })
-    .catch(error => {
-      alert('Error' + error);
-    });
-
-    logsData.map( res => {
+    logsData.map((res) => {
       // console.log('check', res.visitedDate);
-    })
-
+    });
   });
 
   return (

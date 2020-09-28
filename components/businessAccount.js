@@ -1,29 +1,30 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Image, SafeAreaView } from "react-native";
-import { Divider, Text, RadioButton } from "react-native-paper";
+import { Text, RadioButton } from "react-native-paper";
 import HeaderWide from "./HeaderWide";
 import Icon from "react-native-vector-icons/FontAwesome5";
-// import BusinessAccountModel from "../models/BusinessAccount";
+import { NetworkContext } from "../NetworkContext";
 
-const BusinessAccount = () => {
-  // const businessAccount = new BusinessAccountModel();
+const BusinessAccount = ({ navigation }) => {
+  const network = React.useContext(NetworkContext);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <HeaderWide title="Account"></HeaderWide>
         <View style={styles.mainView}>
           <Text style={styles.textField}>NAME</Text>
-
           <View style={styles.subView}>
-            <Text style={styles.subTxtField}>My Resturant</Text>
+            <Text style={styles.subTxtField}>{network.businessName}</Text>
             <Icon
               name="chevron-right"
               style={styles.icon}
-              onPress={() => navigation.navigate("EditBusinessName")}
+              onPress={() =>
+                navigation.navigate("EditBusinessName", {
+                  name: network.businessName,
+                })
+              }
             />
-          </View>
-          <View style={{ paddingTop: 10 }}>
-            <Divider style={{ backgroundColor: "#979797" }} />
           </View>
         </View>
         <View style={styles.mainView}>
@@ -31,46 +32,33 @@ const BusinessAccount = () => {
 
           <View style={styles.subView}>
             <Text style={styles.subTxtField}>
-              2 My Resturant, Toronto, ON H0H0H0
+              {network.addressLine1} {network.addressLine2 || ""},&nbsp;
+              {network.city}, {network.province} &nbsp;
+              {network.postalCode}
             </Text>
             <Icon name="chevron-right" style={styles.icon} />
-          </View>
-          <View style={{ paddingTop: 10 }}>
-            <Divider style={{ backgroundColor: "#979797" }} />
           </View>
         </View>
         <View style={styles.mainView}>
           <Text style={styles.textField}>PHONE</Text>
-
           <View style={styles.subView}>
-            <Text style={styles.subTxtField}> (416) 123- 1234</Text>
+            <Text style={styles.subTxtField}>{network.phone}</Text>
             <Icon name="edit" style={styles.icon} />
-          </View>
-          <View style={{ paddingTop: 10 }}>
-            <Divider style={{ backgroundColor: "#979797" }} />
           </View>
         </View>
         <View style={styles.mainView}>
           <Text style={styles.textField}>EMAIL</Text>
-
           <View style={styles.subView}>
-            <Text style={styles.subTxtField}>My.Resturant123@email.com</Text>
+            <Text style={styles.subTxtField}>{network.email || ""}</Text>
             <Icon name="edit" style={styles.icon} />
-          </View>
-          <View style={{ paddingTop: 10 }}>
-            <Divider style={{ backgroundColor: "#979797" }} />
           </View>
         </View>
 
         <View style={styles.mainView}>
           <Text style={styles.textField}>PASSWORD</Text>
-
           <View style={styles.subView}>
-            <Text style={styles.subTxtField}>*******</Text>
+            <Text style={styles.subTxtField}>********</Text>
             <Icon name="edit" style={styles.icon} />
-          </View>
-          <View style={{ paddingTop: 10 }}>
-            <Divider style={{ backgroundColor: "#979797" }} />
           </View>
         </View>
       </View>
@@ -92,10 +80,12 @@ const styles = StyleSheet.create({
   mainView: {
     flexDirection: "column",
     alignSelf: "stretch",
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
     paddingLeft: 20,
     paddingRight: 20,
+    borderBottomColor: "#979797",
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   subView: {
     flexDirection: "row",

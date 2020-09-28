@@ -41,7 +41,7 @@ const BusinessSignUp = ({ navigation }) => {
     icon: "eye",
     color: "#979797",
   });
-  
+
   const togglePasswordVisiblity = () => {
     let iconName = secure.secure ? "eye-slash" : "eye";
     let eyeColor = secure.secure ? "#979797" : "#00C0C1";
@@ -161,12 +161,8 @@ const BusinessSignUp = ({ navigation }) => {
         phone: textInputPhoneNumber,
       };
 
-      console.log('coming here', userAccount);
-
       API.post("api/businessAccount/create", userAccount)
         .then((response) => {
-          console.log('coming here2222222', userAccount);
-          alert("Data received" + JSON.stringify(response.data));
           Alert.alert(
             "Success!",
             "Sign up Completed!",
@@ -174,11 +170,14 @@ const BusinessSignUp = ({ navigation }) => {
             [{ text: "OK", onPress: () => console.log("OK Pressed") }],
             { cancelable: false }
           );
-
           navigation.navigate("WelcomePage");
         })
         .catch((e) => {
-          console.log('error coming', e);
+          (error) => {
+            console.error("error is sign up business " + error);
+            alert("Unable to create account! ");
+            navigation.navigate("WelcomePage");
+          };
         });
     }
   };
