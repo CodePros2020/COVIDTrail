@@ -4,7 +4,6 @@ import Icon from "react-native-vector-icons/Feather";
 import API from "../api";
 
 const HeaderWide = ({ title, navigation }) => {
-
   const logout = () => {
     API.post("/logout")
       .then((response) => {
@@ -21,7 +20,7 @@ const HeaderWide = ({ title, navigation }) => {
       <View style={styles.mainHeader}>
         <Image source={require("../assets/logosml.png")} />
         <Text style={styles.text}>{title}</Text>
-        <Icon name="log-out" size={30} onPress={logout} color="#707070" />
+        <Icon name="log-out" size={30} color="#707070" onPress={logout} />
       </View>
     </View>
   );
