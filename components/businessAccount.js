@@ -3,10 +3,10 @@ import { StyleSheet, View, Image, SafeAreaView } from "react-native";
 import { Divider, Text, RadioButton } from "react-native-paper";
 import HeaderWide from "./HeaderWide";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import BusinessAccountModel from "../models/BusinessAccount";
+// import BusinessAccountModel from "../models/BusinessAccount";
 
 const BusinessAccount = () => {
-  const businessAccount = new BusinessAccountModel();
+  // const businessAccount = new BusinessAccountModel();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>

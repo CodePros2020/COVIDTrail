@@ -17,9 +17,8 @@ const Tab = createBottomTabNavigator();
 const LogStack = createStackNavigator();
 let loggedInAccount;
 
-function MyTabs({ route }) {
-  // const { accId } = route.params;
-  // alert(JSON.stringify(accId));
+function MyTabs() {
+
   return (
 
     <NetworkContext.Provider value={loggedInAccount}>
