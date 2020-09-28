@@ -8,11 +8,11 @@ import {
   Button,
   Linking,
   TextInput,
-  SafeAreaView,
+  SafeAreaView
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import CustomButton from "./CustomButton";
-import API from "../api";
+import API from '../api';
 
 export default function WelcomePage({ navigation }) {
   const [username, onUserNameChange] = React.useState();
@@ -20,32 +20,19 @@ export default function WelcomePage({ navigation }) {
   const [isSelected, setSelection] = React.useState(false);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const account = {
-    addressLineOne: "",
-    addressLineTwo: "",
-    businessName: "",
-    city: "",
-    email: "",
-    firstName: "",
-    id: "",
-    lastName: "",
-    middleName: "",
-    phone: "",
-    postalCode: "",
-    province: "",
-  };
+  
   const success = () => {
-    API.post(`/login?password=${password}&username=${username}`)
+    API.post('login?password=' + password + '&username=' + username)
       .then((response) => {
+
         account = response.data;
-        alert("Data received" + JSON.stringify(response.data));
-        // navigation.navigate("NavBarBottom", { accountId: account.id });
+
+        if (account) {
+          navigation.navigate('NavBarBottom', { account: account }); 
+        }
       })
-      .catch((e) => {
-        (error) => {
-          console.error(error);
-          alert("Error is " + error);
-        };
+      .catch(error => {
+        alert('Invalid username and/or password!');
       });
   };
 

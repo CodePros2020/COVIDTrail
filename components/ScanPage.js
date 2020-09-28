@@ -11,21 +11,23 @@ import {
   AppRegistry,
 } from "react-native";
 import Constants from "expo-constants";
-import HeaderWide from "./headerWide";
+import HeaderWide from "./HeaderWide";
+import { NetworkContext } from "../NetworkContext";
+
+
 // import QRCodeScanner from "react-native-qrcode-scanner";
 // import { RNCamera } from "react-native-camera";
 
-const ScanPage = ({ navigation }) => {
-  //   ifScaned = (e) => {
-  //     Linking.openURL(e.data).catch((err) =>
-  //       Alert.alert("Invalid QRCode", e.data)
-  //     );
-  //   };
+const ScanPage = ({ navigation, route }) => {
+  
+const network = React.useContext(NetworkContext);
+console.log('what is network', network);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <HeaderWide title="Scan"></HeaderWide>
-        <Text style={{ color: "#fff" }}>In SCAN PAGE</Text>
+  <Text style={{ color: "#fff" }}>In SCAN PAGE</Text>
         {/* <QRCodeScanner
           onRead={this.ifScaned}
           reactivate={true}

@@ -9,17 +9,21 @@ import ScanPage from "./scanPage";
 import AccountPage from "./accountPage";
 import IndividualLogsPage from "./IndividualLogsPage";
 import IndividualLogsDetailPage from "./IndividualLogsDetailPage";
-import BusinessLogs from "./businessLogsPage";
-import BusinessAccount from "./businessAccount";
+import BusinessAccount from "./BusinessAccount";
+import BusinessLogsPage from "./BusinessLogsPage";
+import { NetworkContext } from "../NetworkContext";
 
 const Tab = createBottomTabNavigator();
 const LogStack = createStackNavigator();
+let loggedInAccount;
 
 function MyTabs({ route }) {
   const { accId } = route.params;
   alert(JSON.stringify(accId));
   return (
-    <Tab.Navigator
+
+    <NetworkContext.Provider value={loggedInAccount}>
+      <Tab.Navigator
       initialRouteName="ScanPage"
       tabBarOptions={{
         activeTintColor: "#00C0C1",
@@ -36,6 +40,7 @@ function MyTabs({ route }) {
             <IconScan name="qrcode-scan" size={size} color={color} />
           ),
         }}
+        
       />
       <Tab.Screen
         name="BusinessAccount"
@@ -49,7 +54,7 @@ function MyTabs({ route }) {
       />
       <Tab.Screen
         name="LogsStackScreen"
-        component={LogsStackScreen}
+        component={loggedInAccount.businessName !== null ? BusinessLogsPage : LogsStackScreen}
         options={{
           tabBarLabel: "Logs",
           tabBarIcon: ({ color, size }) => (
@@ -58,6 +63,9 @@ function MyTabs({ route }) {
         }}
       />
     </Tab.Navigator>
+  </NetworkContext.Provider>
+
+    
   );
 }
 
@@ -67,7 +75,6 @@ function LogsStackScreen() {
       <LogStack.Screen
         name="IndividualLogsPage"
         component={IndividualLogsPage}
-        // options={{ tabBarLabel: 'Settings!' }}
       />
       <LogStack.Screen
         name="IndividualLogsDetailPage"
@@ -77,7 +84,20 @@ function LogsStackScreen() {
   );
 }
 
-export default function App() {
+function logScreenDisplay() {
+
+  console.log('logged in account', loggedInAccount);
+  return(
+    LogsStackScreen
+  );
+}
+
+export default function App({ route, navigation }) {
+
+  const { account } = route.params;
+  loggedInAccount = account;
+  console.log('object222222', JSON.stringify(loggedInAccount));
+
   return (
     <NavigationContainer independent={true}>
       <MyTabs />
