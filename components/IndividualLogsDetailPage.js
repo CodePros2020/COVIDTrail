@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 import Header from "./Header";
+import Moment from 'moment';
 
 var width = Dimensions.get("window").width;
 
@@ -16,9 +17,27 @@ const AccountPage = ({ route, navigation }) => {
   const { date } = route.params;
   const { time } = route.params;
   const { name } = route.params;
-  const { address } = route.params;
+  const { addressLine1 } = route.params;
+  const { addressLine2 } = route.params;
+  const { city } = route.params;
+  const { province } = route.params;
+  const { postalCode } = route.params;
   const { phone } = route.params;
   const { email } = route.params;
+
+  const [address, setfullAddress] = useState('');
+
+  useEffect( () => {
+    let addLine2;
+
+    if (addressLine2 !== null) {
+      addLine2 = addressLine2;
+    } else {
+      addLine2 = '';
+    }
+
+    setfullAddress(addressLine1 + ' ' + addLine2 + ' ' + city + ' ' + province + ' ' + postalCode);
+  });
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,7 +49,7 @@ const AccountPage = ({ route, navigation }) => {
         <View style={styles.line}>
           <Text style={styles.label}>VISITED DATE AND TIME</Text>
           <Text style={styles.item}>
-            {date}, {time}
+            {Moment(date).format('MMMM DD, YYYY')}, {Moment(time).format('LT')}
           </Text>
         </View>
 
