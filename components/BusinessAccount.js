@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { StyleSheet, View, Image, SafeAreaView } from "react-native";
 import { Text, RadioButton } from "react-native-paper";
 import HeaderWide from "./HeaderWide";
@@ -6,7 +6,43 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { NetworkContext } from "../NetworkContext";
 
 const BusinessAccount = ({ navigation }) => {
+
   const network = React.useContext(NetworkContext);
+
+  const [name, setName] = useState('');
+  const [fullAddress, setFullAddress] = useState('');
+
+  useEffect( () => {
+    let addLine2;
+
+    if (network.addressLineTwo !== null) {
+      addLine2 = network.addressLineTwo;
+    } else {
+      addLine2 = '';
+    }
+
+    setFullAddress(network.addressLineOne + ' ' + addLine2 + ', ' + network.city + ', ' + network.province + ', ' + network.postalCode);
+  });
+
+  useEffect( () => {
+    if (network.businessName !== null) {
+      setName(network.businessName);
+    } else {
+
+      let middleName;
+
+      if (network.middleName !== null) {
+        middleName = network.middleName;
+      } else {
+        middleName = '';
+      }
+
+      setName(network.firstName + ' ' + middleName + ' ' + network.lastName);
+    }
+  });
+
+
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -15,13 +51,16 @@ const BusinessAccount = ({ navigation }) => {
         <View style={styles.mainView}>
           <Text style={styles.textField}>NAME</Text>
           <View style={styles.subView}>
-            <Text style={styles.subTxtField}>{network.businessName}</Text>
+            <Text style={styles.subTxtField}>{name}</Text>
             <Icon
               name="chevron-right"
               style={styles.icon}
               onPress={() =>
-                navigation.navigate("EditBusinessName", {
-                  name: network.businessName,
+                navigation.navigate("EditNameScreen", {
+                  businessName: network.businessName,
+                  firstName: network.firstName,
+                  middleName: network.middleName,
+                  lastName: network.lastName
                 })
               }
             />
@@ -32,9 +71,7 @@ const BusinessAccount = ({ navigation }) => {
 
           <View style={styles.subView}>
             <Text style={styles.subTxtField}>
-              {network.addressLine1} {network.addressLine2 || ""},&nbsp;
-              {network.city}, {network.province} &nbsp;
-              {network.postalCode}
+              {fullAddress}
             </Text>
             <Icon name="chevron-right" style={styles.icon} />
           </View>

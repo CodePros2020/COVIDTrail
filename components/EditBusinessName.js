@@ -5,7 +5,8 @@ import HeaderSecond from "./HeaderSecond";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 const EditBusinessAccount = ({ navigation, route }) => {
-  const { name } = route.params;
+  // const { name } = route.params;
+  const { name } = '';
   console.log("Name is", name);
   return (
     <SafeAreaView style={styles.container}>

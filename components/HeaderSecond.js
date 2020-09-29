@@ -1,7 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 
-const Header = ({ title, navigation }) => {
+var width = Dimensions.get("window").width;
+
+const Header = ({ title, navigation, onPress }) => {
   const save = () => {};
   return (
     <View style={styles.mainHeader}>
@@ -11,7 +13,7 @@ const Header = ({ title, navigation }) => {
           Cancel
         </Text>
         <Text style={styles.text}>{title}</Text>
-        <Text style={styles.back} onPress={() => navigation.goBack()}>
+        <Text style={styles.back} onPress={onPress}>
           Save
         </Text>
       </View>
@@ -24,16 +26,18 @@ Header.defaultProps = {
 
 const styles = StyleSheet.create({
   mainHeader: {
-    alignSelf: "stretch",
-    flexDirection: "column",
-    alignItems: "center",
+    // alignSelf: "stretch",
+    // flexDirection: "column",
+    // alignItems: "center",
+    width: width,
     height: 80,
     marginTop: 25,
   },
   header: {
-    alignSelf: "stretch",
+    justifyContent: 'space-between',
+    // alignSelf: "stretch",
     flexDirection: "row",
-    alignItems: "center",
+    // alignItems: "center",
     height: 60,
     padding: 15,
     backgroundColor: "#1D1D1D",
@@ -41,8 +45,8 @@ const styles = StyleSheet.create({
   text: {
     color: "#ffffff",
     fontSize: 18,
-    textAlign: "center",
-    marginLeft: 120,
+    // textAlign: "center",
+    // marginLeft: 120,
     fontWeight: "700",
   },
   back: {
@@ -51,9 +55,9 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     height: 15,
-    alignSelf: "stretch",
+    // alignSelf: "stretch",
     flexDirection: "row",
-    alignSelf: "stretch",
+    // alignSelf: "stretch",
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     backgroundColor: "#000000",

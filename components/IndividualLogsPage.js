@@ -13,45 +13,17 @@ import Constants from "expo-constants";
 import HeaderWide from "./HeaderWide";
 import { List } from "react-native-paper";
 import API from "../api";
+import Moment from 'moment';
 
 var width = Dimensions.get("window").width;
-
-// const success = () => {
-//   console.log('coming to this');
-//   API.get('api/placesVisitedLog/1/user')
-//     .then((response) => {
-
-//       var account = response.data;
-//       console.log('account inside sucesss', account);
-//       return account;
-
-//       // if (account) {
-//       //   // alert('what is account' + JSON.stringify(account));
-//       //   // navigation.navigate('NavBarBottom', { account: account });
-//       //   console.log('this is account log', JSON.stringify(account));
-//       // }
-//     })
-//     .catch(error => {
-//       alert('Error' + error);
-//     });
-// };
+var arr;
 
 const InvididualLogsPage = ({ navigation }) => {
-  const { logsData, setLogsData } = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      API.get("api/placesVisitedLog/" + id + "/user")
-        .then((res) => {
-          setLogsData(res.data);
-          alert("dATA Is " + res.data);
-        })
-        .catch((error) => {
-          alert("Unable to get logs " + error);
-        });
-    };
-    fetchData();
-  }, []);
+
+  const [logsData, setLogsData] = useState();
+  const [desiredData, setDesiredData] = useState();
+
 
   const data = [
     {
@@ -146,64 +118,113 @@ const InvididualLogsPage = ({ navigation }) => {
     },
   ];
 
-  useEffect(() => {
-    API.get("api/placesVisitedLog/1/user")
-      .then((response) => {
-        var account = response.data;
-        setLogsData(account);
-      })
-      .catch((error) => {
-        alert("Error" + error);
-      });
+  useEffect( () => {
 
-    logsData.map((res) => {
-      // console.log('check', res.visitedDate);
-    });
-  });
+    async function getLogData() {
+
+      await API.get('api/placesVisitedLog/1/user')
+        .then((response) => {
+
+          var account = response.data;
+          console.log('response', JSON.stringify(account));
+          // setLogsData(account);
+          // console.log('this is account', logsData.length);
+
+          arr = [];
+
+          account.map( res => {
+
+          var businessDet = [];
+
+          res.businessDetails.map( res2 => {
+        
+            var logBusinessDet = {
+              id: res2.id,
+              visitedDateTime: res2.visitedDateTime,
+              businessName: res2.businessAccount.businessName,
+              email: res2.businessAccount.email,
+              phone: res2.businessAccount.phone,
+              addressLine1: res2.businessAccount.address.addressLineOne,
+              addressLine2: res2.businessAccount.address.addressLineTwo,
+              city: res2.businessAccount.address.city,
+              province: res2.businessAccount.address.province,
+              postalCode: res2.businessAccount.address.postalCode
+            }
+
+            businessDet.push(logBusinessDet);
+          });
+
+          var log = {
+            title: res.visitedDate,
+            data: businessDet
+          }
+      
+          arr.push(log);
+        });
+
+        console.log('what is arr', arr.length);
+        if (arr.length > 0) {
+        // console.log('its not empty', arr.length);
+        setDesiredData(arr);
+        // console.log('desired data length', desiredData.length);
+      }
+    })
+        .catch(error => {
+          alert('Error' + error);
+      });
+    }
+    
+    getLogData();
+
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <HeaderWide title="Logs"></HeaderWide>
         <SectionList
-          sections={data}
+          sections={desiredData}
           renderItem={({ item, index, section }) => (
             <View style={styles.item}>
               <Text
                 style={styles.itemDetails}
                 onPress={() =>
                   navigation.navigate("IndividualLogsDetailPage", {
-                    name: item.name,
-                    time: item.time,
-                    date: item.date,
-                    address: item.address,
+                    name: item.businessName,
+                    time: item.visitedDateTime,
+                    date: item.visitedDateTime,
+                    addressLine1: item.addressLine1,
+                    addressLine2: item.addressLine2,
+                    city: item.city,
+                    province: item.province,
+                    postalCode: item.postalCode,
                     phone: item.phone,
                     email: item.email,
                   })
                 }
               >
-                {item.name}
+                {item.businessName}
               </Text>
               <Text
                 style={styles.itemDetails}
                 onPress={() =>
                   navigation.navigate("IndividualLogsDetailPage", {
-                    name: item.name,
-                    time: item.time,
-                    date: item.date,
-                    address: item.address,
+                    name: item.businessName,
+                    time: item.visitedDateTime,
+                    date: item.visitedDateTime,
+                    address: item.addressLine1,
                     phone: item.phone,
                     email: item.email,
                   })
                 }
               >
-                {item.time}
+                {Moment(item.visitedDateTime).format('LT')}
               </Text>
             </View>
           )}
           renderSectionHeader={({ section }) => (
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionHeader}>{section.title}</Text>
+              <Text style={styles.sectionHeader}>{Moment(section.title).format('MMMM DD, YYYY')}</Text>
             </View>
           )}
           keyExtractor={(item, index) => item + index}
