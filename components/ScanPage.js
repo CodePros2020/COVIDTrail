@@ -39,7 +39,7 @@ export default class ScanPage extends React.Component {
     }
     return (
       <View style={styles.container}>
-        <HeaderWide title="Scan" />
+        <HeaderWide title="Scan" navigation={navigation} />
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
           //   style={[StyleSheet.absoluteFillObject, styles.scanner]}

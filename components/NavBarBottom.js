@@ -13,7 +13,6 @@ import BusinessLogsPage from "./BusinessLogsPage";
 import EditBusinessName from "./EditBusinessName";
 import { NetworkContext } from "../NetworkContext";
 import QRCodeGenerator from "./QRCodePage";
-import EditBusinessName from "./EditBusinessName";
 import EditClientName from "./EditClientName";
 
 const Tab = createBottomTabNavigator();

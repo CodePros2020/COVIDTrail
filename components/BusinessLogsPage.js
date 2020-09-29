@@ -65,7 +65,7 @@ const BusinessLogsPage = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <HeaderWide title="Logs" />
+        <HeaderWide title="Logs" navigation={navigation} />
 
         <View style={{ width: Dimensions.get("window").width }}>
           <View

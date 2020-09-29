@@ -1,39 +1,61 @@
-import React, { Component } from "react";
-import { StyleSheet, View, Image, SafeAreaView } from "react-native";
+import React, { Component, useState } from "react";
+import { StyleSheet, View, SafeAreaView, TextInput, Alert } from "react-native";
 import { Divider, Text, RadioButton } from "react-native-paper";
 import HeaderSecond from "./HeaderSecond";
-import Icon from "react-native-vector-icons/FontAwesome5";
+import API from "../api";
+import { NetworkContext } from "../NetworkContext";
 
-const EditBusinessAccount = ({ navigation, route }) => {
-  // const { name } = route.params;
-  const { name } = '';
-  console.log("Name is", name);
+const EditBusinessName = ({ navigation, route }) => {
+  const network = React.useContext(NetworkContext);
+  const { businessName } = route.params;
+  const [state, setState] = useState({ name: businessName });
+
+  const onPressSave = () => {
+    if (!state.name.trim()) {
+      Alert.alert(
+        "Required",
+        "Please enter business name.",
+        [{ text: "OK", onPress: () => console.log("Ok Pressed") }],
+        { cancelable: false }
+      );
+      return;
+    } else {
+      API.post(`/api/businessAccount/${network.id}/name?newName=${state.name}`)
+        .then((res) => {
+          Alert.alert("Success", "Name has been updated.");
+        })
+        .catch((error) => console.log("failed to update"));
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <HeaderSecond title="Account" />
+        <HeaderSecond
+          title="Name"
+          navigation={navigation}
+          onPress={onPressSave}
+        />
         <View style={styles.mainView}>
-          <Text style={styles.textField}>NAME</Text>
-
+          <Text style={styles.textField}>NAME </Text>
           <View style={styles.subView}>
-            <Text style={styles.subTxtField}>My Resturant</Text>
-            <Icon
-              name="chevron-right"
-              style={styles.icon}
-              //   onPress={() =>
-              //     navigation.navigate("EditBusinessName/", businessAccount.id)
-              //   }
-            />
-          </View>
-          <View style={{ paddingTop: 10 }}>
-            <Divider style={{ backgroundColor: "#979797" }} />
+            <TextInput
+              style={styles.subTxtField}
+              onChangeText={(value) => setState({ name: value })}
+              value={state.name}
+              spellCheck={false}
+              autoCorrect={false}
+              maxLength={100}
+            >
+              {state.name}
+            </TextInput>
           </View>
         </View>
       </View>
     </SafeAreaView>
   );
 };
-export default EditBusinessAccount;
+export default EditBusinessName;
 
 const styles = StyleSheet.create({
   container: {
@@ -58,6 +80,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignSelf: "stretch",
     paddingTop: 10,
+    backgroundColor: "#262D37",
+    borderBottomWidth: 1,
+    borderBottomColor: "#707070",
   },
   textField: {
     color: "#00C0C1",
