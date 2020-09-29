@@ -8,11 +8,11 @@ import {
   Button,
   Linking,
   TextInput,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import CustomButton from "./CustomButton";
-import API from '../api';
+import API from "../api";
 
 export default function WelcomePage({ navigation }) {
   const [username, onUserNameChange] = React.useState();
@@ -20,8 +20,8 @@ export default function WelcomePage({ navigation }) {
   const [isSelected, setSelection] = React.useState(false);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  
-const success = async () => {
+
+  const success = async () => {
     API.post("login?password=" + password + "&username=" + username)
       .then((response) => {
         var account = response.data;
@@ -54,6 +54,7 @@ const success = async () => {
           underlineColorAndroid="transparent"
           spellCheck={false}
           autoCorrect={false}
+          maxLength={10}
         />
       </View>
 
@@ -70,6 +71,7 @@ const success = async () => {
           underlineColorAndroid="transparent"
           spellCheck={false}
           autoCorrect={false}
+          maxLength={25}
         />
       </View>
 

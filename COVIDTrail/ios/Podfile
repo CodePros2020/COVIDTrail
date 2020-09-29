@@ -13,6 +13,8 @@ target 'COVIDTrail' do
   pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
   pod 'Permission-Camera', :path => "../node_modules/react-native-permissions/ios/Camera.podspec"
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'COVIDTrailTests' do
     inherit! :complete
     # Pods for testing

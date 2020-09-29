@@ -4,8 +4,9 @@ import { Divider, Text, RadioButton } from "react-native-paper";
 import HeaderSecond from "./HeaderSecond";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
-const EditBusinessAccount = ({ navigation }) => {
-  const { navigate } = navigation;
+const EditBusinessAccount = ({ navigation, route }) => {
+  const { name } = route.params;
+  console.log("Name is", name);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
@@ -19,7 +20,7 @@ const EditBusinessAccount = ({ navigation }) => {
               name="chevron-right"
               style={styles.icon}
               onPress={() =>
-                navigation.navigate("editBusinessName/", businessAccount.id)
+                navigation.navigate("EditBusinessName/", businessAccount.id)
               }
             />
           </View>

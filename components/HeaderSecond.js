@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const Header = ({ title, navigation }) => {
-  const baseUrl = "http://covidtrail-backend.azurewebsites.net";
   const save = () => {};
   return (
     <View style={styles.mainHeader}>

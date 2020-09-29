@@ -1,83 +1,94 @@
-import React from "react";
+import * as React from "react";
 import {
-  StyleSheet,
   Text,
-  SafeAreaView,
-  ScrollView,
   View,
-  Linking,
-  TouchableOpacity,
+  StyleSheet,
+  Button,
   Alert,
-  AppRegistry,
+  Dimensions,
 } from "react-native";
 import Constants from "expo-constants";
+import * as Permissions from "expo-permissions";
 import HeaderWide from "./HeaderWide";
-import { NetworkContext } from "../NetworkContext";
+import { BarCodeScanner } from "expo-barcode-scanner";
+import API from "../api";
 
+export default class ScanPage extends React.Component {
+  state = {
+    hasCameraPermission: null,
+    scanned: false,
+  };
 
-// import QRCodeScanner from "react-native-qrcode-scanner";
-// import { RNCamera } from "react-native-camera";
+  async componentDidMount() {
+    this.getPermissionsAsync();
+  }
 
-const ScanPage = ({ navigation, route }) => {
-  
-const network = React.useContext(NetworkContext);
-console.log('what is network', network);
+  getPermissionsAsync = async () => {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({ hasCameraPermission: status === "granted" });
+  };
 
-  return (
-    <SafeAreaView style={styles.container}>
+  render() {
+    const { hasCameraPermission, scanned } = this.state;
+
+    if (hasCameraPermission === null) {
+      return <Text>Requesting for camera permission</Text>;
+    }
+    if (hasCameraPermission === false) {
+      return <Text>No access to camera</Text>;
+    }
+    return (
       <View style={styles.container}>
-        <HeaderWide title="Scan"></HeaderWide>
-  <Text style={{ color: "#fff" }}>In SCAN PAGE</Text>
-        {/* <QRCodeScanner
-          onRead={this.ifScaned}
-          reactivate={true}
-          permissionDialogMessage="Need permission to access camera."
-          reactivateTimeout={10}
-          showMarker={true}
-          markerStyle={{ borderColor: "#fff", borderRadius: 10 }}
-          bottomContent={
-            <TouchableOpacity>
-              <Text style={{ fontSize: 20, color: "red" }}>Scan QRCode</Text>
-            </TouchableOpacity>
-          }
-        // /> */}
-        {/* <QRCodeScanner */}
-        {/* //   onRead={this.onSuccess}
-        //   flashMode={RNCamera.Constants.FlashMode.torch}
-        //   topContent={ */}
-        {/* //     <Text style={styles.centerText}>
-        //       Go to{" "}
-        //       <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
-        //       your computer and scan the QR code.
-        //     </Text>
-        //   }
-        //   bottomContent={ */}
-        {/* //     <TouchableOpacity style={styles.buttonTouchable}>
-        //       <Text style={styles.buttonText}>OK. Got it!</Text>
-        //     </TouchableOpacity>
-        //   }
-        // /> */}
-        {/* <ScrollView style={styles.scrollView}></ScrollView> */}
+        <HeaderWide title="Scan" />
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
+          //   style={[StyleSheet.absoluteFillObject, styles.scanner]}
+          style={styles.scanner}
+        />
+        {scanned && (
+          <Button
+            title={"Tap to Scan Again"}
+            onPress={() => this.setState({ scanned: false })}
+          />
+        )}
       </View>
-    </SafeAreaView>
-  );
-};
+    );
+  }
+
+  handleBarCodeScanned = ({ type, data }) => {
+    this.setState({ scanned: true });
+    API.get("api/placesVisitedLog?businessId=1&userId=" + id)
+      .then((response) => {
+        account = response.data;
+        alert("Data received" + JSON.stringify(response.data));
+        // navigation.navigate("NavBarBottom", { accountId: account.id });
+      })
+      .catch((e) => {
+        (error) => {
+          console.error(error);
+          alert("Error is " + error);
+        };
+      });
+    Alert.alert(
+      "Success",
+      `Bar code with type ${type} and data ${data} has been scanned!`
+    );
+  };
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#262D37",
-    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+  },
+  scanner: {
+    height: "80%",
+    width: Dimensions.get("window").width,
     marginTop: 0,
-    // marginTop: Constants.statusBarHeight,
-  },
-  scrollView: {
+    borderColor: "#979797",
     backgroundColor: "#262D37",
-    marginHorizontal: 20,
-  },
-  text: {
-    fontSize: 42,
+    marginBottom: 30,
   },
 });
-
-export default ScanPage;

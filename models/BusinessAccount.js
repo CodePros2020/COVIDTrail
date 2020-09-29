@@ -1,5 +1,5 @@
 import CustomersVisited from "./CustomersVisitedLog";
-import Address from "./address";
+import Address from "./Address";
 
 export default class BusinessAccount {
   id;

@@ -29,7 +29,7 @@ var arr;
 
 //       // if (account) {
 //       //   // alert('what is account' + JSON.stringify(account));
-//       //   // navigation.navigate('NavBarBottom', { account: account }); 
+//       //   // navigation.navigate('NavBarBottom', { account: account });
 //       //   console.log('this is account log', JSON.stringify(account));
 //       // }
 //     })
@@ -39,6 +39,7 @@ var arr;
 // };
 
 const InvididualLogsPage = ({ navigation }) => {
+  const { logsData, setLogsData } = useState("");
 
 // var account;
 
