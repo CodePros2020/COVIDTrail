@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -13,6 +13,7 @@ import {
 import HeaderWide from "./HeaderWide";
 import CustomButton from "./CustomButton";
 import { NetworkContext } from "../NetworkContext";
+import API from "../api";
 // import CheckBox from "@react-native-community/checkbox";
 
 const BusinessLogsPage = ({ navigation }) => {
@@ -65,34 +66,33 @@ const BusinessLogsPage = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <HeaderWide title="Logs" />
-        <ScrollView style={styles.scrollView}>
-          <View style={{ width: Dimensions.get("window").width }}>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "flex-end",
-                marginRight: "10%",
-              }}
-            >
-              <Text style={styles.title}>Select All</Text>
-              <CheckBox
-                value={isSelected}
-                onValueChange={setSelection}
-                style={styles.checkbox}
-                tintColors={{ true: "#00C0C1", false: "white" }}
-              />
-            </View>
 
-            <VirtualizedList
-              data={DATA}
-              initialNumToRender={4}
-              renderItem={({ item }) => <Item title={item.title} />}
-              keyExtractor={(item) => item.key}
-              getItemCount={getItemCount}
-              getItem={getItem}
+        <View style={{ width: Dimensions.get("window").width }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              marginRight: "10%",
+            }}
+          >
+            <Text style={styles.title}>Select All</Text>
+            <CheckBox
+              value={isSelected}
+              onValueChange={setSelection}
+              style={styles.checkbox}
+              tintColors={{ true: "#00C0C1", false: "white" }}
             />
           </View>
-        </ScrollView>
+
+          <VirtualizedList
+            data={DATA}
+            initialNumToRender={4}
+            renderItem={({ item }) => <Item title={item.title} />}
+            keyExtractor={(item) => item.key}
+            getItemCount={getItemCount}
+            getItem={getItem}
+          />
+        </View>
 
         <View style={{ flexDirection: "column", padding: 10 }}>
           <Text

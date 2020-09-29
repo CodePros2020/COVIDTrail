@@ -19,9 +19,9 @@ const EditBusinessAccount = ({ navigation, route }) => {
             <Icon
               name="chevron-right"
               style={styles.icon}
-              onPress={() =>
-                navigation.navigate("EditBusinessName/", businessAccount.id)
-              }
+              //   onPress={() =>
+              //     navigation.navigate("EditBusinessName/", businessAccount.id)
+              //   }
             />
           </View>
           <View style={{ paddingTop: 10 }}>

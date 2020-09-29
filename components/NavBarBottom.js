@@ -6,11 +6,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import ScanPage from "./ScanPage";
-import AccountPage from "./AccountPage";
 import IndividualLogsPage from "./IndividualLogsPage";
 import IndividualLogsDetailPage from "./IndividualLogsDetailPage";
 import BusinessAccount from "./BusinessAccount";
 import BusinessLogsPage from "./BusinessLogsPage";
+import EditBusinessName from "./EditBusinessName";
 import { NetworkContext } from "../NetworkContext";
 import QRCodeGenerator from "./QRCodePage";
 
@@ -85,6 +85,18 @@ function LogsStackScreen() {
   );
 }
 
+function BusinessLogsStackScreen() {
+  return (
+    <LogStack.Navigator screenOptions={{ headerShown: false }}>
+      <LogStack.Screen name="BusinessLogsPage" component={BusinessLogsPage} />
+      <LogStack.Screen name="EditBusinessName" component={EditBusinessName} />
+      <LogStack.Screen name="EditAddress" component={EditAddress} />
+      <LogStack.Screen name="EditPhone" component={EditPhone} />
+      <LogStack.Screen name="EditEmail" component={EditEmail} />
+      <LogStack.Screen name="EditPassword" component={EditPassword} />
+    </LogStack.Navigator>
+  );
+}
 function logScreenDisplay() {
   console.log("logged in account", loggedInAccount);
   return LogsStackScreen;

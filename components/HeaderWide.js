@@ -6,14 +6,23 @@ import API from "../api";
 const HeaderWide = ({ title, navigation }) => {
   //   console.log("navigation is ", navigation);
   const logout = () => {
+    Alert.alert(
+      "Logout",
+      "Would you like to log out?",
+      [
+        {
+          text: "NO",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "YES", onPress: () => logoutSuccess() },
+      ],
+      { cancelable: false }
+    );
+  };
+  const logoutSuccess = () => {
     API.post("/logout")
       .then((response) => {
-        // Alert.alert(
-        //   "Success",
-        //   "You are successfully Logged out!",
-        //   [{ text: "OK", onPress: () => navigation.navigate("WelcomePage") }],
-        //   { cancelable: false }
-        // );
         Alert.alert("Success", "You are successfully Logged out!");
         navigation.navigate("WelcomePage");
       })
