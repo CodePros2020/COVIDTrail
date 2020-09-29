@@ -47,7 +47,6 @@ const EditBusinessName = ({ navigation, route }) => {
               autoCorrect={false}
               maxLength={100}
             >
-              {state.name}
             </TextInput>
           </View>
         </View>
