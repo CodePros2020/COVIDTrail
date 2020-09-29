@@ -19,6 +19,7 @@ const QRCodePage = () => {
           alignItems: "flex-start",
         }}
       >
+        <HeaderWide title="Scan" navigation={navigation} />
         <Text style={styles.text}>{network.businessName}</Text>
         <QRCode
           value={text.length > 0 ? text : "health app"}

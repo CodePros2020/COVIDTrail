@@ -6,48 +6,53 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { NetworkContext } from "../NetworkContext";
 
 const BusinessAccount = ({ navigation }) => {
-
   const network = React.useContext(NetworkContext);
 
-  const [name, setName] = useState('');
-  const [fullAddress, setFullAddress] = useState('');
+  const [name, setName] = useState("");
+  const [fullAddress, setFullAddress] = useState("");
 
-  useEffect( () => {
+  useEffect(() => {
     let addLine2;
 
     if (network.addressLineTwo !== null) {
       addLine2 = network.addressLineTwo;
     } else {
-      addLine2 = '';
+      addLine2 = "";
     }
 
-    setFullAddress(network.addressLineOne + ' ' + addLine2 + ', ' + network.city + ', ' + network.province + ', ' + network.postalCode);
+    setFullAddress(
+      network.addressLineOne +
+        " " +
+        addLine2 +
+        ", " +
+        network.city +
+        ", " +
+        network.province +
+        ", " +
+        network.postalCode
+    );
   });
 
-  useEffect( () => {
+  useEffect(() => {
     if (network.businessName !== null) {
       setName(network.businessName);
     } else {
-
       let middleName;
 
       if (network.middleName !== null) {
         middleName = network.middleName;
       } else {
-        middleName = '';
+        middleName = "";
       }
 
-      setName(network.firstName + ' ' + middleName + ' ' + network.lastName);
+      setName(network.firstName + " " + middleName + " " + network.lastName);
     }
   });
-
-
-
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <HeaderWide title="Account"></HeaderWide>
+        <HeaderWide title="Account" navigation={navigation} />
         <View style={styles.mainView}>
           <Text style={styles.textField}>NAME</Text>
           <View style={styles.subView}>
@@ -60,7 +65,7 @@ const BusinessAccount = ({ navigation }) => {
                   businessName: network.businessName,
                   firstName: network.firstName,
                   middleName: network.middleName,
-                  lastName: network.lastName
+                  lastName: network.lastName,
                 })
               }
             />
@@ -70,10 +75,19 @@ const BusinessAccount = ({ navigation }) => {
           <Text style={styles.textField}>ADDRESS</Text>
 
           <View style={styles.subView}>
-            <Text style={styles.subTxtField}>
-              {fullAddress}
-            </Text>
-            <Icon name="chevron-right" style={styles.icon} />
+            <Text style={styles.subTxtField}>{fullAddress}</Text>
+            <Icon
+              name="chevron-right"
+              style={styles.icon}
+              onPress={() =>
+                navigation.navigate("EditAddress", {
+                  businessName: network.businessName,
+                  firstName: network.firstName,
+                  middleName: network.middleName,
+                  lastName: network.lastName,
+                })
+              }
+            />
           </View>
         </View>
         <View style={styles.mainView}>

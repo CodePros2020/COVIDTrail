@@ -1,30 +1,19 @@
 import React, { Component, useState } from "react";
-import { StyleSheet, View, SafeAreaView, TextInput, Alert } from "react-native";
+import { StyleSheet, View, Image, SafeAreaView, TextInput } from "react-native";
 import { Divider, Text, RadioButton } from "react-native-paper";
 import HeaderSecond from "./HeaderSecond";
-import API from "../api";
-import { NetworkContext } from "../NetworkContext";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
-const EditBusinessName = ({ navigation, route }) => {
-  const network = React.useContext(NetworkContext);
-  const { businessName } = route.params;
-  const [state, setState] = useState({ name: businessName });
+const EditEmail = ({ navigation, route }) => {
+  const { email } = route.params;
+
+  const [textInputEmail, setTextInputEmail] = useState("");
 
   const onPressSave = () => {
-    if (!state.name.trim()) {
-      Alert.alert(
-        "Required",
-        "Please enter business name.",
-        [{ text: "OK", onPress: () => console.log("Ok Pressed") }],
-        { cancelable: false }
-      );
+    if (!textInputEmail.trim()) {
+      alert("Please Enter email");
       return;
     } else {
-      API.post(`/api/businessAccount/${network.id}/name?newName=${state.name}`)
-        .then((res) => {
-          Alert.alert("Success", "Name has been updated.");
-        })
-        .catch((error) => console.log("failed to update"));
     }
   };
 
@@ -32,22 +21,22 @@ const EditBusinessName = ({ navigation, route }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <HeaderSecond
-          title="Name"
+          title="Email"
           navigation={navigation}
           onPress={onPressSave}
         />
         <View style={styles.mainView}>
-          <Text style={styles.textField}>NAME </Text>
+          <Text style={styles.textField}>Email *</Text>
           <View style={styles.subView}>
             <TextInput
               style={styles.subTxtField}
-              onChangeText={(value) => setState({ name: value })}
-              value={state.name}
+              onChangeText={(value) => setTextInputEmail(value)}
+              value={textInputEmail}
               spellCheck={false}
               autoCorrect={false}
-              maxLength={100}
+              maxLength={30}
             >
-              {state.name}
+              {email}
             </TextInput>
           </View>
         </View>
@@ -55,7 +44,7 @@ const EditBusinessName = ({ navigation, route }) => {
     </SafeAreaView>
   );
 };
-export default EditBusinessName;
+export default EditEmail;
 
 const styles = StyleSheet.create({
   container: {

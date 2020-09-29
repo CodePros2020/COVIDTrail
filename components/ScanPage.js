@@ -39,7 +39,7 @@ export default class ScanPage extends React.Component {
     }
     return (
       <View style={styles.container}>
-        <HeaderWide title="Scan" />
+        <HeaderWide title="Scan" navigation={navigation} />
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
           //   style={[StyleSheet.absoluteFillObject, styles.scanner]}
@@ -57,6 +57,14 @@ export default class ScanPage extends React.Component {
 
   handleBarCodeScanned = ({ type, data }) => {
     this.setState({ scanned: true });
+
+    Alert.alert(
+      "Success",
+      `Bar code with type ${type} and data ${data} has been scanned!`,
+      [{ text: "OK", onPress: () => saveVisit() }]
+    );
+  };
+  saveVisit = () => {
     API.get("api/placesVisitedLog?businessId=1&userId=" + id)
       .then((response) => {
         account = response.data;
@@ -69,10 +77,6 @@ export default class ScanPage extends React.Component {
           alert("Error is " + error);
         };
       });
-    Alert.alert(
-      "Success",
-      `Bar code with type ${type} and data ${data} has been scanned!`
-    );
   };
 }
 
