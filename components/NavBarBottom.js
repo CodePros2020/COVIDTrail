@@ -13,16 +13,19 @@ import BusinessAccount from "./BusinessAccount";
 import BusinessLogsPage from "./BusinessLogsPage";
 import { NetworkContext } from "../NetworkContext";
 import QRCodeGenerator from "./QRCodePage";
+import EditBusinessName from "./EditBusinessName";
+import EditClientName from "./EditClientName";
 
 const Tab = createBottomTabNavigator();
 const LogStack = createStackNavigator();
+const AccountStack = createStackNavigator();
 let loggedInAccount;
 
 function MyTabs() {
   return (
     <NetworkContext.Provider value={loggedInAccount}>
       <Tab.Navigator
-        initialRouteName="ScanPage"
+        initialRouteName="BusinessAccount"
         tabBarOptions={{
           activeTintColor: "#00C0C1",
           activeBackgroundColor: "#262D37",
@@ -43,7 +46,7 @@ function MyTabs() {
         />
         <Tab.Screen
           name="BusinessAccount"
-          component={BusinessAccount}
+          component={AccountStackScreen}
           options={{
             tabBarLabel: "Account",
             tabBarIcon: ({ color, size }) => (
@@ -82,6 +85,22 @@ function LogsStackScreen() {
         component={IndividualLogsDetailPage}
       />
     </LogStack.Navigator>
+  );
+}
+
+function AccountStackScreen() {
+
+  return (
+    <AccountStack.Navigator screenOptions={{ headerShown: false }}>
+      <AccountStack.Screen
+        name="BusinessAccount"
+        component={BusinessAccount}
+      />
+      <AccountStack.Screen
+        name="EditNameScreen"
+        component={loggedInAccount.businessName !== null ? EditBusinessName : EditClientName}
+      />
+    </AccountStack.Navigator>
   );
 }
 

@@ -18,30 +18,8 @@ import Moment from 'moment';
 var width = Dimensions.get("window").width;
 var arr;
 
-// const success = () => {
-//   console.log('coming to this');
-//   API.get('api/placesVisitedLog/1/user')
-//     .then((response) => {
-
-//       var account = response.data;
-//       console.log('account inside sucesss', account);
-//       return account;
-
-//       // if (account) {
-//       //   // alert('what is account' + JSON.stringify(account));
-//       //   // navigation.navigate('NavBarBottom', { account: account });
-//       //   console.log('this is account log', JSON.stringify(account));
-//       // }
-//     })
-//     .catch(error => {
-//       alert('Error' + error);
-//     });
-// };
-
 const InvididualLogsPage = ({ navigation }) => {
-  const { logsData, setLogsData } = useState("");
 
-// var account;
 
   const [logsData, setLogsData] = useState();
   const [desiredData, setDesiredData] = useState();
