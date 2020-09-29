@@ -3,7 +3,8 @@ import { NetworkContext } from "../NetworkContext";
 import { AppRegistry, StyleSheet, View, TextInput, Text } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import Icon from "react-native-vector-icons/Feather";
-const QRCodePage = () => {
+import HeaderWide from "./HeaderWide";
+const QRCodePage = ({ navigation }) => {
   const network = React.useContext(NetworkContext);
   //   var text = "https://oldnavy.gapcanada.ca/";
   var text = "COVIDTrail-businessId=" + network.id;

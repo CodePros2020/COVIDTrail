@@ -29,7 +29,7 @@ export default class ScanPage extends React.Component {
   };
 
   render() {
-    const { hasCameraPermission, scanned } = this.state;
+    const { hasCameraPermission, scanned, navigation } = this.state;
 
     if (hasCameraPermission === null) {
       return <Text>Requesting for camera permission</Text>;
