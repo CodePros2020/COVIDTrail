@@ -1,81 +1,96 @@
 import React, { Component, useState } from "react";
-import { StyleSheet, View, SafeAreaView, TextInput, Alert } from "react-native";
+import { StyleSheet, View, Image, SafeAreaView, TextInput, Alert } from "react-native";
 import { Divider, Text, RadioButton } from "react-native-paper";
-import HeaderVerify from "./HeaderVerify";
-import API from "../api";
+import HeaderSecond from "./HeaderSecond";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import API from '../api';
 import { NetworkContext } from "../NetworkContext";
 
 const EditPhone = ({ navigation, route }) => {
   const network = React.useContext(NetworkContext);
   const { phoneNo } = route.params;
-  const [state, setState] = useState({ phone: phoneNo });
+  
+  const [textInputPhone, setTextInputPhone] = useState(phoneNo);
+  const [textInputPassword, setTextInputPassword] = useState('');
 
   const onPressSave = () => {
-    if (!state.name.trim()) {
-      Alert.alert(
-        "Required",
-        "Please enter phone.",
-        [{ text: "OK", onPress: () => console.log("Ok Pressed") }],
-        { cancelable: false }
-      );
+    if (!textInputPhone.trim()) {
+      alert("Please Enter Phone Number");
+      return;
+    } else if (!textInputPassword.trim()) {
+      alert("Please enter your password to proceed.");
       return;
     } else {
+
       let userType;
 
-    if (network.businessName !== null) {
-      userType = 'businessAccount';
-    } else {
-      userType = 'userAccount';
-    }
+      if (network.businessName !== null) {
+        userType = 'businessAccount';
+      } else {
+        userType = 'userAccount';
+      }
+      
+      console.log('this is new phone', textInputPhone);
+      console.log('password entered', textInputPassword);
+      console.log('network id: ', network.id);
+      console.log('what is userType: ', userType);
 
-      API.put(
-        `/api/${userType}/${network.id}/phone?newPhone=${state.phone}`
-      )
-        .then((res) => {
-          Alert.alert("Success", "Phone has been updated.");
+      API.put("api/" + userType + "/" + network.id + "/phone?newPhone=" + textInputPhone + "&password=" + textInputPassword)
+        .then((response) => {
+
+          console.log('check response', response.data);
+
+          if (response.data.startsWith('Please')) {
+            alert(response.data);
+          } else {
+            Alert.alert(
+            "Success!",
+            "Phone updated!",
+
+            [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+            { cancelable: false }
+          );
+          navigation.navigate('BusinessAccount');
+          }          
         })
-        .catch((error) => console.log("failed to update"));
+        .catch((e) => {
+            console.error("error phone update " + e);
+            alert("Unable to update phone! ");
+        });
     }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <HeaderVerify
-          title="Phone"
-          navigation={navigation}
-          onPress={onPressSave}
-        />
+        <HeaderSecond title="Account" navigation={navigation} onPress={onPressSave} />
         <View style={styles.mainView}>
-          <Text style={styles.textField}>New Phone Number </Text>
+          <Text style={styles.textField}>PHONE NUMBER *</Text>
           <View style={styles.subView}>
-            <TextInput
-              keyboardType="name-phone-pad"
+            <TextInput 
               style={styles.subTxtField}
-              onChangeText={(value) => setState({ phone: value })}
-              value={state.phone}
-              spellCheck={false}
-              autoCorrect={false}
-              maxLength={10}
-            ></TextInput>
-          </View>
-        </View>
-        <View style={styles.mainView}>
-          <Text style={styles.textField}>Password </Text>
-          <View style={styles.subView}>
-            <TextInput
-              style={styles.subTxtField}
-              onChangeText={(value) => setPassword(value)}
-              value={password}
-              secureTextEntry={true}
+              onChangeText={(value) => setTextInputPhone(value)}
+              value={textInputPhone}
               spellCheck={false}
               autoCorrect={false}
               maxLength={30}
-            ></TextInput>
+              ></TextInput>
           </View>
         </View>
+
         <View style={styles.mainView}>
-          <Text style={styles.textField}>Send Verification Code </Text>
+          <Text style={styles.textField}>PLEASE ENTER YOUR PASSWORD *</Text>
+          <View style={styles.subView}>
+            <TextInput 
+              style={styles.subTxtField}
+              onChangeText={(value) => setTextInputPassword(value)}
+              value={textInputPassword}
+              spellCheck={false}
+              autoCorrect={false}
+              secureTextEntry={true}
+              maxLength={30}
+              ></TextInput>
+          </View>
         </View>
       </View>
     </SafeAreaView>
