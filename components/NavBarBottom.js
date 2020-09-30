@@ -16,10 +16,10 @@ import { NetworkContext } from "../NetworkContext";
 import QRCodeGenerator from "./QRCodePage";
 import EditClientName from "./EditClientName";
 import EditAddress from "./EditAddress";
-// import EditPhone from "./EditPhone";
-import EditEmail from "./EditEmail";
-import EditPassword from "./EditPassword";
 import API from '../api';
+import EditEmail from "./EditEmail";
+import EditPhone from "./EditPhone";
+import EditPassword from "./EditPassword";
 
 const Tab = createBottomTabNavigator();
 const LogStack = createStackNavigator();
@@ -108,7 +108,7 @@ function AccountStackScreen() {
         }
       />
       <AccountStack.Screen name="EditAddress" component={EditAddress} />
-      {/* <AccountStack.Screen name="EditPhone" component={EditPhone} /> */}
+      <AccountStack.Screen name="EditPhone" component={EditPhone} />
       <AccountStack.Screen name="EditEmail" component={EditEmail} />
       <AccountStack.Screen name="EditPassword" component={EditPassword} />
     </AccountStack.Navigator>
@@ -198,6 +198,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     height: 45,
-    padding: 10,
+    padding: 20,
   },
 });

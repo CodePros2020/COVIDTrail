@@ -3,17 +3,27 @@ import { StyleSheet, View, Image, SafeAreaView, TextInput } from "react-native";
 import { Divider, Text, RadioButton } from "react-native-paper";
 import HeaderSecond from "./HeaderSecond";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import { NetworkContext } from "../NetworkContext";
+import API from "../api";
 
 const EditEmail = ({ navigation, route }) => {
   const { email } = route.params;
+  const network = React.useContext(NetworkContext);
 
-  const [textInputEmail, setTextInputEmail] = useState("");
+  const [emailVal, setEmail] = useState({ email });
 
   const onPressSave = () => {
-    if (!textInputEmail.trim()) {
+    if (emailVal.email === "") {
       alert("Please Enter email");
       return;
     } else {
+      API.put(
+        `/api/businessAccount/${network.id}/email?newEmail=${emailVal.email}`
+      )
+        .then((res) => {
+          Alert.alert("Success", "Email has been updated.");
+        })
+        .catch((error) => console.log("failed to update"));
     }
   };
 
@@ -26,18 +36,16 @@ const EditEmail = ({ navigation, route }) => {
           onPress={onPressSave}
         />
         <View style={styles.mainView}>
-          <Text style={styles.textField}>Email *</Text>
+          <Text style={styles.textField}>Email </Text>
           <View style={styles.subView}>
             <TextInput
               style={styles.subTxtField}
-              onChangeText={(value) => setTextInputEmail(value)}
-              value={textInputEmail}
+              onChangeText={(value) => setEmail(value)}
+              value={emailVal.email}
               spellCheck={false}
               autoCorrect={false}
-              maxLength={30}
-            >
-              {email}
-            </TextInput>
+              maxLength={100}
+            ></TextInput>
           </View>
         </View>
       </View>

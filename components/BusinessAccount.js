@@ -154,7 +154,11 @@ const BusinessAccount = ({ navigation }) => {
           <Text style={styles.textField}>PASSWORD</Text>
           <View style={styles.subView}>
             <Text style={styles.subTxtField}>********</Text>
-            <Icon name="edit" style={styles.icon} />
+            <Icon
+              name="edit"
+              style={styles.icon}
+              onPress={() => navigation.navigate("EditPassword")}
+            />
           </View>
         </View>
       </View>

@@ -4,33 +4,60 @@ import { Divider, Text, RadioButton } from "react-native-paper";
 import HeaderSecond from "./HeaderSecond";
 import API from "../api";
 import { NetworkContext } from "../NetworkContext";
+import { add } from "react-native-reanimated";
 
-const EditBusinessName = ({ navigation, route }) => {
+const EditAddress = ({ navigation, route }) => {
   const network = React.useContext(NetworkContext);
   const { address } = route.params;
-  const [textInputStreet, setTextInputStreet] = useState("");
-  const [textInputUnit, setTextInputUnit] = useState("");
-  const [textInputCity, setTextInputCity] = useState("");
-  const [textInputProvince, setTextInputProvince] = useState("");
-  const [textInputPostal, setTextInputPostal] = useState("");
+  const { addressVal, setAddress } = useState({
+    street: address.street,
+    unit: address.unit,
+    city: address.city,
+    province: address.province,
+    postalCode: address.postalCode,
+  });
 
   const onPressSave = () => {
-    if (!textInputBusiness.trim()) {
+    if (!addressVal.street.trim()) {
       Alert.alert(
         "Required",
-        "Please enter business name.",
+        "Please enter street.",
+        [{ text: "OK", onPress: () => console.log("OkPresses") }],
+        { cancelable: false }
+      );
+      return;
+    } else if (!addressVal.city.trim()) {
+      Alert.alert(
+        "Required",
+        "Please enter city.",
+        [{ text: "OK", onPress: () => console.log("OkPresses") }],
+        { cancelable: false }
+      );
+      return;
+    } else if (!addressVal.province.trim()) {
+      Alert.alert(
+        "Required",
+        "Please enter province.",
+        [{ text: "OK", onPress: () => console.log("OkPresses") }],
+        { cancelable: false }
+      );
+      return;
+    } else if (!addressVal.postalCode.trim()) {
+      Alert.alert(
+        "Required",
+        "Please enter postal code.",
         [{ text: "OK", onPress: () => console.log("OkPresses") }],
         { cancelable: false }
       );
       return;
     } else {
-      API.post(
-        `/api/businessAccount/${network.id}/name?newName=${textInputBusiness}`
-      )
-        .then((res) => {
-          Alert.alert("Success", "Name has been updated.");
-        })
-        .catch((error) => console.log("failed to update"));
+      //   API.put(
+      //     `/api/businessAccount/${network.id}/name?newName=${textInputBusiness}`
+      //   )
+      //     .then((res) => {
+      //       Alert.alert("Success", "Name has been updated.");
+      //     })
+      //     .catch((error) => console.log("failed to update"));
     }
   };
 
@@ -38,7 +65,7 @@ const EditBusinessName = ({ navigation, route }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <HeaderSecond
-          title="Name"
+          title="Address"
           navigation={navigation}
           onPress={onPressSave}
         />
@@ -47,14 +74,12 @@ const EditBusinessName = ({ navigation, route }) => {
           <View style={styles.subView}>
             <TextInput
               style={styles.subTxtField}
-              onChangeText={(value) => setTextInputBusiness(value)}
-              value={textInputBusiness}
+              onChangeText={(value) => setAddress({ street: value })}
+              value={addressVal.street}
               spellCheck={false}
               autoCorrect={false}
               maxLength={30}
-            >
-              {address.street}
-            </TextInput>
+            ></TextInput>
           </View>
         </View>
         <View style={styles.mainView}>
@@ -62,14 +87,12 @@ const EditBusinessName = ({ navigation, route }) => {
           <View style={styles.subView}>
             <TextInput
               style={styles.subTxtField}
-              onChangeText={(value) => setTextInputBusiness(value)}
-              value={textInputBusiness}
+              onChangeText={(value) => setAddress({ unit: value })}
+              value={addressVal.unit}
               spellCheck={false}
               autoCorrect={false}
               maxLength={30}
-            >
-              {address.unit}
-            </TextInput>
+            ></TextInput>
           </View>
         </View>
         <View style={styles.mainView}>
@@ -77,14 +100,12 @@ const EditBusinessName = ({ navigation, route }) => {
           <View style={styles.subView}>
             <TextInput
               style={styles.subTxtField}
-              onChangeText={(value) => setTextInputBusiness(value)}
-              value={textInputBusiness}
+              onChangeText={(value) => setAddress({ city: value })}
+              value={addressVal.city}
               spellCheck={false}
               autoCorrect={false}
               maxLength={30}
-            >
-              {address}
-            </TextInput>
+            ></TextInput>
           </View>
         </View>
         <View style={styles.mainView}>
@@ -92,14 +113,12 @@ const EditBusinessName = ({ navigation, route }) => {
           <View style={styles.subView}>
             <TextInput
               style={styles.subTxtField}
-              onChangeText={(value) => setTextInputBusiness(value)}
-              value={textInputBusiness}
+              onChangeText={(value) => setAddress({ province: value })}
+              value={addressVal.province}
               spellCheck={false}
               autoCorrect={false}
               maxLength={30}
-            >
-              {businessName}
-            </TextInput>
+            ></TextInput>
           </View>
         </View>
         <View style={styles.mainView}>
@@ -107,21 +126,21 @@ const EditBusinessName = ({ navigation, route }) => {
           <View style={styles.subView}>
             <TextInput
               style={styles.subTxtField}
-              onChangeText={(value) => setTextInputBusiness(value)}
-              value={textInputBusiness}
+              onChangeText={(value) =>
+                setTextInputBusiness({ postalCode: value })
+              }
+              value={addressVal.postalCode}
               spellCheck={false}
               autoCorrect={false}
               maxLength={30}
-            >
-              {businessName}
-            </TextInput>
+            ></TextInput>
           </View>
         </View>
       </View>
     </SafeAreaView>
   );
 };
-export default EditBusinessName;
+export default EditAddress;
 
 const styles = StyleSheet.create({
   container: {
