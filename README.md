@@ -1,4 +1,17 @@
-  # COVIDTrail
+# COVIDTrail
+
+## How to run the app
+
+```
+# Install node modules
+npm install
+
+# Install expo command line tools
+npm install --global expo-cli
+
+# Start the project
+expo start
+```
 
 ## Objective / Goal 
 
