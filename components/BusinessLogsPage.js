@@ -9,6 +9,7 @@ import {
   Dimensions,
   Divider,
   CheckBox,
+  TextInput,
 } from "react-native";
 import HeaderWide from "./HeaderWide";
 import CustomButton from "./CustomButton";
@@ -103,7 +104,14 @@ const BusinessLogsPage = ({ navigation }) => {
           >
             Email
           </Text>
-          <Text style={styles.title}>Public.health.officer@email.com</Text>
+          <TextInput
+            style={styles.subTxtField}
+            onChangeText={(value) => setState({ name: value })}
+            value={state.name}
+            spellCheck={false}
+            autoCorrect={false}
+            maxLength={100}
+          ></TextInput>
         </View>
         <View style={{ marginBottom: 10 }}>
           <CustomButton name="Send" />

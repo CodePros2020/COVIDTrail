@@ -12,7 +12,7 @@ const QRCodePage = ({ navigation }) => {
     <View style={styles.container}>
       <HeaderWide title="QR Code" navigation={navigation} />
       <View style={styles.subView}>
-        <View style={stykes.textView}>
+        <View style={styles.textView}>
           <Text style={styles.text}>{network.businessName}</Text>
         </View>
         <View style={styles.subtextView}>
