@@ -8,7 +8,7 @@ const api = () => {
     async config => {
       const value = await Session.readData();
 
-      config.baseURL = "http://localhost:8080/"
+      config.baseURL = "http://covidtrail-backend.azurewebsites.net/"
       config.headers = { 
         "Content-Type": "application/json",
         "Authorization": "Basic " + value
