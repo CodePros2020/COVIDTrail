@@ -27,3 +27,45 @@ Our team aims to create a solution that will simplify the process of contact tra
   <li>If a person is tested positive for COVID 19 and went into an establishment, the merchant would simply have to check the logs and provide the information of customers who would have probably contacted the infected person in the given date and time. </li>
   <li>If a registered user has tested positive for COVID 19, it will be easy to check the places the person has gone into prior to being tested. </li>
 </ul>
+
+## Open Source
+
+Front-end:
+<ul>
+	<li>React</li> 
+	<li>Expo</li>
+	<li>NPM</li> 
+	<li>React Native</li>  
+	<li>Material UI</li> 
+	<li>Node.js</li> 
+</ul>
+
+Back-end: 
+<ul>
+ <li>Java 11</li>
+ <li>Spring Boot</li>
+ <li>Spring Security</li>
+ <li>Apache Maven </li>
+ <li>Project Lombok</li>
+ <li>JPA</li>
+ <li>Swagger</li>
+</ul>
+
+## Closed Source
+
+Azure: 
+<ul>
+ <li>SQL Database</li>
+ <li>Web App</li>
+</ul>
+
+
+## Engineers
+<ul>
+ <li>Janelle Baetiong</li>
+ <li>Sadia Rashid</li>
+ <li>Haichuan He</li>
+ <li>Logan Kim</li>
+ <li>Alan Lucena</li>
+</ul>
+
