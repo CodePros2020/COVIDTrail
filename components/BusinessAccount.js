@@ -139,14 +139,14 @@ const BusinessAccount = ({ navigation }) => {
           <Text style={styles.textField}>PHONE</Text>
           <View style={styles.subView}>
             <Text style={styles.subTxtField}>{phone}</Text>
-            <Icon name="edit" style={styles.icon} />
+            <Icon name="edit" style={styles.icon} onPress={() => navigation.navigate('EditPhone', {phoneNo: phone})} />
           </View>
         </View>
         <View style={styles.mainView}>
           <Text style={styles.textField}>EMAIL</Text>
           <View style={styles.subView}>
             <Text style={styles.subTxtField}>{email || ""}</Text>
-            <Icon name="edit" style={styles.icon} />
+            <Icon name="edit" style={styles.icon} onPress={() => navigation.navigate('EditEmail', {email: email})} />
           </View>
         </View>
 
