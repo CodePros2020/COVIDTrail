@@ -13,6 +13,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome5";
 import CustomButton from "./CustomButton";
 import API from "../api";
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function WelcomePage({ navigation }) {
   const [username, onUserNameChange] = React.useState();
@@ -21,16 +22,26 @@ export default function WelcomePage({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
+  const storeData = async (value) => {
+    
+    try {
+      await AsyncStorage.setItem('id', value)
+    } catch (e) {
+      console.log('value is not saved async storage', e);
+    }
+  }
+
   const success = async () => {
     API.post("login?password=" + password + "&username=" + username)
       .then((response) => {
         var account = response.data;
         if (account) {
+          storeData(account.id.toString());
           navigation.navigate("NavBarBottom", { account: account });
         }
       })
       .catch((error) => {
-        alert("Invalid username and/or password!");
+        alert("Invalid username and/or password!" + error);
       });
   };
 

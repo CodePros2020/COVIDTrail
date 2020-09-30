@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage';
 import Icon from "react-native-vector-icons/FontAwesome";
 import IconScan from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationContainer } from "@react-navigation/native";
@@ -14,12 +15,18 @@ import EditBusinessName from "./EditBusinessName";
 import { NetworkContext } from "../NetworkContext";
 import QRCodeGenerator from "./QRCodePage";
 import EditClientName from "./EditClientName";
+import EditAddress from "./EditAddress";
+// import EditPhone from "./EditPhone";
+import EditEmail from "./EditEmail";
+import EditPassword from "./EditPassword";
+import API from '../api';
 
 const Tab = createBottomTabNavigator();
 const LogStack = createStackNavigator();
 const AccountStack = createStackNavigator();
 const EditBusinessStack = createStackNavigator();
 let loggedInAccount;
+let loggedInAccount2;
 
 function MyTabs() {
   return (
@@ -38,7 +45,7 @@ function MyTabs() {
           }
           name="ScanPage"
           options={{
-            tabBarLabel: "Scan",
+            tabBarLabel: loggedInAccount.businessName !== null ? "QR Code" : "Scan",
             tabBarIcon: ({ color, size }) => (
               <IconScan name="qrcode-scan" size={size} color={color} />
             ),
@@ -88,18 +95,6 @@ function LogsStackScreen() {
   );
 }
 
-function BusinessLogsStackScreen() {
-  return (
-    <LogStack.Navigator screenOptions={{ headerShown: false }}>
-      <LogStack.Screen name="BusinessLogsPage" component={BusinessLogsPage} />
-      <LogStack.Screen name="EditBusinessName" component={EditBusinessName} />
-      <LogStack.Screen name="EditAddress" component={EditAddress} />
-      <LogStack.Screen name="EditPhone" component={EditPhone} />
-      <LogStack.Screen name="EditEmail" component={EditEmail} />
-      <LogStack.Screen name="EditPassword" component={EditPassword} />
-    </LogStack.Navigator>
-  );
-}
 function AccountStackScreen() {
   return (
     <AccountStack.Navigator screenOptions={{ headerShown: false }}>
@@ -112,19 +107,82 @@ function AccountStackScreen() {
             : EditClientName
         }
       />
+      <AccountStack.Screen name="EditAddress" component={EditAddress} />
+      {/* <AccountStack.Screen name="EditPhone" component={EditPhone} /> */}
+      <AccountStack.Screen name="EditEmail" component={EditEmail} />
+      <AccountStack.Screen name="EditPassword" component={EditPassword} />
     </AccountStack.Navigator>
   );
-}
-
-function logScreenDisplay() {
-  console.log("logged in account", loggedInAccount);
-  return LogsStackScreen;
 }
 
 export default function App({ route, navigation }) {
   const { account } = route.params;
   loggedInAccount = account;
-  console.log("object222222", JSON.stringify(loggedInAccount));
+  console.log("Logged In User: ", JSON.stringify(loggedInAccount));
+  const [session, setSession] = useState();
+  const [userId, setUserId] = useState();
+
+  // useEffect( () => {
+
+  //   const getData = async () => {
+  //     try {
+  //       const value = await AsyncStorage.getItem('id')
+  //       if(value !== null) {
+  //         setUserId(value);
+  //       } else {
+  //         console.log('id value is null');
+  //       }
+  //     } catch(e) {
+  //       console.log('error getting async id', e);
+  //     }
+  //   }
+
+  //   console.log('is it coming here use effect')
+
+  //   getData();
+  // }, []);
+
+  // useEffect( () => {
+
+  //   async function getSession() {
+
+  //     let acctType;
+
+  //     console.log('check if id is coming here', userId);
+
+  //     if (loggedInAccount.businessName !== null) {
+  //       acctType = 'businessAccount';
+  //     } else {
+  //       acctType = 'userAccount'
+  //     }
+
+  //     await API.get('api/' + acctType + '/' + loggedInAccount.id)
+  //       .then((response) => {
+
+  //         var account = response.data;
+  //         console.log('session', JSON.stringify(account));
+
+  //   }).catch(error => {
+  //         alert('Error retrieving user!' + error);
+  //     });
+  //   }
+    
+  //   getSession();
+
+  //   // const getData = async () => {
+  //   //   try {
+  //   //     const jsonValue = await AsyncStorage.getItem('session')
+  //   //     const value = jsonValue != null ? JSON.parse(jsonValue) : null;
+  //   //     setSession(value);
+  //   //     return value;
+  //   //   } catch(e) {
+  //   //     console.log('error getting data')
+  //   //   }
+  //   // }
+  //   // getData();
+  // }, []);
+
+  
 
   return (
     <NavigationContainer independent={true}>
@@ -132,16 +190,6 @@ export default function App({ route, navigation }) {
     </NavigationContainer>
   );
 }
-
-const NavBarBottom = () => {
-  return (
-    <View style={styles.mainHeader}>
-      <IconScan name="qrcode-scan" size={24} color="#00C0C1" />
-      <Icon name="user" size={24} color="#707070" />
-      <Icon name="list-alt" size={24} color="#707070" />
-    </View>
-  );
-};
 
 const styles = StyleSheet.create({
   mainHeader: {
@@ -153,5 +201,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-// export default NavBarBottom;

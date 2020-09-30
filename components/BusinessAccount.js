@@ -4,50 +4,95 @@ import { Text, RadioButton } from "react-native-paper";
 import HeaderWide from "./HeaderWide";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { NetworkContext } from "../NetworkContext";
+import API from '../api';
+import { useIsFocused } from "@react-navigation/native";
 
 const BusinessAccount = ({ navigation }) => {
   const network = React.useContext(NetworkContext);
+  const isFocused = useIsFocused();
+
 
   const [name, setName] = useState("");
   const [fullAddress, setFullAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [fName, setFname] = useState("");
+  const [mName, setMname] = useState("");
+  const [lName, setLname] = useState("");
+  const [bName, setBname] = useState("");
 
-  useEffect(() => {
-    let addLine2;
 
-    if (network.addressLineTwo !== null) {
-      addLine2 = network.addressLineTwo;
+  useEffect( () => {
+
+
+    async function getUser() {
+
+      let acctType;
+
+      console.log('check if id is coming here', network.id);
+
+      if (network.businessName !== null) {
+        acctType = 'businessAccount';
+      } else {
+        acctType = 'userAccount'
+      }
+
+      await API.get('api/' + acctType + '/' + network.id)
+        .then((response) => {
+
+          var account = response.data;
+          console.log('user', JSON.stringify(account));
+
+        setPhone(account.phone);
+        setEmail(account.email);
+
+        let addLine2;
+
+        console.log('address 2', account.address.addressLineTwo);
+
+    if (account.address.addressLineTwo !== null) {
+      addLine2 = account.address.addressLineTwo;
     } else {
       addLine2 = "";
     }
 
     setFullAddress(
-      network.addressLineOne +
+      account.address.addressLineOne +
         " " +
         addLine2 +
         ", " +
-        network.city +
+        account.address.city +
         ", " +
-        network.province +
+        account.address.province +
         ", " +
-        network.postalCode
+        account.address.postalCode
     );
-  });
 
-  useEffect(() => {
     if (network.businessName !== null) {
-      setName(network.businessName);
-    } else {
-      let middleName;
+          setName(account.businessName);
+          setBname(account.businessName);
+        } else {
+          let middleName;
+    
+          if (account.middleName !== null) {
+            middleName = account.middleName;
+          } else {
+            middleName = "";
+          }
+    
+          setName(account.firstName + " " + middleName + " " + account.lastName);
+          setFname(account.firstName);
+          setMname(account.middleName);
+          setLname(account.lastName);
+        }
 
-      if (network.middleName !== null) {
-        middleName = network.middleName;
-      } else {
-        middleName = "";
-      }
-
-      setName(network.firstName + " " + middleName + " " + network.lastName);
+    }).catch(error => {
+          alert('Error retrieving user!' + error);
+      });
     }
-  });
+    
+    getUser();
+  }, [isFocused]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -62,10 +107,10 @@ const BusinessAccount = ({ navigation }) => {
               style={styles.icon}
               onPress={() =>
                 navigation.navigate("EditNameScreen", {
-                  businessName: network.businessName,
-                  firstName: network.firstName,
-                  middleName: network.middleName,
-                  lastName: network.lastName,
+                  businessName: bName,
+                  firstName: fName,
+                  middleName: mName,
+                  lastName: lName,
                 })
               }
             />
@@ -81,10 +126,10 @@ const BusinessAccount = ({ navigation }) => {
               style={styles.icon}
               onPress={() =>
                 navigation.navigate("EditAddress", {
-                  businessName: network.businessName,
-                  firstName: network.firstName,
-                  middleName: network.middleName,
-                  lastName: network.lastName,
+                  businessName: bName,
+                  firstName: fName,
+                  middleName: mName,
+                  lastName: lName,
                 })
               }
             />
@@ -93,14 +138,14 @@ const BusinessAccount = ({ navigation }) => {
         <View style={styles.mainView}>
           <Text style={styles.textField}>PHONE</Text>
           <View style={styles.subView}>
-            <Text style={styles.subTxtField}>{network.phone}</Text>
+            <Text style={styles.subTxtField}>{phone}</Text>
             <Icon name="edit" style={styles.icon} />
           </View>
         </View>
         <View style={styles.mainView}>
           <Text style={styles.textField}>EMAIL</Text>
           <View style={styles.subView}>
-            <Text style={styles.subTxtField}>{network.email || ""}</Text>
+            <Text style={styles.subTxtField}>{email || ""}</Text>
             <Icon name="edit" style={styles.icon} />
           </View>
         </View>
