@@ -21,19 +21,19 @@ const BusinessLogsPage = ({ navigation }) => {
   const network = React.useContext(NetworkContext);
   const { logsData, setLogsData } = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      API.get("api/placesVisitedLog/" + network.id + "/business/")
-        .then((res) => {
-          setLogsData(res.data);
-          alert("dATA Is " + res.data);
-        })
-        .catch((error) => {
-          alert("Unable to get logs " + error);
-        });
-    };
-    fetchData();
-  }, []);
+  //   useEffect(() => {
+  //     const fetchData = async () => {
+  //       API.get("api/placesVisitedLog/" + network.id + "/business/")
+  //         .then((res) => {
+  //           setLogsData(res.data);
+  //           alert("dATA Is " + res.data);
+  //         })
+  //         .catch((error) => {
+  //           alert("Unable to get logs " + error);
+  //         });
+  //     };
+  //     fetchData();
+  //   }, []);
 
   const DATA = [];
   const [isSelected, setSelection] = React.useState(false);

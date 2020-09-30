@@ -9,7 +9,7 @@ import { add } from "react-native-reanimated";
 const EditAddress = ({ navigation, route }) => {
   const network = React.useContext(NetworkContext);
   const { address } = route.params;
-  const { addressVal, setAddress } = useState({
+  const [addressVal, setAddress] = useState({
     addressLineOne: address.street,
     addressLineTwo: address.unit,
     city: address.city,
