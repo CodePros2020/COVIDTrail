@@ -1,45 +1,40 @@
+// import React from "react";
+
+// class LocalStore {
+
+//   setToken = (token) => {
+//     sessionStorage.setItem(token);
+//   };
+
+//   deleteToken = () => {
+//       sessionStorage.clear();
+//   };
+
+//   getToken = () => {
+//     sessionStorage.getItem();
+//   };
+// }
+
+// const LocalStoreClass = new LocalStore();
+// export default LocalStoreClass;
+
 import React from "react";
 import { AsyncStorage } from "@react-native-community/async-storage";
 
 class LocalStore {
-  getToken = async () => {
-    try {
-      const token = await AsyncStorage.getItem("COVIDTrail");
-      if (token !== null) {
-        console.log("Token is", token);
-      }
-    } catch (e) {
-      console.log("Error in getting token");
-    }
+  getToken = (key) => {
+    const token = AsyncStorage.getItem(key) || "";
+    console.log("key", key);
+    console.log("token", token);
+    return token;
   };
-
-  storeToken = async (token) => {
-    try {
-      await AsyncStorage.setItem("COVIDTrail", token);
-    } catch (e) {
-      console.log("Error in saving token");
-    }
+  setToken = (token) => {
+    AsyncStorage.setItem("COVIDTrail", token);
   };
-  removeToken = async () => {
-    try {
-      await AsyncStorage.removeItem("COVIDTrail");
-    } catch (e) {
-      console.log("Error in removing token");
-    }
-
-    console.log("Done.");
+  deleteToken = () => {
+    AsyncStorage.removeItem("COVIDTrail");
   };
 }
-
-// const KEY = "USER_DATA";
-
-// let keyValue = { name: yogi };
-
-// AsyncStorage.setItem(KEY, keyValue);
-
-// AsyncStorage.getItem(KEY).then((asyncStorageRes) => {
-//   console.log(JSON.parse(asyncStorageRes));
-// });
 
 const LocalStoreClass = new LocalStore();
 export default LocalStoreClass;

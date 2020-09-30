@@ -13,27 +13,37 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome5";
 import CustomButton from "./CustomButton";
 import API from "../api";
+import AsyncStorage from "@react-native-community/async-storage";
 import Session from "../sessionService";
 
 export default function WelcomePage({ navigation }) {
-  const [username, onUserNameChange] = React.useState();
-  const [password, onPasswordChange] = React.useState();
+  const [username, onUserNameChange] = React.useState("");
+  const [password, onPasswordChange] = React.useState("");
   const [isSelected, setSelection] = React.useState(false);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+
+  const storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem("id", value);
+    } catch (e) {
+      console.log("value is not saved async storage", e);
+    }
+  };
 
   const success = async () => {
     API.post("login?password=" + password + "&username=" + username)
       .then((response) => {
         var account = response.data;
         if (account) {
-          Session.storeToken(account.token);
-          console.log("Token is ", Session.getToken());
+          storeData(account.id.toString());
+          console.log("account token", account.token);
+          // Session.setToken(account.token);
           navigation.navigate("NavBarBottom", { account: account });
         }
       })
       .catch((error) => {
-        alert("Invalid username and/or password!");
+        alert("Invalid username and/or password!" + error);
       });
   };
 

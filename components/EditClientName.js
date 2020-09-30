@@ -1,17 +1,25 @@
 import React, { Component, useState } from "react";
-import { StyleSheet, View, Image, SafeAreaView, TextInput } from "react-native";
+import { StyleSheet, View, Image, SafeAreaView, TextInput, Alert } from "react-native";
 import { Divider, Text, RadioButton } from "react-native-paper";
 import HeaderSecond from "./HeaderSecond";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import API from '../api';
+import { NetworkContext } from "../NetworkContext";
 
 const EditClientName = ({ navigation, route }) => {
+  const network = React.useContext(NetworkContext);
   const { firstName } = route.params;
   const { middleName } = route.params;
   const { lastName } = route.params;
+  const [state, setState] = useState({
+    fName: firstName,
+    mName: middleName,
+    lName: lastName
+  });
 
-  const [textInputFirstName, setTextInputFirsttName] = useState("");
-  const [textInputMiddleName, setTextInputMiddletName] = useState("");
-  const [textInputLastName, setTextInputLasttName] = useState("");
+  const [textInputFirstName, setTextInputFirsttName] = useState(firstName);
+  const [textInputMiddleName, setTextInputMiddletName] = useState(middleName);
+  const [textInputLastName, setTextInputLasttName] = useState(lastName);
 
   const checkTextInput = () => {
     if (!textInputFirstName.trim()) {
@@ -31,7 +39,31 @@ const EditClientName = ({ navigation, route }) => {
       alert("Please Enter Last Name");
       return;
     } else {
-      
+      console.log('what is state', state);
+
+      var newName = {
+        firstName: textInputFirstName,
+        lastName: textInputLastName,
+        middleName: textInputMiddleName
+      };
+
+      console.log('this is new name', newName);
+
+      API.put("api/userAccount/" + network.id + "/name", newName)
+        .then((response) => {
+          Alert.alert(
+            "Success!",
+            "Name updated!",
+
+            [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+            { cancelable: false }
+          );
+          navigation.navigate('BusinessAccount');
+        })
+        .catch((e) => {
+            console.error("error name update " + e);
+            alert("Unable to update name! ");
+        });
     }
   };
 
@@ -49,7 +81,7 @@ const EditClientName = ({ navigation, route }) => {
               spellCheck={false}
               autoCorrect={false}
               maxLength={30}
-              >{firstName}</TextInput>
+              ></TextInput>
           </View>
         </View>
         <View style={styles.mainView}>
@@ -57,12 +89,12 @@ const EditClientName = ({ navigation, route }) => {
           <View style={styles.subView}>
             <TextInput 
               style={styles.subTxtField}
-              onChangeText={(value) => setTextInputMiddleName(value)}
+              onChangeText={(value) => setTextInputMiddletName(value)}
               value={textInputMiddleName}
               spellCheck={false}
               autoCorrect={false}
               maxLength={30}
-              >{middleName}</TextInput>
+              ></TextInput>
           </View>
         </View>
         <View style={styles.mainView}>
@@ -75,7 +107,7 @@ const EditClientName = ({ navigation, route }) => {
               spellCheck={false}
               autoCorrect={false}
               maxLength={30}
-              >{lastName}</TextInput>
+              ></TextInput>
           </View>
         </View>
       </View>

@@ -7,20 +7,19 @@ import {
   View,
   TextInput,
   Dimensions,
+  Alert,
   Picker,
 } from "react-native";
-import Constants from "expo-constants";
 import Header from "./Header";
 import CustomButton from "./CustomButton";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { color } from "react-native-reanimated";
+import API from "../api";
 
 var width = Dimensions.get("window").width;
-var widthProportion = "80%";
 
 const ClientSignUp = ({ navigation }) => {
   const [textInputFirstName, setTextInputFirsttName] = useState("");
-  const [textInputMiddleName, setTextInputMiddletName] = useState("");
+  const [textInputMiddleName, setTextInputMiddleName] = useState("");
   const [textInputLastName, setTextInputLasttName] = useState("");
   const [textInputPhoneNumber, setTextInputPhoneNumber] = useState("");
   const [textInputEmail, setTextInputEmail] = useState("");
@@ -41,7 +40,6 @@ const ClientSignUp = ({ navigation }) => {
     icon: "eye",
     color: "#979797",
   });
-  // const [userModel, setUserModel] = useState({UserAccount});
 
   const togglePasswordVisiblity = () => {
     let iconName = secure.secure ? "eye-slash" : "eye";
@@ -67,53 +65,130 @@ const ClientSignUp = ({ navigation }) => {
 
   const checkTextInput = () => {
     if (!textInputFirstName.trim()) {
-      alert("Please Enter First Name");
+      Alert.alert(
+        "Information Required!",
+        "Please provide First Name.",
+
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
       return;
     } else if (!textInputLastName.trim()) {
-      alert("Please Enter Last Name");
+      Alert.alert(
+        "Information Required!",
+        "Please provide Last Name.",
+
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
       return;
     } else if (!textInputPhoneNumber.trim()) {
-      alert("Please Enter Phone Number");
+      Alert.alert(
+        "Information Required!",
+        "Please provide Phone Number.",
+
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
       return;
     } else if (!textInputAddressLine1.trim()) {
-      alert("Please Enter Address Line 1");
+      Alert.alert(
+        "Information Required!",
+        "Please provide Address Line 1.",
+
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
       return;
     } else if (!textInputCity.trim()) {
-      alert("Please Enter City");
+      Alert.alert(
+        "Information Required!",
+        "Please provide City.",
+
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
       return;
     } else if (!textInputProvince.trim()) {
-      alert("Please Enter Province");
+      Alert.alert(
+        "Information Required!",
+        "Please provide Province.",
+
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
       return;
     } else if (!textInputPostalCode.trim()) {
-      alert("Please Enter Postal Code");
+      Alert.alert(
+        "Information Required!",
+        "Please choose Postal Code.",
+
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
       return;
     } else if (!textInputPassword.trim()) {
-      alert("Please enter a Password.");
+      Alert.alert(
+        "Information Required!",
+        "Please provide Password.",
+
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
       return;
     } else if (!textInputConfirmPassword.trim()) {
-      alert("Please confirm the password you entered.");
+      Alert.alert(
+        "Information Required!",
+        "Please provide Confirm Password.",
+
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
       return;
     } else if (textInputPassword !== textInputConfirmPassword) {
-      alert("Password and Confirm Password fields does not match.");
+      Alert.alert(
+        "Error!",
+        "Password and Confirm Password fields do not match.",
+
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
       return;
     } else {
-      alert("Sign Up Completed.");
+      var userAccount = {
+        address: {
+          addressLineOne: textInputAddressLine1,
+          addressLineTwo: textInputAddressLine2,
+          city: textInputCity,
+          postalCode: textInputPostalCode,
+          province: textInputProvince,
+        },
+        email: textInputEmail,
+        firstName: textInputFirstName,
+        lastName: textInputLastName,
+        middleName: textInputMiddleName,
+        password: textInputPassword,
+        phone: textInputPhoneNumber,
+      };
 
-      // let userAccount = new UserAccount();
-      // userAccount.firstName = textInputFirstName;
-      // userAccount.middleName = textInputMiddleName;
-      // userAccount.lastName = textInputLastName;
-      // userAccount.phoneNumber = textInputPhoneNumber;
-      // userAccount.emailAddress = textInputEmail;
-      // userAccount.addressLine1 = textInputAddressLine1;
-      // userAccount.addressLine2 = textInputAddressLine2;
-      // userAccount.city = textInputCity;
-      // userAccount.province = textInputProvince;
-      // userAccount.postalCode = textInputPostalCode;
-      // userAccount.password = textInputPassword;
+      API.post("api/userAccount/create", userAccount)
+        .then((response) => {
+          Alert.alert(
+            "Success!",
+            "Sign up Completed!",
 
-      navigation.navigate("NavBarBottom");
-      return;
+            [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+            { cancelable: false }
+          );
+          navigation.navigate("WelcomePage");
+        })
+        .catch((e) => {
+          (error) => {
+            console.error("error is sign up personal " + error);
+            alert("Unable to create account! ");
+            navigation.navigate("WelcomePage");
+          };
+        });
     }
   };
 
@@ -134,7 +209,7 @@ const ClientSignUp = ({ navigation }) => {
               underlineColorAndroid="transparent"
               spellCheck={false}
               autoCorrect={false}
-              maxLength={30}
+              maxLength={100}
             />
           </View>
           <View style={styles.viewStyle}>
@@ -147,7 +222,7 @@ const ClientSignUp = ({ navigation }) => {
               underlineColorAndroid="transparent"
               spellCheck={false}
               autoCorrect={false}
-              maxLength={30}
+              maxLength={100}
             />
           </View>
           <View style={styles.viewStyle}>
@@ -160,7 +235,7 @@ const ClientSignUp = ({ navigation }) => {
               underlineColorAndroid="transparent"
               spellCheck={false}
               autoCorrect={false}
-              maxLength={30}
+              maxLength={100}
             />
           </View>
           <View style={styles.viewStyle}>
@@ -183,6 +258,7 @@ const ClientSignUp = ({ navigation }) => {
               onChangeText={(value) => setTextInputEmail(value)}
               value={textInputEmail}
               placeholder="Email"
+              keyboardType="email-address"
               placeholderTextColor={"#979797"}
               underlineColorAndroid="transparent"
               spellCheck={false}
@@ -323,6 +399,7 @@ const ClientSignUp = ({ navigation }) => {
             name="Next"
             style="customBtn"
             onPress={checkTextInput}
+            // onPress={() => navigation.navigate("NavBarBottom")}
           />
         </View>
       </View>
