@@ -18,7 +18,6 @@ import { color } from "react-native-reanimated";
 import API from "../api";
 
 var width = Dimensions.get("window").width;
-var widthProportion = "80%";
 
 const BusinessSignUp = ({ navigation }) => {
   const [textInputBusinessName, setTextInputBusinessName] = useState("");
@@ -77,7 +76,7 @@ const BusinessSignUp = ({ navigation }) => {
     } else if (!textInputPhoneNumber.trim()) {
       Alert.alert(
         "Information Required!",
-        "Please provide Phone number.",
+        "Please provide Phone Number.",
 
         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
         { cancelable: false }
@@ -86,7 +85,7 @@ const BusinessSignUp = ({ navigation }) => {
     } else if (!textInputAddressLine1.trim()) {
       Alert.alert(
         "Information Required!",
-        "Please provide address line1.",
+        "Please provide Address Line 1.",
 
         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
         { cancelable: false }
@@ -95,7 +94,7 @@ const BusinessSignUp = ({ navigation }) => {
     } else if (!textInputCity.trim()) {
       Alert.alert(
         "Information Required!",
-        "Please provide city.",
+        "Please provide City.",
 
         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
         { cancelable: false }
@@ -104,7 +103,7 @@ const BusinessSignUp = ({ navigation }) => {
     } else if (!textInputProvince.trim()) {
       Alert.alert(
         "Information Required!",
-        "Please provide province.",
+        "Please provide Province.",
 
         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
         { cancelable: false }
@@ -113,7 +112,7 @@ const BusinessSignUp = ({ navigation }) => {
     } else if (!textInputPostalCode.trim()) {
       Alert.alert(
         "Information Required!",
-        "Please choose postal code.",
+        "Please choose Postal Code.",
 
         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
         { cancelable: false }
@@ -122,7 +121,7 @@ const BusinessSignUp = ({ navigation }) => {
     } else if (!textInputPassword.trim()) {
       Alert.alert(
         "Information Required!",
-        "Please provide password.",
+        "Please provide Password.",
 
         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
         { cancelable: false }
@@ -131,7 +130,7 @@ const BusinessSignUp = ({ navigation }) => {
     } else if (!textInputConfirmPassword.trim()) {
       Alert.alert(
         "Information Required!",
-        "Please provide confirm password.",
+        "Please provide Confirm Password.",
 
         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
         { cancelable: false }
@@ -139,8 +138,8 @@ const BusinessSignUp = ({ navigation }) => {
       return;
     } else if (textInputPassword !== textInputConfirmPassword) {
       Alert.alert(
-        "Information Required!",
-        "Password and Confirm Password fields does not match.",
+        "Error!",
+        "Password and Confirm Password fields do not match.",
 
         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
         { cancelable: false }

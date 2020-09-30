@@ -3,133 +3,36 @@ import {
   StyleSheet,
   Text,
   SafeAreaView,
-  ScrollView,
   View,
-  FlatList,
   SectionList,
   Dimensions,
 } from "react-native";
-import Constants from "expo-constants";
 import HeaderWide from "./HeaderWide";
-import { List } from "react-native-paper";
 import API from "../api";
 import Moment from 'moment';
+import { NetworkContext } from "../NetworkContext";
+import { useIsFocused } from "@react-navigation/native";
 
 var width = Dimensions.get("window").width;
 var arr;
 
 const InvididualLogsPage = ({ navigation }) => {
+  const network = React.useContext(NetworkContext);
+  const isFocused = useIsFocused();
 
 
-  const [logsData, setLogsData] = useState();
   const [desiredData, setDesiredData] = useState();
-
-
-  const data = [
-    {
-      title: "September 7, 2020",
-      data: [
-        {
-          name: "Restaurant 1",
-          time: "1:00 PM",
-          date: "September 7, 2020",
-          address: "Toronto",
-          phone: "4163334567",
-          email: "restaurant1@email.com",
-        },
-        {
-          name: "Restaurant 2",
-          time: "1:00 PM",
-          date: "September 7, 2020",
-          address: "Toronto",
-          phone: "4163334567",
-          email: "restaurant2@email.com",
-        },
-        {
-          name: "Restaurant 3",
-          time: "1:00 PM",
-          date: "September 7, 2020",
-          address: "Toronto",
-          phone: "4163334567",
-          email: "restaurant3@email.com",
-        },
-        {
-          name: "Restaurant 4",
-          time: "1:00 PM",
-          date: "September 7, 2020",
-          address: "Toronto",
-          phone: "4163334567",
-          email: "restaurant4@email.com",
-        },
-        {
-          name: "Restaurant 5",
-          time: "1:00 PM",
-          date: "September 7, 2020",
-          address: "Toronto",
-          phone: "4163334567",
-          email: "restaurant5@email.com",
-        },
-      ],
-    },
-    {
-      title: "September 1, 2020",
-      data: [
-        {
-          name: "Restaurant 6",
-          time: "1:00 PM",
-          date: "September 7, 2020",
-          address: "Toronto",
-          phone: "4163334567",
-          email: "restaurant6@email.com",
-        },
-        {
-          name: "Restaurant 7",
-          time: "1:00 PM",
-          date: "September 7, 2020",
-          address: "Toronto",
-          phone: "4163334567",
-          email: "restaurant7@email.com",
-        },
-        {
-          name: "Restaurant 8",
-          time: "1:00 PM",
-          date: "September 7, 2020",
-          address: "Toronto",
-          phone: "4163334567",
-          email: "restaurant8@email.com",
-        },
-        {
-          name: "Restaurant 9",
-          time: "1:00 PM",
-          date: "September 7, 2020",
-          address: "Toronto",
-          phone: "4163334567",
-          email: "restaurant9@email.com",
-        },
-        {
-          name: "Restaurant 10",
-          time: "1:00 PM",
-          date: "September 7, 2020",
-          address: "Toronto",
-          phone: "4163334567",
-          email: "restaurant10@email.com",
-        },
-      ],
-    },
-  ];
 
   useEffect( () => {
 
     async function getLogData() {
 
-      await API.get('api/placesVisitedLog/1/user')
+      await API.get('api/placesVisitedLog/' + network.id + '/user')
         .then((response) => {
 
           var account = response.data;
           console.log('response', JSON.stringify(account));
-          // setLogsData(account);
-          // console.log('this is account', logsData.length);
-
+          
           arr = [];
 
           account.map( res => {
@@ -162,21 +65,24 @@ const InvididualLogsPage = ({ navigation }) => {
           arr.push(log);
         });
 
+        console.log('user id', network.id);
         console.log('what is arr', arr.length);
         if (arr.length > 0) {
         // console.log('its not empty', arr.length);
         setDesiredData(arr);
         // console.log('desired data length', desiredData.length);
+      } else {
+        alert('No record found!');
       }
     })
         .catch(error => {
-          alert('Error' + error);
+          alert('Error!' + error);
       });
     }
     
     getLogData();
 
-  }, []);
+  }, [isFocused]);
 
   return (
     <SafeAreaView style={styles.container}>
