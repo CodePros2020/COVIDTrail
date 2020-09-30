@@ -20,8 +20,16 @@ const EditPhone = ({ navigation, route }) => {
       );
       return;
     } else {
+      let userType;
+
+    if (network.businessName !== null) {
+      userType = 'businessAccount';
+    } else {
+      userType = 'userAccount';
+    }
+
       API.put(
-        `/api/businessAccount/${network.id}/phone?newPhone=${state.phone}`
+        `/api/${userType}/${network.id}/phone?newPhone=${state.phone}`
       )
         .then((res) => {
           Alert.alert("Success", "Phone has been updated.");
