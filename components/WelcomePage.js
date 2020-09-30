@@ -13,6 +13,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome5";
 import CustomButton from "./CustomButton";
 import API from "../api";
+import Session from "../sessionService";
 
 export default function WelcomePage({ navigation }) {
   const [username, onUserNameChange] = React.useState();
@@ -26,6 +27,8 @@ export default function WelcomePage({ navigation }) {
       .then((response) => {
         var account = response.data;
         if (account) {
+          Session.storeToken(account.token);
+          console.log("Token is ", Session.getToken());
           navigation.navigate("NavBarBottom", { account: account });
         }
       })

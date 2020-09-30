@@ -10,15 +10,15 @@ const EditAddress = ({ navigation, route }) => {
   const network = React.useContext(NetworkContext);
   const { address } = route.params;
   const { addressVal, setAddress } = useState({
-    street: address.street,
-    unit: address.unit,
+    addressLineOne: address.street,
+    addressLineTwo: address.unit,
     city: address.city,
-    province: address.province,
     postalCode: address.postalCode,
+    province: address.province,
   });
 
   const onPressSave = () => {
-    if (!addressVal.street.trim()) {
+    if (!addressVal.addressLineOne.trim()) {
       Alert.alert(
         "Required",
         "Please enter street.",
@@ -51,13 +51,11 @@ const EditAddress = ({ navigation, route }) => {
       );
       return;
     } else {
-      //   API.put(
-      //     `/api/businessAccount/${network.id}/name?newName=${textInputBusiness}`
-      //   )
-      //     .then((res) => {
-      //       Alert.alert("Success", "Name has been updated.");
-      //     })
-      //     .catch((error) => console.log("failed to update"));
+      API.put(`api/address/${network.id}/businessAccount`, addressVal)
+        .then((res) => {
+          Alert.alert("Success", "Name has been updated.");
+        })
+        .catch((error) => console.log("failed to update"));
     }
   };
 
@@ -75,7 +73,7 @@ const EditAddress = ({ navigation, route }) => {
             <TextInput
               style={styles.subTxtField}
               onChangeText={(value) => setAddress({ street: value })}
-              value={addressVal.street}
+              value={addressVal.addressLineOne}
               spellCheck={false}
               autoCorrect={false}
               maxLength={30}
@@ -88,7 +86,7 @@ const EditAddress = ({ navigation, route }) => {
             <TextInput
               style={styles.subTxtField}
               onChangeText={(value) => setAddress({ unit: value })}
-              value={addressVal.unit}
+              value={addressVal.addressLineTwo}
               spellCheck={false}
               autoCorrect={false}
               maxLength={30}

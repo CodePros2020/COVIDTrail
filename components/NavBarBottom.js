@@ -25,7 +25,7 @@ const AccountStack = createStackNavigator();
 const EditBusinessStack = createStackNavigator();
 let loggedInAccount;
 
-function MyTabs() {
+function MyTabs({ navigation }) {
   return (
     <NetworkContext.Provider value={loggedInAccount}>
       <Tab.Navigator
