@@ -58,7 +58,7 @@ Back-end:
 
 Azure: 
 <ul>
- <li>SQL Database; and/li>
+ <li>SQL Database; and</li>
  <li>Web App.</li>
 </ul>
 
