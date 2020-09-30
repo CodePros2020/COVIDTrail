@@ -20,11 +20,13 @@ const EditBusinessName = ({ navigation, route }) => {
       );
       return;
     } else {
+      console.log("what is new business name: ", state.name);
       API.put(`api/businessAccount/${network.id}/name/${state.name}`)
         .then((res) => {
           Alert.alert("Success", "Name has been updated.");
+          navigation.navigate("BusinessAccount");
         })
-        .catch((error) => console.log("failed to update"));
+        .catch((error) => console.log("failed to update", error));
     }
   };
 
