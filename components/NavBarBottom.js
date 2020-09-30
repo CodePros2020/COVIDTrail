@@ -20,11 +20,15 @@ import API from '../api';
 import EditEmail from "./EditEmail";
 import EditPhone from "./EditPhone";
 import EditPassword from "./EditPassword";
+import Session from "../sessionService";
+import WelcomePage from "./WelcomePage";
 
 const Tab = createBottomTabNavigator();
 const LogStack = createStackNavigator();
 const AccountStack = createStackNavigator();
-const EditBusinessStack = createStackNavigator();
+const ScanStack = createStackNavigator();
+const BusinessLogStack = createStackNavigator();
+
 let loggedInAccount;
 let loggedInAccount2;
 
@@ -40,9 +44,7 @@ function MyTabs() {
         }}
       >
         <Tab.Screen
-          component={
-            loggedInAccount.businessName !== null ? QRCodeGenerator : ScanPage
-          }
+          component={ScanStackScreen}
           name="ScanPage"
           options={{
             tabBarLabel: loggedInAccount.businessName !== null ? "QR Code" : "Scan",
@@ -65,7 +67,7 @@ function MyTabs() {
           name="LogsStackScreen"
           component={
             loggedInAccount.businessName !== null
-              ? BusinessLogsPage
+              ? BusinessLogsStackScreen
               : LogsStackScreen
           }
           options={{
@@ -77,6 +79,21 @@ function MyTabs() {
         />
       </Tab.Navigator>
     </NetworkContext.Provider>
+  );
+}
+
+function ScanStackScreen() {
+  return (
+    <ScanStack.Navigator screenOptions={{ headerShown: false }}>
+      <ScanStack.Screen
+        name="IndividualLogsPage"
+        component={loggedInAccount.businessName !== null ? QRCodeGenerator : ScanPage}
+      />
+      {/* <ScanStack.Screen
+        name="WelcomePage"
+        component={WelcomePage}
+      /> */}
+    </ScanStack.Navigator>
   );
 }
 
@@ -92,6 +109,17 @@ function LogsStackScreen() {
         component={IndividualLogsDetailPage}
       />
     </LogStack.Navigator>
+  );
+}
+
+function BusinessLogsStackScreen() {
+  return (
+    <BusinessLogStack.Navigator screenOptions={{ headerShown: false }}>
+      <BusinessLogStack.Screen
+        name="BusinessLogsPage"
+        component={BusinessLogsPage}
+      />
+    </BusinessLogStack.Navigator>
   );
 }
 
@@ -115,12 +143,13 @@ function AccountStackScreen() {
   );
 }
 
-export default function App({ route, navigation }) {
+export default function Tabs({ route, navigation }) {
   const { account } = route.params;
   loggedInAccount = account;
   console.log("Logged In User: ", JSON.stringify(loggedInAccount));
   const [session, setSession] = useState();
   const [userId, setUserId] = useState();
+  // console.log('Checking token: ', Session.getToken('COVIDTrail'));
 
   // useEffect( () => {
 
@@ -185,9 +214,9 @@ export default function App({ route, navigation }) {
   
 
   return (
-    <NavigationContainer independent={true}>
+    // <NavigationContainer independent={true}>
       <MyTabs />
-    </NavigationContainer>
+    // </NavigationContainer>
   );
 }
 

@@ -87,7 +87,7 @@ const BusinessAccount = ({ navigation }) => {
         }
 
     }).catch(error => {
-          alert('Error retrieving user!' + error);
+          console.log('In Business Logs component - Error retrieving user!' + error);
       });
     }
     

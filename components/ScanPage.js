@@ -12,6 +12,8 @@ import * as Permissions from "expo-permissions";
 import HeaderWide from "./HeaderWide";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import API from "../api";
+import { useNavigation } from '@react-navigation/native';
+
 
 export default class ScanPage extends React.Component {
   state = {
