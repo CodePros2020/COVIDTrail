@@ -3,10 +3,10 @@
 ## How to run the app
 
 ```
-# Install node modules
+# Install modules and dependencies
 npm install
 
-# Install expo command line tools
+# Install expo command line tools (if you don't have it already)
 npm install --global expo-cli
 
 # Start the project
