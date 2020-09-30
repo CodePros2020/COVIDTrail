@@ -81,10 +81,13 @@ const BusinessAccount = ({ navigation }) => {
               style={styles.icon}
               onPress={() =>
                 navigation.navigate("EditAddress", {
-                  businessName: network.businessName,
-                  firstName: network.firstName,
-                  middleName: network.middleName,
-                  lastName: network.lastName,
+                  address: {
+                    street: network.addressLineOne,
+                    unit: network.addressLineTwo,
+                    city: network.city,
+                    province: network.province,
+                    postalCode: network.postalCode,
+                  },
                 })
               }
             />
@@ -94,14 +97,30 @@ const BusinessAccount = ({ navigation }) => {
           <Text style={styles.textField}>PHONE</Text>
           <View style={styles.subView}>
             <Text style={styles.subTxtField}>{network.phone}</Text>
-            <Icon name="edit" style={styles.icon} />
+            <Icon
+              name="edit"
+              style={styles.icon}
+              onPress={() =>
+                navigation.navigate("EditPhone", {
+                  phone: network.phone,
+                })
+              }
+            />
           </View>
         </View>
         <View style={styles.mainView}>
           <Text style={styles.textField}>EMAIL</Text>
           <View style={styles.subView}>
             <Text style={styles.subTxtField}>{network.email || ""}</Text>
-            <Icon name="edit" style={styles.icon} />
+            <Icon
+              name="edit"
+              style={styles.icon}
+              onPress={() =>
+                navigation.navigate("EditEmail", {
+                  email: network.email,
+                })
+              }
+            />
           </View>
         </View>
 
@@ -109,7 +128,11 @@ const BusinessAccount = ({ navigation }) => {
           <Text style={styles.textField}>PASSWORD</Text>
           <View style={styles.subView}>
             <Text style={styles.subTxtField}>********</Text>
-            <Icon name="edit" style={styles.icon} />
+            <Icon
+              name="edit"
+              style={styles.icon}
+              onPress={() => navigation.navigate("EditPassword")}
+            />
           </View>
         </View>
       </View>

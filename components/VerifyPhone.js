@@ -1,16 +1,16 @@
 import React, { Component, useState } from "react";
 import { StyleSheet, View, SafeAreaView, TextInput, Alert } from "react-native";
 import { Divider, Text, RadioButton } from "react-native-paper";
-import HeaderVerify from "./HeaderVerify";
+import HeaderSecond from "./HeaderSecond";
 import API from "../api";
 import { NetworkContext } from "../NetworkContext";
 
-const EditPhone = ({ navigation, route }) => {
+const VerifyPhone = ({ navigation, route }) => {
   const network = React.useContext(NetworkContext);
-  const { phoneNo } = route.params;
-  const [state, setState] = useState({ phone: phoneNo });
+  const { code } = route.params;
+  const [state, setState] = useState({ phoneCode: code });
 
-  const onPressSave = () => {
+  const onPressVerify = () => {
     if (!state.name.trim()) {
       Alert.alert(
         "Required",
@@ -20,14 +20,20 @@ const EditPhone = ({ navigation, route }) => {
       );
       return;
     } else {
-      API.put(
-        `/api/businessAccount/${network.id}/phone?newPhone=${state.phone}`
-      )
-        .then((res) => {
-          Alert.alert("Success", "Phone has been updated.");
-        })
-        .catch((error) => console.log("failed to update"));
-    }
+ Alert.alert(
+        "Phone Verified",
+        "Youe phone number is successfully updated.",
+        [{ text: "Close", onPress: () => console.log("close Pressed") }],
+        { cancelable: false }
+      );
+    //   API.put(
+    //     `/api/businessAccount/${network.id}/phone?newPhone=${state.phone}`
+    //   )
+    //     .then((res) => {
+    //       Alert.alert("Success", "Phone has been updated.");
+    //     })
+    //     .catch((error) => console.log("failed to update"));
+    // }
   };
 
   return (
@@ -39,7 +45,7 @@ const EditPhone = ({ navigation, route }) => {
           onPress={onPressSave}
         />
         <View style={styles.mainView}>
-          <Text style={styles.textField}>New Phone Number </Text>
+          <Text style={styles.textField}>Phone </Text>
           <View style={styles.subView}>
             <TextInput
               keyboardType="name-phone-pad"
@@ -53,27 +59,13 @@ const EditPhone = ({ navigation, route }) => {
           </View>
         </View>
         <View style={styles.mainView}>
-          <Text style={styles.textField}>Password </Text>
-          <View style={styles.subView}>
-            <TextInput
-              style={styles.subTxtField}
-              onChangeText={(value) => setPassword(value)}
-              value={password}
-              secureTextEntry={true}
-              spellCheck={false}
-              autoCorrect={false}
-              maxLength={30}
-            ></TextInput>
-          </View>
+          <Text style={styles.textField} onPress={onPressVerify}>Verify </Text>
         </View>
-        <View style={styles.mainView}>
-          <Text style={styles.textField}>Send Verification Code </Text>
-        </View>
-      </View>
+      </View> 
     </SafeAreaView>
   );
 };
-export default EditPhone;
+export default VerifyPhone;
 
 const styles = StyleSheet.create({
   container: {
