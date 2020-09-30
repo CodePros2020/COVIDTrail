@@ -19,7 +19,8 @@ import API from "../api";
 
 const BusinessLogsPage = ({ navigation }) => {
   const network = React.useContext(NetworkContext);
-  const { logsData, setLogsData } = useState("");
+  const [email, setEmail] = useState("");
+  //   const [ logsData, setLogsData ] = useState("");
 
   //   useEffect(() => {
   //     const fetchData = async () => {
@@ -106,8 +107,8 @@ const BusinessLogsPage = ({ navigation }) => {
           </Text>
           <TextInput
             style={styles.subTxtField}
-            onChangeText={(value) => setState({ name: value })}
-            value={state.name}
+            onChangeText={(value) => setEmail({ name: value })}
+            value={email}
             spellCheck={false}
             autoCorrect={false}
             maxLength={100}

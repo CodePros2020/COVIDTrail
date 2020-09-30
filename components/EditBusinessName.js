@@ -20,7 +20,7 @@ const EditBusinessName = ({ navigation, route }) => {
       );
       return;
     } else {
-      API.put(`/api/businessAccount/${network.id}/name/${state.name}`)
+      API.put(`api/businessAccount/${network.id}/name/${state.name}`)
         .then((res) => {
           Alert.alert("Success", "Name has been updated.");
         })
@@ -46,8 +46,7 @@ const EditBusinessName = ({ navigation, route }) => {
               spellCheck={false}
               autoCorrect={false}
               maxLength={100}
-            >
-            </TextInput>
+            ></TextInput>
           </View>
         </View>
       </View>
