@@ -410,6 +410,13 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontSize: 18,
   },
+  userIcon: {
+    color: "#979797",
+    // margin: 5,
+    // paddingRight: 10,
+    // alignItems: "center",
+    fontSize: 18,
+  },
   warning: {
     color: "#ffffff",
     textAlign: "center",
@@ -424,13 +431,6 @@ const styles = StyleSheet.create({
     borderColor: "#00C0C1",
     borderWidth: 1,
     backgroundColor: "#262D37",
-  },
-  userIcon: {
-    color: "#979797",
-    // margin: 5,
-    // paddingRight: 10,
-    // alignItems: "center",
-    fontSize: 18,
   },
 });
 

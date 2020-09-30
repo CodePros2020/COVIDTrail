@@ -5,57 +5,67 @@ import HeaderSecond from "./HeaderSecond";
 import API from "../api";
 import { NetworkContext } from "../NetworkContext";
 
-const EditBusinessName = ({ navigation, route }) => {
+const VerifyPhone = ({ navigation, route }) => {
   const network = React.useContext(NetworkContext);
-  const { businessName } = route.params;
-  const [state, setState] = useState({ name: businessName });
+  const { code } = route.params;
+  const [state, setState] = useState({ phoneCode: code });
 
-  const onPressSave = () => {
+  const onPressVerify = () => {
     if (!state.name.trim()) {
       Alert.alert(
         "Required",
-        "Please enter business name.",
+        "Please enter phone.",
         [{ text: "OK", onPress: () => console.log("Ok Pressed") }],
         { cancelable: false }
       );
       return;
     } else {
-      API.put(`/api/businessAccount/${network.id}/name?newName=${state.name}`)
-        .then((res) => {
-          Alert.alert("Success", "Name has been updated.");
-        })
-        .catch((error) => console.log("failed to update"));
-    }
+ Alert.alert(
+        "Phone Verified",
+        "Youe phone number is successfully updated.",
+        [{ text: "Close", onPress: () => console.log("close Pressed") }],
+        { cancelable: false }
+      );
+    //   API.put(
+    //     `/api/businessAccount/${network.id}/phone?newPhone=${state.phone}`
+    //   )
+    //     .then((res) => {
+    //       Alert.alert("Success", "Phone has been updated.");
+    //     })
+    //     .catch((error) => console.log("failed to update"));
+    // }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <HeaderSecond
-          title="Name"
+        <HeaderVerify
+          title="Phone"
           navigation={navigation}
           onPress={onPressSave}
         />
         <View style={styles.mainView}>
-          <Text style={styles.textField}>Name </Text>
+          <Text style={styles.textField}>Phone </Text>
           <View style={styles.subView}>
             <TextInput
+              keyboardType="name-phone-pad"
               style={styles.subTxtField}
-              onChangeText={(value) => setState({ name: value })}
-              value={state.name}
+              onChangeText={(value) => setState({ phone: value })}
+              value={state.phone}
               spellCheck={false}
               autoCorrect={false}
-              maxLength={100}
-            >
-              {/* {state.name} */}
-            </TextInput>
+              maxLength={10}
+            ></TextInput>
           </View>
         </View>
-      </View>
+        <View style={styles.mainView}>
+          <Text style={styles.textField} onPress={onPressVerify}>Verify </Text>
+        </View>
+      </View> 
     </SafeAreaView>
   );
 };
-export default EditBusinessName;
+export default VerifyPhone;
 
 const styles = StyleSheet.create({
   container: {

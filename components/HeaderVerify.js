@@ -1,21 +1,18 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const Header = ({ title, navigation }) => {
+const HeaderVerify = ({ title, navigation }) => {
   return (
     <View style={styles.mainHeader}>
       <View style={styles.headerStyle}></View>
       <View style={styles.header}>
         <Text style={styles.back} onPress={() => navigation.goBack()}>
-          Back
+          Cancel
         </Text>
         <Text style={styles.text}>{title}</Text>
       </View>
     </View>
   );
-};
-Header.defaultProps = {
-  title: "Hello",
 };
 
 const styles = StyleSheet.create({
@@ -56,4 +53,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Header;
+export default HeaderVerify;
