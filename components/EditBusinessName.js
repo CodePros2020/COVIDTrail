@@ -20,7 +20,7 @@ const EditBusinessName = ({ navigation, route }) => {
       );
       return;
     } else {
-      API.put(`/api/businessAccount/${network.id}/name?newName=${state.name}`)
+      API.put(`/api/businessAccount/${network.id}/name/${state.name}`)
         .then((res) => {
           Alert.alert("Success", "Name has been updated.");
         })
@@ -37,7 +37,7 @@ const EditBusinessName = ({ navigation, route }) => {
           onPress={onPressSave}
         />
         <View style={styles.mainView}>
-          <Text style={styles.textField}>Name </Text>
+          <Text style={styles.textField}>NAME </Text>
           <View style={styles.subView}>
             <TextInput
               style={styles.subTxtField}
@@ -46,7 +46,8 @@ const EditBusinessName = ({ navigation, route }) => {
               spellCheck={false}
               autoCorrect={false}
               maxLength={100}
-            ></TextInput>
+            >
+            </TextInput>
           </View>
         </View>
       </View>

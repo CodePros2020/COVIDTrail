@@ -14,7 +14,7 @@ import HeaderWide from "./HeaderWide";
 import CustomButton from "./CustomButton";
 import { NetworkContext } from "../NetworkContext";
 import API from "../api";
-// import CheckBox from "@react-native-community/checkbox";
+// import Session from "./serviceSession.js";
 
 const BusinessLogsPage = ({ navigation }) => {
   const network = React.useContext(NetworkContext);
