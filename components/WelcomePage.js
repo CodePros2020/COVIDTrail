@@ -22,14 +22,6 @@ export default function WelcomePage({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  const storeData = async (value) => {
-    try {
-      await AsyncStorage.setItem("id", value);
-    } catch (e) {
-      console.log("value is not saved async storage", e);
-    }
-  };
-
   const success = async () => {
     await API.post("login?password=" + password + "&username=" + username)
       .then((response) => {
@@ -37,9 +29,10 @@ export default function WelcomePage({ navigation }) {
         Session.saveData(account.token);
         var account = response.data;
         if (account) {
-          storeData(account.id.toString());
+          Session.storeData(account.id.toString());
           console.log("account token", account.token);
           // Session.setToken(account.token);
+
           navigation.navigate("NavBarBottom", { account: account });
         }
       })

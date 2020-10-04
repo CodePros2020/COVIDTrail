@@ -20,21 +20,21 @@ import API from "../api";
 const BusinessLogsPage = ({ navigation }) => {
   const network = React.useContext(NetworkContext);
   const [email, setEmail] = useState("");
-  //   const [ logsData, setLogsData ] = useState("");
+  const [logsData, setLogsData] = useState("");
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       API.get("api/placesVisitedLog/" + network.id + "/business/")
-  //         .then((res) => {
-  //           setLogsData(res.data);
-  //           alert("dATA Is " + res.data);
-  //         })
-  //         .catch((error) => {
-  //           alert("Unable to get logs " + error);
-  //         });
-  //     };
-  //     fetchData();
-  //   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      API.get("api/placesVisitedLog/" + network.id + "/business/")
+        .then((res) => {
+          //setLogsData(res.data);
+          alert("dATA Is " + res.data);
+        })
+        .catch((error) => {
+          alert("Unable to get logs " + error);
+        });
+    };
+    fetchData();
+  }, []);
 
   const DATA = [];
   const [isSelected, setSelection] = React.useState(false);
@@ -109,6 +109,7 @@ const BusinessLogsPage = ({ navigation }) => {
             style={styles.subTxtField}
             onChangeText={(value) => setEmail({ name: value })}
             value={email}
+            keyboardType="email-address"
             spellCheck={false}
             autoCorrect={false}
             maxLength={100}

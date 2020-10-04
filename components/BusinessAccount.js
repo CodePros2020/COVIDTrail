@@ -124,14 +124,15 @@ const BusinessAccount = ({ navigation }) => {
             <Icon
               name="chevron-right"
               style={styles.icon}
-              onPress={() =>
-                navigation.navigate("EditAddress", {
-                  businessName: bName,
-                  firstName: fName,
-                  middleName: mName,
-                  lastName: lName,
-                })
-              }
+              //   onPress={() =>
+              //     navigation.navigate("EditAddress", {
+              //       addressLineOne: ,
+              //       addressLineTwo: ,
+              //       city: ,
+              //       postalCode: ,
+              //       province: ,
+              //     })
+              //   }
             />
           </View>
         </View>

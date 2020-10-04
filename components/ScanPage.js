@@ -12,8 +12,8 @@ import * as Permissions from "expo-permissions";
 import HeaderWide from "./HeaderWide";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import API from "../api";
-import { useNavigation } from '@react-navigation/native';
-
+import { useNavigation } from "@react-navigation/native";
+import Session from "./serviceSession.js";
 
 export default class ScanPage extends React.Component {
   state = {
@@ -67,7 +67,9 @@ export default class ScanPage extends React.Component {
     );
   };
   saveVisit = () => {
-    API.get("api/placesVisitedLog?businessId=1&userId=" + id)
+    var id = Session.readId();
+    console.log("Id from async", id);
+    API.post("api/placesVisitedLog?businessId=1&userId=" + id)
       .then((response) => {
         account = response.data;
         alert("Data received" + JSON.stringify(response.data));
