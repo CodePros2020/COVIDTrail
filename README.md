@@ -1,5 +1,9 @@
 # COVIDTrail
 
+<b>Please note</b>: Backend server is now down due to cost concerns.
+
+Click [here](https://github.com/CodePros2020/COVIDTrail-Backend) to view backend repository.
+
 ## How to run the app
 
 ```
