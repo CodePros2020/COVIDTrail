@@ -88,3 +88,5 @@ Azure:
  <li>Logan Kim; and</li>
  <li>Alan Lucena</li>
 </ul>
+
+Note: Remote pair programming is used to boost efficiency.
