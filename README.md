@@ -1,4 +1,5 @@
 # COVIDTrail
+Demo Video: [COVIDTrail](https://drive.google.com/file/d/14sDLdbnIfzY2a8zn0L0fjENHLqJub9-Q/view?usp=sharing)
 
 <b>Please note</b>: Backend server is now down due to cost concerns.
 
